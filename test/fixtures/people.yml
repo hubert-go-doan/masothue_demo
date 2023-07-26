@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cmnd: MyString
+  address: MyString
+  date_start: 2023-07-26
+  phone_number: MyString
+  managed_by: MyString
+  represent: one
+  city: one
+  district: one
+  ward: one
+  company_type: one
+  status: one
+
+two:
+  name: MyString
+  cmnd: MyString
+  address: MyString
+  date_start: 2023-07-26
+  phone_number: MyString
+  managed_by: MyString
+  represent: two
+  city: two
+  district: two
+  ward: two
+  company_type: two
+  status: two

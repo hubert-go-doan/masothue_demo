@@ -27,6 +27,10 @@ gem 'bootstrap', '~> 5.3.0.alpha3'
 
 gem 'jquery-rails'
 
+gem "font-awesome-sass", "~> 6.4.0"
+
+gem 'simple_form'
+
 gem 'pagy'
 
 gem 'devise'

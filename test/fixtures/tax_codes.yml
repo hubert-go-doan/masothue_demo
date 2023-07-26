@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  taxable: one
+  taxable_type: Taxable
+
+two:
+  code: MyString
+  taxable: two
+  taxable_type: Taxable
