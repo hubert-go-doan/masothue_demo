@@ -1,0 +1,30 @@
+section.mb-4
+  h1.h1-responsive.text-center.my-4
+    | Liên hệ
+  .container
+    .row
+      .col-md-6.mb-md-0.mb-5
+        h4
+          | Gửi liên hệ
+        = simple_form_for @contact, id: 'contact-form' do |f|
+          = f.input :name, label: 'Họ và tên', input_html: {class: 'form-control' }
+          .pt-3
+            = f.input :email, label: 'Email',input_html: {class: 'form-control' }
+          .pt-3
+              = f.input :content, as: :text, label: 'Nội dung', input_html: { class: 'form-control', style: 'height: 200px; width: 100%;' }
+          .pt-3
+            = f.button :submit, class: 'btn btn-primary form-control cursor-pointer', value: 'Submit'
+      .col-md-6.text-center
+        h4
+          | Thông tin liên hệ
+        ul.list-unstyled.mb-0
+          li
+            i.fas.fa-envelope.mt-4.fa-2x
+            p
+              | Email: info@masothue.com
+          li
+            p
+              | Mọi đóng góp, vui lòng liên hệ: info@masothue.com
+          li
+            a[href="/"]
+              | Mã số thuế
