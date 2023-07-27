@@ -1,0 +1,29 @@
+nav.navbar.navbar-expand-lg.bg-danger.sticky-top.pb-3.pt-3
+  .container
+    .row
+      #navbarSupportedContent.collapse.navbar-collapse
+        ul.navbar-nav.me-auto.mb-2.mb-lg-0
+          li.nav-item.dropdown
+            |  <a class="nav-link dropdown-toggle text-light", style="font-size: 20px;"role="button" data-bs-toggle="dropdown" aria-expanded="false"> Tra cứu mã số thuế 
+            ul.dropdown-menu.border-1
+              li
+                a.dropdown-item[href="#"]
+                  strong
+                    | Ngành nghề kinh doanh
+              li
+                a.dropdown-item[href="#"]
+                  strong
+                    | Doanh nghiệp mới thành lập
+              li
+                a.dropdown-item[href="#"]
+                  | Loại hình công ty
+              li
+                a.dropdown-item[href="#"]
+                  | Theo tỉnh thành phố
+              li
+                a.dropdown-item[href="#"]
+                  | Trạng thái công ty
+        form.d-flex[style="padding-left: 117px" role="search"]
+          input.form-control.me-2[style="width: 600px;" type="search" placeholder="Nhập mã số thuế, CMND, tên công ty" aria-label="Search"]
+          button.btn.btn-dark[type="submit" style="font-size: 18px; padding: 10px;"]
+            | Search

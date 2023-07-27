@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
-  # get 'contacts/index'
-  
-  # get 'contacts', to: 'contacts#index'
-  resources :contacts
-  devise_for :users
-  root 'main#home'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # route devise
+  devise_for :users, controllers: {
+    registrations: 'registrations',
+    sessions: 'sessions',
+    passwords: 'passwords'
+  }
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # Route admin
+  namespace :admin do
+    root to: 'base#index'
+    resources :companies
+    resource :city
+    resources :contacts, only: [:index, :show, :edit, :update, :destroy]
+  end
+
+  # route homepage
+  root 'main#home'
+  get '/contacts', to: 'contacts#new'
+  post '/contacts', to: 'contacts#create'
 end
