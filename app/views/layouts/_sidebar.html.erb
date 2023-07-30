@@ -2,24 +2,31 @@
   <nav id="sidebarMenu" class="sidebar collapse d-lg-block collapse bg-body-tertiary ">
     <div class="position-sticky">
       <div class="list-group-flush mx-3 mt-4 pt-2 ">
-        <li class="list-group-item list-group-item-action py-3 active ripple h5" aria-current="true" >
-          <i class="fas fa-tachometer-alt fa-fw me-3"></i>
+        <!-- <li class="list-group-item list-group-item-action py-3 active ripple h5" aria-current="true" >
+          <i class="fas fa-tachometer-alt fa-fw me-2"></i>
           <%= link_to 'Dashboard', admin_root_path %>
-        </li>
+        </li> -->
+
         <li class="list-group-item list-group-item-action py-3 active ripple h5" aria-current="true" >
-          <i class="fa-solid fa-building fa-fw me-3"></i>
+          <i class="fa-solid fa-building fa-fw me-2"></i>
           <%= link_to 'Company', admin_companies_path %>
         </li>
+
         <li class="list-group-item list-group-item-action py-3 active ripple h5" aria-current="true" >
-          <i class="fa-solid fa-person fa-lg fa-fw me-3"></i>
+          <i class="fa-solid fa-code fa-fw me-2"></i>
+          <%= link_to 'Tax code', admin_companies_path %>
+        </li>
+      
+        <li class="list-group-item list-group-item-action py-3 active ripple h5" aria-current="true" >
+          <i class="fa-solid fa-person fa-lg fa-fw me-2"></i>
           <%= link_to 'Person', admin_root_path %>
         </li>
         <li class="list-group-item list-group-item-action py-3 active ripple h5" aria-current="true" >
-          <i class="fa-solid fa-address-book fa-fw me-3"></i>
+          <i class="fa-solid fa-address-book fa-fw me-2"></i>
           <%= link_to 'Contacts', admin_contacts_path %>
         </li>
         <li class="list-group-item list-group-item-action py-3 active ripple h5" aria-current="true" >
-          <i class="fas fa-chart-line fa-fw me-3"></i>
+          <i class="fas fa-chart-line fa-fw me-2"></i>
           <%= link_to 'Business Type', admin_root_path %>
         </li>
       </div>
@@ -34,9 +41,10 @@
       <a class="navbar-brand" href="/admin">
         <img
           src="https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp"
-          height="25"
-          alt="MST Logo"
-          loading="lazy"
+          height="40",
+          alt="MST Logo",
+          loading="lazy",
+          style="padding-left: 27px;"
         />
       </a>
 

@@ -2,7 +2,7 @@ doctype html
 html
   head
     title
-      | Admin Dashboard
+      | TaxCodeInfoAdmin
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
@@ -20,5 +20,5 @@ html
         = flash[:alert]
         button.btn-close[type="button" data-bs-dismiss="alert" aria-label="Close"]
     .container-fluid[style="padding:0"]
-      .content
+      .content[style="padding-left:277px"]
         = yield

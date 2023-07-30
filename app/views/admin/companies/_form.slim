@@ -1,0 +1,43 @@
+.container-form.rounded-4.shadow.bg-body.rounded.border-1
+  div[style="padding: 30px 30px 55px 30px"]
+    = simple_form_for [:admin, company] do |f|
+      .row.mb-3 
+        .col 
+            = f.input :name, lable: "Name Company",  input_html: {class: 'form-control'}, placeholder: "Name"
+        .col 
+            = f.input :sub_name, lable: "Sub Name", input_html: {class: 'form-control'}, placeholder: "Sub-name"
+        .col 
+            = f.input :date_start, start_year: Date.today.year - 50,
+                                end_year: Date.today.year, discard_day: false,
+                                order: [:day, :month, :year], input_html: { class: 'form-control'}
+      
+      .row.mb-3 
+        .col 
+            = f.input :phone_number, input_html: {class: 'form-control'}, placeholder: "Phone number"
+        .col 
+            = f.input :managed_by, input_html: {class: 'form-control'}, placeholder: "Managed by"
+        .col 
+            = f.input :address, label: "Address", input_html: {class: 'form-control'},placeholder: "Address Detail"
+            / = f.hint 'Address Detail, please!'
+      
+      .row.mb-3
+        .col 
+            = f.input :city_id, prompt: "City", label: "City", collection: @city_list, input_html: {id: "city-select"}
+        .col 
+            = f.input :district_id, prompt: "District", label: "District", collection: [], input_html: {id: "district-select"}
+        .col 
+            = f.input :ward_id, prompt: "Ward", label: "Ward", collection: [], input_html: {id: "ward-select"}
+      
+      .row.mb-3 
+        .col 
+            = f.input :represent_id, prompt: "Repersent ", label: "Repersent", collection: @represent_list
+        .col 
+            = f.input :company_type_id, prompt: "Company Type", label: "Company Type", collection: @company_type_list
+      
+      .row.mb-1
+        .col 
+            = f.input :business_area_id, prompt: "Business Area ", label: "Business Area", collection: @business_area_list
+        .col 
+            = f.input :status_id ,prompt: "Status ", label: "Status", collection: @status_list
+      = link_to "Back", admin_companies_path, class: "btn btn-secondary float-start", style: "padding: 5px 30px"
+      = f.button :submit, value:"Submit", class: "btn btn-primary float-end", style: "padding: 5px 30px"

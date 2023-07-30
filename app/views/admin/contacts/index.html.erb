@@ -1,13 +1,13 @@
-<div style="padding-left: 330px;" >
-  <h1>List Contacts</h1>
-  <table class="table table-bordered">
+<div>
+  <h3 style="padding-top: 20px;" >Management Contacts</h3>
+  <table class="table table-hover table-bordered">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
+        <th style="width: 20px;" scope="col">#</th>
+        <th style="width: 90px" scope="col">Name</th>
+        <th style="width: 90px" scope="col">Email</th>
         <th scope="col">Content</th>
-        <th scope="col"></th>
+        <th style="width: 35px;" scope="col"></ths>
       </tr>
     </thead>
     <tbody>
@@ -18,8 +18,12 @@
           <td><%= contact.email %></td>
           <td style="word-wrap: break-word; white-space: normal;"><%= contact.content %></td>
           <td>
-              <%= button_to 'delete', admin_contact_path(contact), method: :delete,
-  form: {data: {turbo_confirm: 'Are you sure?'}} %>
+              <%= button_to 'Delete', admin_contact_path(contact), method: :delete,
+  form: {data: {turbo_confirm: 'Are you sure?'}},class: "btn btn-link btn-sm btn-rounded", role: "button" %>
+            <!-- <%= link_to "Destroy", admin_contact_path(contact), data: {
+              turbo_method: :delete,
+              turbo_confirm: "Are you sure?"
+            } %> -->
           </td>
         </tr>
       <% end %>

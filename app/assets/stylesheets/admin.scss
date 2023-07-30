@@ -15,11 +15,14 @@
 @import "bootstrap";
 @import "font-awesome";
 
+
+
 .sidebar {
-  width: 300px;
+  width: 264px;
   height: 100vh;
   background-color: #f0f0f0;
-  padding-top: 34px ;
+  padding-left: 20px;
+  margin-top: 60px;
   position: fixed;
   top: 0;
   left: 0;
@@ -46,3 +49,59 @@
   color: #007bff;
 }
 
+.sidebar li i:hover {
+  color: #007bff;
+}
+
+.add-style{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
+  padding-right: 20px;
+}
+
+.add-style h3 {
+  padding-left: 16px;
+}
+
+.add-style a{
+  text-decoration: none;
+  color: white;
+}
+
+.button_add{
+  padding-right: 10px;
+}
+
+.content-table {
+  max-width: 100%;
+  overflow-x: auto; 
+}
+
+.table {
+  table-layout: fixed; 
+  width: 100%; 
+}
+
+.table th, .table td {
+  width: 200px; 
+}
+
+.container-form{
+  margin: 0px 200px;
+}
+
+.input-light-text {
+  color: #999;
+}
+
+.style-form {
+  padding-left: 200px; 
+  padding-top: 25px;
+}
+
+.style-form-back a{
+  padding-left: 200px; 
+  text-decoration: none;
+  cursor: pointer;
+}

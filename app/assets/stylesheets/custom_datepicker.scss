@@ -1,0 +1,27 @@
+
+.table-condensed{
+  height: 285px;
+  width: 322px;
+  background-color: blanchedalmond;
+}
+
+.datepicker {
+  width: 300px; 
+}
+
+.datepicker table tr td.day:hover,
+.datepicker table tr td.day.focused,
+.datepicker table tr td.day.active {
+  background-color: #007bff; 
+  color: #fff; 
+  width: 40px; 
+}
+
+.month{
+  padding: 10px;
+}
+
+thead, tbody, tfoot, tr, td, th {
+  border-color: inherit;
+  font-size: 20px;
+}

@@ -1,0 +1,20 @@
+= stylesheet_link_tag 'homepage'
+- @companies.each do |company|
+  .content
+    h4
+      a[href='/'] 
+        = company.name
+    strong # 
+    | Mã số thuế: 
+    = company.tax_code ? company.tax_code.code : ''
+    br
+    strong 
+      i.fa-solid.fa-person
+    |  Người đại diện: 
+    = company.represent.name
+    br
+    strong 
+      i.fa-solid.fa-location-dot
+    |  Address: 
+    = company.address + ', ' + company.ward.name + ', ' + company.ward.district.name + ', ' + company.district.city.name + ', Việt Nam'
+    hr

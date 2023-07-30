@@ -14,3 +14,16 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 @import "font-awesome";
+@import 'bootstrap-datepicker';
+@import 'custom_datepicker';
+
+
+
+@font-face {
+  font-family: 'Open Sans', sans-serif;
+  src: url('/app/assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf') format('truetype');
+}
+
+body {
+  font-family: "Open Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;;
+}

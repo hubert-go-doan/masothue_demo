@@ -6,11 +6,12 @@ Rails.application.routes.draw do
     passwords: 'passwords'
   }
 
-  # Route admin
+  # route admin
   namespace :admin do
     root to: 'base#index'
+    get 'districts_by_city', to: 'districts#districts_by_city'
+    get 'wards_by_district', to: 'wards#wards_by_district'
     resources :companies
-    resource :city
     resources :contacts, only: [:index, :show, :edit, :update, :destroy]
   end
 
@@ -18,4 +19,5 @@ Rails.application.routes.draw do
   root 'main#home'
   get '/contacts', to: 'contacts#new'
   post '/contacts', to: 'contacts#create'
+  get '/homepage', to: 'admin/companies#homepage'
 end

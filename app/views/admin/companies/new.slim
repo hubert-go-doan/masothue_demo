@@ -1,0 +1,6 @@
+h3.style-form
+  | New Company 
+= render partial: 'form', locals: {company: @company}
+/ .style-form-back
+/    = link_to "Back to company", admin_companies_path, class: "h6 text-primary"
+
