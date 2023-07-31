@@ -1,0 +1,14 @@
+.taxcode-form.rounded-4.shadow.bg-body.rounded.border-1
+  div[style="padding: 30px 30px 70px 30px"]
+    = simple_form_for [:admin, @tax_code], html: { id: 'tax_code_form' } do |f|
+      .row.mb-3 
+        .col 
+          = f.input :code, label: "Tax Code", input_html: { class: 'form-control'}, placeholder: "Tax Code"
+      .row.mb-3 
+        .col 
+          = f.input :taxable_type, require: true, label: "Type", prompt: "Select Type", collection: @taxable_types, input_html: { class: 'form-control', id: 'tax_code_taxable_type' }
+        .col
+          = f.input :taxable_id, collection: [], label_method: :name, value_method: :id, prompt: 'Please Choose Type', input_html: {id: 'tax_code_taxable_id'}
+      = link_to "Back", admin_tax_codes_path, class: "btn btn-secondary float-start", style: "padding: 5px 30px"
+      = f.button :submit, value: "Submit", class: "btn btn-primary float-end", style: "padding: 5px 30px"
+
