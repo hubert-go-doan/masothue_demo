@@ -1,3 +1,5 @@
 class MainController < ApplicationController
-  def home; end
+  def home
+    @companies = Company.all
+  end
 end
