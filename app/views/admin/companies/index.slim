@@ -1,10 +1,9 @@
 .add-style
   h3 
     | Management Company
-  a href="/admin/companies/new" 
-    button.btn.cursor-pointer.button_add.btn-primary[type="button"]
-      i.fa-solid.fa-plus.me-2
-      | Add Company
+  = link_to new_admin_company_path, class: 'btn cursor-pointer button_add btn-primary', type: 'button' do
+    i.fa-solid.fa-plus.me-2
+    |  Add Company 
 .p-3.content-table
   table.table.table-hover.align-middle.mb-0.bg-white.table-responsive.table-bordered
     thead.bg-light

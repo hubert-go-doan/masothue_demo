@@ -1,7 +1,8 @@
 class Admin::CompaniesController < ApplicationController
-  layout 'admin_layout', except: [:homepage]
+  layout 'admin_layout'
 
   before_action :prepare_data, only: [:new, :create, :edit]
+  before_action :find_id, only: [:edit, :update, :destroy]
 
   def index 
     @companies = Company.all
@@ -21,11 +22,9 @@ class Admin::CompaniesController < ApplicationController
   end
 
   def edit
-    @company = Company.find(params[:id])
   end
 
   def update
-    @company = Company.find(params[:id])
     if @company.update(company_params)
       redirect_to admin_companies_path 
     else
@@ -34,7 +33,7 @@ class Admin::CompaniesController < ApplicationController
   end
 
   def destroy
-    @company = Company.find(params[:id])
+    # @company = Company.find(params[:id])
     @company.destroy
     redirect_to admin_companies_path, status: :see_other
   end
@@ -45,6 +44,10 @@ class Admin::CompaniesController < ApplicationController
     @company_type_list = CompanyType.all.map { |com_type| [com_type.type_name, com_type.id] }
     @status_list = Status.all.map { |status| [status.name, status.id] }
     @business_area_list = BusinessArea.all.map { |business| [business.name, business.id] }
+  end
+
+  def find_id
+    @company = Company.find(params[:id])
   end
 
   private

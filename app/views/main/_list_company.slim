@@ -6,7 +6,7 @@
         = company.name
     strong # 
     | Mã số thuế: 
-    = company.tax_code ? company.tax_code.code : ''
+    = company.tax_code&.code
     br
     strong 
       i.fa-solid.fa-person

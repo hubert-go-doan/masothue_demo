@@ -1,27 +1,62 @@
+$color_1: #fff;
+$background-color_1: blanchedalmond;
+$background-color_2: #007bff;
+$border-color_1: inherit;
 
-.table-condensed{
-  height: 285px;
-  width: 322px;
-  background-color: blanchedalmond;
+.table-condensed {
+	height: 285px;
+	width: 322px;
+	background-color: $background-color_1;
 }
 
 .datepicker {
-  width: 300px; 
+	width: 300px;
+	table {
+		tr {
+			td.day {
+				&:hover {
+					background-color: $background-color_2;
+					color: $color_1;
+					width: 40px;
+				}
+			}
+			td.day.focused {
+				background-color: $background-color_2;
+				color: $color_1;
+				width: 40px;
+			}
+			td.day.active {
+				background-color: $background-color_2;
+				color: $color_1;
+				width: 40px;
+			}
+		}
+	}
 }
-
-.datepicker table tr td.day:hover,
-.datepicker table tr td.day.focused,
-.datepicker table tr td.day.active {
-  background-color: #007bff; 
-  color: #fff; 
-  width: 40px; 
+.month {
+	padding: 10px;
 }
-
-.month{
-  padding: 10px;
+thead {
+	border-color: $border-color_1;
+	font-size: 20px;
 }
-
-thead, tbody, tfoot, tr, td, th {
-  border-color: inherit;
-  font-size: 20px;
+tbody {
+	border-color: $border-color_1;
+	font-size: 20px;
+}
+tfoot {
+	border-color: $border-color_1;
+	font-size: 20px;
+}
+tr {
+	border-color: $border-color_1;
+	font-size: 20px;
+}
+td {
+	border-color: $border-color_1;
+	font-size: 20px;
+}
+th {
+	border-color: $border-color_1;
+	font-size: 20px;
 }

@@ -15,93 +15,96 @@
 @import "bootstrap";
 @import "font-awesome";
 
-
+$color_1: #333;
+$color_2: #007bff;
+$color_3: white;
+$color_4: #999;
+$background-color_1: #f0f0f0;
 
 .sidebar {
-  width: 264px;
-  height: 100vh;
-  background-color: #f0f0f0;
-  padding-left: 20px;
-  margin-top: 60px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  overflow-y: auto;
+	width: 264px;
+	height: 100vh;
+	background-color: $background-color_1;
+	padding-left: 20px;
+	margin-top: 60px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	overflow-y: auto;
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	li {
+		margin-bottom: 10px;
+		a {
+			color: $color_1;
+			text-decoration: none;
+			&:hover {
+				color: $color_2;
+			}
+		}
+		i {
+			&:hover {
+				color: $color_2;
+			}
+		}
+	}
 }
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.add-style {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 15px;
+	padding-right: 20px;
+	h3 {
+		padding-left: 16px;
+	}
+	a {
+		text-decoration: none;
+		color: $color_3;
+	}
 }
 
-.sidebar li {
-  margin-bottom: 10px;
-}
-
-.sidebar li a {
-  color: #333;
-  text-decoration: none;
-}
-
-.sidebar li a:hover {
-  color: #007bff;
-}
-
-.sidebar li i:hover {
-  color: #007bff;
-}
-
-.add-style{
-  display: flex;
-  justify-content: space-between;
-  padding-top: 15px;
-  padding-right: 20px;
-}
-
-.add-style h3 {
-  padding-left: 16px;
-}
-
-.add-style a{
-  text-decoration: none;
-  color: white;
-}
-
-.button_add{
-  padding-right: 10px;
+.button_add {
+  padding: 8px;
 }
 
 .content-table {
-  max-width: 100%;
-  overflow-x: auto; 
+	max-width: 100%;
+	overflow-x: auto;
 }
 
 .table {
-  table-layout: fixed; 
-  width: 100%; 
+	table-layout: fixed;
+	width: 100%;
+	th {
+		width: 200px;
+	}
+	td {
+		width: 200px;
+	}
 }
 
-.table th, .table td {
-  width: 200px; 
-}
-
-.container-form{
-  margin: 0px 200px;
+.container-form {
+	margin: 0px 200px;
 }
 
 .input-light-text {
-  color: #999;
+	color: $color_4;
 }
 
 .style-form {
-  padding-left: 200px; 
-  padding-top: 25px;
+	padding-left: 200px;
+	padding-top: 25px;
 }
 
-.style-form-back a{
-  padding-left: 200px; 
-  text-decoration: none;
-  cursor: pointer;
+.style-form-back {
+	a {
+		padding-left: 200px;
+		text-decoration: none;
+		cursor: pointer;
+	}
 }

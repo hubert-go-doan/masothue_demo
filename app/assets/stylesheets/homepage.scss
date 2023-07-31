@@ -1,7 +1,11 @@
-.content h4 a{
-  font-size: 1.2rem;
-  color: #0275d8;
-  text-decoration: none;
+$color_1: #0275d8;
+
+.content {
+	h4 {
+		a {
+			font-size: 1.2rem;
+			color: $color_1;
+			text-decoration: none;
+		}
+	}
 }
-
-

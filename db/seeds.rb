@@ -28,6 +28,11 @@
 #   city_id: 1
 # )
 
+# District.create(
+#   name: "Cam Le",
+#   city_id: 2
+# )
+
 # Ward.create(
 #   name: 'Phường 25',
 #   district_id: 1
@@ -39,19 +44,25 @@
 # )
 
 # Status.create(
-#   name: "Đang hoạt động"
+#   name: "Tam Ngung"
 # )
 
 # Represent.create(
-#   name: "Nguyen Thuy Nhung",
-#   day_of_birth: Date.new(1999,10,16)
+#   name: "Nguyen Thuy Hai",
+#   day_of_birth: Date.new(1999,1,16)
 # )
 
 # BusinessArea.create(
-#   name: "In an",
+#   name: "IT Phan Mem",
 # )
 
+# CompanyType.create(
+#   type_name: "Cong ty Co phan",
+# )
 
+# CompanyType.create(
+#   type_name: "Cong ty Tu Nhan",
+# )
 # Company.create(
 #   name: "Công Ty BDS",
 #   sub_name: "BDS",

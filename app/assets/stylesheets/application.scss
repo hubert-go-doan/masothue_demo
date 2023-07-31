@@ -18,12 +18,13 @@
 @import 'custom_datepicker';
 
 
+$font-family_1: "Open Sans",'HelveticaNeue-Light',"Helvetica Neue Light","Helvetica Neue",'Helvetica','Arial',"Lucida Grande",sans-serif;
 
 @font-face {
-  font-family: 'Open Sans', sans-serif;
-  src: url('/app/assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf') format('truetype');
+	font-family: 'Open Sans', sans-serif;
+	src: url('/app/assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf') format('truetype');
 }
 
 body {
-  font-family: "Open Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;;
+	font-family: $font-family_1;
 }

@@ -114,7 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_070152) do
     t.bigint "taxable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["taxable_type", "taxable_id"], name: "index_tax_codes_on_taxable"
+    t.index ["taxable_type", "taxable_id"], name: "index_tax_codes_on_taxable_type_and_taxable_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
