@@ -2,7 +2,7 @@ class Admin::CompaniesController < ApplicationController
   layout 'admin_layout'
 
   before_action :prepare_data, only: [:new, :create, :edit]
-  before_action :find_id, only: [:edit, :update, :destroy]
+  before_action :prepare_company, only: [:edit, :update, :destroy]
 
   def index 
     @companies = Company.all
@@ -46,7 +46,7 @@ class Admin::CompaniesController < ApplicationController
     @business_area_list = BusinessArea.all.map { |business| [business.name, business.id] }
   end
 
-  def find_id
+  def prepare_company
     @company = Company.find(params[:id])
   end
 

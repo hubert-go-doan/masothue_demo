@@ -2,8 +2,7 @@
 - @companies.each do |company|
   .content
     h4
-      a[href='/'] 
-        = company.name
+     = link_to company.name,'#', class: "content-name"
     strong # 
     | Mã số thuế: 
     = company.tax_code&.code
