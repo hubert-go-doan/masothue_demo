@@ -44,9 +44,9 @@
               p.text-muted.mb-0
                 = company.sub_name
         td
-          = company.tax_code ? company.tax_code.code : 'No tax code'
+          = company.tax_code&.code || 'No Tax code'
         td
-          = company.address + ', ' + company.ward.name + ', ' + company.ward.district.name + ', ' + company.district.city.name + ', Việt Nam'
+          = full_address(company)
         td
           = company.represent.name 
         td 

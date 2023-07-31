@@ -16,5 +16,5 @@
     strong 
       i.fa-solid.fa-location-dot
     |  Address: 
-    = company.address + ', ' + company.ward.name + ', ' + company.ward.district.name + ', ' + company.district.city.name + ', Việt Nam'
+    = full_address(company)
     hr

@@ -7,8 +7,8 @@ footer.text-center.text-lg-start.bg-white.text-muted
           / h6.text-uppercase.fw-bold.mb-4
           /   i.fas.fa-gem.me-3.text-secondary
           /   | TaxCodeInfo
-          a.navbar-brand[href="/"]
-            img[src="https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp" width="175px" height="42" alt="logo_masothue"]
+          = link_to root_path, class: "navbar-brand" do
+            = image_tag "https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp", width: "175px", height: "42", alt: "logo_masothue"
           p
             | Trang web giúp bạn tra cứu mã số thuế cá nhân, doanh nghiệp nhanh nhất, chính xác nhất !
           p 
@@ -17,24 +17,24 @@ footer.text-center.text-lg-start.bg-white.text-muted
           h6.text-uppercase.fw-bold.mb-4
             |  Truy cập nhanh 
           p
-            a.text-reset[href="#!"]
+            = link_to "#!", class: "text-reset" do
               | Tra cứu mã số thuế theo ngành nghề
           p
-            a.text-reset[href="#!"]
+            = link_to "#!", class: "text-reset" do
               | Tra cứu mã số thuế theo loại hình doanh nghiệp
           p
-            a.text-reset[href="#!"]
+            = link_to "#!", class: "text-reset" do
               | Tra cứu mã số thuế theo tình trạng DN
         .col-md-3.col-lg-2.col-xl-2.mx-auto.mb-4
           h6.text-uppercase.fw-bold.mb-4
           p
-            a.text-reset[href="#!"]
+            = link_to "#!", class: "text-reset" do
               | Tra cứu mã số thuế cá nhân
           p
-            a.text-reset[href="#!"]
+            = link_to "#!", class: "text-reset" do
               | Doanh nghiệp mới thành lập
           p
-            a.text-reset[href="#!"]
+            = link_to "#!", class: "text-reset" do
               | Mã số thuế theo tỉnh thành phố
         .col-md-4.col-lg-3.col-xl-3.mx-auto.mb-md-0.mb-4
           h6.text-uppercase.fw-bold.mb-4
@@ -50,5 +50,5 @@ footer.text-center.text-lg-start.bg-white.text-muted
             |  Liên hệ
   .text-center.p-4[style="background-color: rgba(0, 0, 0, 0.025);"]
     |  © 2023 Copyright: 
-    a.text-reset.fw-bold[href="/"]
+    = link_to root_path, class: "text-reset fw-bold" do
       | TaxCodeInfo

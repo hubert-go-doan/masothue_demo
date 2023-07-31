@@ -7,16 +7,16 @@
       #navbarNav.navbar-collapse.p-5
         ul.navbar-nav[style="font-weight: bold;"]
           li.nav-item.ps-5
-            a.nav-link[href="/"]
+             = link_to root_path, class: "nav-link" do
               | Trang chủ
           li.nav-item.ps-5
-            a.nav-link[href="/"]
+             = link_to root_path, class: "nav-link" do
               | Tra cứu thuế cá nhân
           li.nav-item.ps-5
-            a.nav-link[href="/"]
+            = link_to root_path, class: "nav-link" do
               | Ngành nghề
           li.nav-item.ps-5
-            a.nav-link[href="/contacts"]
+             = link_to contacts_path, class: "nav-link" do
               | Liên hệ
       .email-navbar
         span[style="font-weight: 300;"]
