@@ -63,6 +63,7 @@
 # CompanyType.create(
 #   type_name: "Cong ty Tu Nhan",
 # )
+
 # Company.create(
 #   name: "Công Ty BDS",
 #   sub_name: "BDS",
@@ -76,6 +77,21 @@
 #   company_type_id: 1, 
 #   business_area_id: 1, 
 #   represent_id: 1,
+#   status_id: 1 
+# )
+
+
+# Person.create(
+#   name: "Nguyen Doan Bao",
+#   cmnd: "88484848484",
+#   address: "123 Ha Noi",
+#   date_start: Date.today,
+#   phone_number: "0192726333",
+#   managed_by: "Chi cục thuế Quận 22",
+#   city_id: 1, 
+#   district_id: 1, 
+#   ward_id: 1, 
+#   company_type_id: 1, 
 #   status_id: 1 
 # )
 

@@ -2,6 +2,7 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require dropdowns
+//= require taxcode
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
 //= jquery_ujs

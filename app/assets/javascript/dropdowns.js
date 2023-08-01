@@ -1,16 +1,16 @@
-$(document).ready(function() {
+$(document).ready(() => {
   const citySelect = $('#city-select');
   const districtSelect = $('#district-select');
   const wardSelect = $('#ward-select');
 
-  citySelect.on('change', function() {
-    const selectedCityId = $(this).val();
+  citySelect.on('change', () => {
+    const selectedCityId = citySelect.val();
     if (selectedCityId) {
       $.get(`/admin/districts_by_city?city_id=${selectedCityId}`)
-        .done(function(data) {
+        .done(data => {
           districtSelect.html('<option value="">Chọn quận</option>');
           wardSelect.html('<option value="">Chọn phường</option>');
-          data.forEach(function(district) {
+          data.forEach(district => {
             districtSelect.append(`<option value="${district.id}">${district.name}</option>`);
           });
         });
@@ -20,13 +20,13 @@ $(document).ready(function() {
     }
   });
 
-  districtSelect.on('change', function() {
-    const selectedDistrictId = $(this).val();
+  districtSelect.on('change', () => {
+    const selectedDistrictId = districtSelect.val();
     if (selectedDistrictId) {
       $.get(`/admin/wards_by_district?district_id=${selectedDistrictId}`)
-        .done(function(data) {
+        .done(data => {
           wardSelect.html('<option value="">Chọn phường</option>');
-          data.forEach(function(ward) {
+          data.forEach(ward => {
             wardSelect.append(`<option value="${ward.id}">${ward.name}</option>`);
           });
         });
