@@ -31,18 +31,18 @@
         td
           strong[style="color: #FF3333"]
             = taxcode.code
+        - taxable = taxcode.taxable
         td
           .d-flex.align-items-center
             div
-              - taxable = taxcode.taxable
               p.fw-bold.mb-1
                 = taxable.name
               p.text-muted.mb-0
                 = taxable.is_a?(Company) ? taxable.sub_name : ''
         td
-          = taxable.is_a?(Company) && taxcode.taxable.represent&.name || taxcode.taxable.name
+          = taxable.is_a?(Company) && taxable.represent&.name || taxable.name
         td 
-          = full_address(taxcode.taxable)
+          = full_address(taxable)
         td
           = taxcode.taxable_type
         td
