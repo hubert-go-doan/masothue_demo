@@ -25,13 +25,13 @@
         th[style="width: 50px"]
     tbody
     - @tax_codes.each_with_index do |taxcode, index|
+      - taxable = taxcode.taxable
       tr
         td
           = index + 1
         td
           strong[style="color: #FF3333"]
             = taxcode.code
-        - taxable = taxcode.taxable
         td
           .d-flex.align-items-center
             div
