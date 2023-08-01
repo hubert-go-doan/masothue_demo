@@ -1,9 +1,9 @@
 class Admin::TaxCodesController < ApplicationController
   layout 'admin_layout'
   
-  OBJECT_TAXCODE = ['Company', 'Person']
+  OBJECT_TAXCODE = %w[Company Person]
 
-  before_action :fetch_taxable_types, only: [:new, :create]
+  before_action :fetch_taxable_types, only: %i[new create]
 
   def index
     @tax_codes = TaxCode.includes(:taxable).all

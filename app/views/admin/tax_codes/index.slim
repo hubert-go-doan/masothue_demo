@@ -34,14 +34,15 @@
         td
           .d-flex.align-items-center
             div
+              - taxable = taxcode.taxable
               p.fw-bold.mb-1
-                = taxcode.taxable.name
+                = taxable.name
               p.text-muted.mb-0
-                = taxcode.taxable_type =='Company' && taxcode.taxable.sub_name ? taxcode.taxable.sub_name : ''
+                = taxable.is_a?(Company) ? taxable.sub_name : ''
         td
-          = taxcode.taxable_type == 'Company' && taxcode.taxable.represent ? taxcode.taxable.represent.name : taxcode.taxable.name
+          = taxable.is_a?(Company) && taxcode.taxable.represent&.name || taxcode.taxable.name
         td 
-          = full_addr(taxcode)
+          = full_address(taxcode.taxable)
         td
           = taxcode.taxable_type
         td
