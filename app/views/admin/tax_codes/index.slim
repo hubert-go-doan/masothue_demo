@@ -13,16 +13,16 @@
         th[style="width: 30px"]
           | STT
         th[style="width: 90px"]
-          | Tax Code
+          | #Tax Code
         th
           | Name
-        th[style="width: 150px"]
+        th[style="width: 130px"]
           | Represent
-        th[style="width: 180px"]
+        th[style="width: 200px"]
           | Address
-        th[style="width: 100px"]
+        th[style="width: 60px"]
           | Type
-        th[style="width: 50px"]
+        th[style="width: 25px"]
     tbody
     - @tax_codes.each_with_index do |taxcode, index|
       - taxable = taxcode.taxable
@@ -46,4 +46,6 @@
         td
           = taxcode.taxable_type
         td
-          = button_to "Delete", admin_tax_code_path(taxcode), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "btn btn-link btn-sm btn-rounded", role: "button"
+          = button_to admin_tax_code_path(taxcode), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "btn btn-link-dark btn-sm", role: "button" do 
+            i.fa.fa-trash
+

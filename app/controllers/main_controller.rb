@@ -1,5 +1,9 @@
 class MainController < ApplicationController
   def home
-    @companies = Company.all
+    @data = {
+      companies: Company.all,
+      persons: Person.all
+    }
+    @cities =  City.order(:id)
   end
 end

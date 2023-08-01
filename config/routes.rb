@@ -9,11 +9,12 @@ Rails.application.routes.draw do
   # route admin
   namespace :admin do
     root to: 'base#index'
-
+    
     get 'districts_by_city', to: 'districts#districts_by_city'
     get 'wards_by_district', to: 'wards#wards_by_district'
-
+    
     resources :companies
+    resources :people
     resources :contacts, only: [:index, :show, :edit, :update, :destroy]
     resources :tax_codes do
       collection do
