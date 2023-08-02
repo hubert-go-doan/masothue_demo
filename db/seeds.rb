@@ -169,3 +169,21 @@
 #   taxable_type: "Company",
 #   taxable_id: 
 # )
+
+BUSINESS_AREA = [
+  "Bán buôn máy móc, thiết bị và phụ tùng máy khác",
+  "Đại lý, môi giới, đấu giá",
+  "Bán buôn đồ dùng khác cho gia đình",
+  "Dịch vụ liên quan đến in",
+  "Hoàn thiện công trình xây dựng",
+  "Quảng cáo",
+  "Cắt tóc, làm đầu, gội đầu",
+  "Bán buôn máy vi tính, thiết bị ngoại vi và phần mềm",
+  "Bán buôn thiết bị và linh kiện điện tử, viễn thông",
+  "Bán buôn thực phẩm",
+  "Xây dựng nhà các loại"
+]
+
+BUSINESS_AREA.each do |busi|
+  BusinessArea.create(name: busi)
+end

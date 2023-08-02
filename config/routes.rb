@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   # route homepage
   root 'main#home'
   resources :company_types
+  resources :business_areas
   get '/contacts', to: 'contacts#new'
   post '/contacts', to: 'contacts#create'
   get '/homepage', to: 'admin/companies#homepage'
