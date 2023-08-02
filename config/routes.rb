@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     
     resources :companies
     resources :people
+    resources :company_types, only: [:index]
     resources :contacts, only: [:index, :show, :edit, :update, :destroy]
     resources :tax_codes do
       collection do
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
 
   # route homepage
   root 'main#home'
+  resources :company_types
   get '/contacts', to: 'contacts#new'
   post '/contacts', to: 'contacts#create'
   get '/homepage', to: 'admin/companies#homepage'
