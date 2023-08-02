@@ -76,8 +76,13 @@ $background-color_1: #f0f0f0;
 }
 
 .content-table {
+  display: flex;
   max-width: 100%;
   overflow-x: auto;
+}
+
+.sum {
+  margin-left: 20px;
 }
 
 .table {

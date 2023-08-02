@@ -40,7 +40,7 @@ class Admin::CompaniesController < ApplicationController
   def prepare_data
     @city_list = City.pluck(:name, :id)
     @represent_list = Represent.pluck(:name, :id)
-    @company_type_list = CompanyType.pluck(:company_type, :id)
+    @company_type_list = CompanyType.pluck(:type_name, :id)
     @status_list = Status.pluck(:name, :id)
     @business_area_list = BusinessArea.pluck(:name, :id)
   end

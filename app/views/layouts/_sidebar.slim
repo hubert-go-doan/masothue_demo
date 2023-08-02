@@ -20,7 +20,11 @@ header
 
     li.list-group-item.list-group-item-action.py-3.active.ripple.h5[aria-current="true"]
       i.fas.fa-chart-line.fa-fw.me-2
-      = link_to 'Business Type', admin_root_path
+      = link_to 'Company Type', admin_company_types_path
+
+    li.list-group-item.list-group-item-action.py-3.active.ripple.h5[aria-current="true"]
+      i.fa-solid.fa-industry.fa-fw.me-2
+      = link_to 'Type of industry', admin_root_path
 
   nav#main-navbar.navbar.navbar-expand-lg.navbar-light.bg-white.fixed-top
     .container-fluid
