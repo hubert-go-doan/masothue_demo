@@ -1,0 +1,18 @@
+.content-area.container.pt-5
+  .area-section
+    h1[style="font-size: 25px"]
+      | Tra cứu mã số thuế theo ngành nghề
+    .list-type
+      div[style="padding: 16px 0px 16px 10px; font-size: 16px"]
+        strong Ngành
+      ul
+        - @business_areas.each do |busi_area|
+          li 
+            = link_to busi_area.name, business_area_path(busi_area), class: "custom-link"
+
+  .sidebar-blog
+    h6 
+      | Tra cứu mã số thuế trên facebook
+    img src="https://masothue.com/assets/images/xfacebook-masothue.vn.png.pagespeed.ic.eTS6GzZSmp.webp" alt="Search Taxcode on Facebook"/
+    = render partial: 'sidebar'
+
