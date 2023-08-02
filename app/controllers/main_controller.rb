@@ -1,9 +1,6 @@
 class MainController < ApplicationController
   def home
-    @data = {
-      companies: Company.all,
-      persons: Person.all
-    }
+    @data = (Company.all + Person.all).shuffle
     @cities =  City.order(:id)
   end
 end

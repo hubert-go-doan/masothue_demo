@@ -1,18 +1,17 @@
-- @data.each do |category, items|
-  - items.each do |item|
-    .content
-      h4
-        = link_to item.name, '#', class: "content-name"
-      strong #
-      | Mã số thuế: 
-      = item.tax_code&.code
-      br
-      strong
-        i.fa-solid.fa-person 
-      |  Người đại diện: 
-      = item.instance_of?(Company) ? item.represent.name : item.name
-      br
-      strong
-        i.fa-solid.fa-location-dot 
-      = full_address(item)
-      hr
+- @data.each do |category|
+  .content
+    h4
+      = link_to category.name, '#', class: "content-name"
+    strong #
+    | Mã số thuế: 
+    = category.tax_code&.code
+    br
+    strong
+      i.fa-solid.fa-person 
+    |  Người đại diện: 
+    = category.instance_of?(Company) ? category.represent.name : category.name
+    br
+    strong
+      i.fa-solid.fa-location-dot 
+    = full_address(category)
+    hr

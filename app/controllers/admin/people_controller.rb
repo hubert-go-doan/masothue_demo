@@ -43,9 +43,9 @@ class Admin::PeopleController < ApplicationController
   end
   
   def prepare_data
-    @city_list = City.all.map { |city| [city.name, city.id] }
-    @company_type_list = CompanyType.all.map { |com_type| [com_type.type_name, com_type.id] }
-    @status_list = Status.all.map { |status| [status.name, status.id] }
+    @city_list = City.pluck(:name, :id)
+    @company_type_list = CompanyType.pluck(:type_name, :id)
+    @status_list = Status.pluck(:name, :id)
   end
 
   private

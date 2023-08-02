@@ -8,7 +8,7 @@ class Person < ApplicationRecord
   has_one :tax_code, as: :taxable, dependent: :destroy
 
   validates :name, :address, :managed_by, :date_start, presence: true
-  validates :phone_number, :cmnd, numericality: { only_integer: true }, presence: true
+  validates :phone_number, :cmnd, numericality: { only_integer: true }
   validate :presence_of_foreign_keys
 
   private
