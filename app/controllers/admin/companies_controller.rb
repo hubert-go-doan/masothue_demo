@@ -33,17 +33,16 @@ class Admin::CompaniesController < ApplicationController
   end
 
   def destroy
-    # @company = Company.find(params[:id])
     @company.destroy
     redirect_to admin_companies_path, status: :see_other
   end
 
   def prepare_data
-    @city_list = City.all.map { |city| [city.name, city.id] }
-    @represent_list = Represent.all.map { |repre| [repre.name, repre.id] }
-    @company_type_list = CompanyType.all.map { |com_type| [com_type.type_name, com_type.id] }
-    @status_list = Status.all.map { |status| [status.name, status.id] }
-    @business_area_list = BusinessArea.all.map { |business| [business.name, business.id] }
+    @city_list = City.pluck(:name, :id)
+    @represent_list = Represent.pluck(:name, :id)
+    @company_type_list = CompanyType.pluck(:company_type, :id)
+    @status_list = Status.pluck(:name, :id)
+    @business_area_list = BusinessArea.pluck(:name, :id)
   end
 
   def prepare_company

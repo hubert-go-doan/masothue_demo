@@ -1,19 +1,17 @@
-= stylesheet_link_tag 'homepage'
-- @companies.each do |company|
+- @data.each do |category|
   .content
     h4
-     = link_to company.name,'#', class: "content-name"
-    strong # 
+      = link_to category.name, '#', class: "content-name"
+    strong #
     | Mã số thuế: 
-    = company.tax_code&.code
+    = category.tax_code&.code
     br
-    strong 
-      i.fa-solid.fa-person
+    strong
+      i.fa-solid.fa-person 
     |  Người đại diện: 
-    = company.represent.name
+    = category.instance_of?(Company) ? category.represent.name : category.name
     br
-    strong 
-      i.fa-solid.fa-location-dot
-    |  Address: 
-    = full_address(company)
+    strong
+      i.fa-solid.fa-location-dot 
+    = full_address(category)
     hr

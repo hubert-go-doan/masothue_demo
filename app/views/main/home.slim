@@ -7,32 +7,43 @@
   .carousel-inner
     .carousel-item.active
       img.d-block.w-100[src="https://masothue.com/assets/images/slider/xtra-cuu-ma-so-thue-slide-2-min.png.pagespeed.ic.2zJHIHv0aL.webp" alt=""]
-      .carousel-caption.d-none.d-md-block
+      .carousel-caption.d-none.d-md-block.content-slider
         h5
-          | First slide label
-        p
-          | Some representative placeholder content for the first slide.
+          | Tra cứu mã số thuế cá nhân
+        h1
+          | Cá cứu 
+          strong mã số thuế cá nhân 
+          br
+          |nhanh chóng tiện lợi
     .carousel-item
       img.d-block.w-100[src="https://masothue.com/assets/images/slider/xtra-cuu-ma-so-thue-slide-4-min.png.pagespeed.ic.sjYy5mDY40.webp" alt="..."]
-      .carousel-caption.d-none.d-md-block
+      .carousel-caption.d-none.d-md-block.content-slider
         h5
-          | Second slide label
-        p
-          | Some representative placeholder content for the second slide.
+          | Tin Tức
+        h1
+          | Về thuế, kế toán và doanh nghiệp 
+          br 
+          strong Thông tin mới nhất
     .carousel-item
       img.d-block.w-100[src="https://masothue.com/assets/images/slider/xtra-cuu-ma-so-thue-slide-3-min.png.pagespeed.ic.YweYEEDKnI.webp" alt="Third slide"]
-      .carousel-caption.d-none.d-md-block
+      .carousel-caption.d-none.d-md-block.content-slider
         h5
-          | Third slide label
-        p
-          | Some representative placeholder content for the third slide.
+          | Tra cứu mã số thuế
+        h1
+          | Tra cứu trực tiếp ngay trên  
+          br 
+          strong Facebook & Zalo
     .carousel-item
       img.d-block.w-100[src="https://masothue.com/assets/images/slider/xtra-cuu-ma-so-thue-slide-4-min.png.pagespeed.ic.sjYy5mDY40.webp" alt="four slide"]
-      .carousel-caption.d-none.d-md-block
+      .carousel-caption.d-none.d-md-block.content-slider
         h5
-          | Third slide label
-        p
-          | Some representative placeholder content for the third slide.
+          | Tra cứu mã số thuế công ty
+        h1
+          | Hơn 
+          strong 1,7 triệu 
+          | doanh nghiệp trên
+          br
+          | 63 tỉnh thành
 .container.pt-5
   .row
     .feature-list.d-flex.justify-content-around.align-item-center.border.p-5.rounded-3
@@ -77,8 +88,12 @@
           br
           |  Thành phố 
 .content-area.container.pt-5
-  h1[style="padding-bottom: 20px; border-bottom: 2px solid #DC3545"]
-    | Tra Cứu Mã Số Thuế (Công ty, Cá nhân)
-  = render partial: 'list_company', locals: { companies: @companies }
-.sidebar-blog
-/ code sidebar
+  .area-section
+    h1
+      | Tra Cứu Mã Số Thuế (Công ty, Cá nhân)
+    = render partial: 'list_company'
+  .sidebar-blog
+    h6 
+      | Tra cứu mã số thuế trên facebook
+    img src="https://masothue.com/assets/images/xfacebook-masothue.vn.png.pagespeed.ic.eTS6GzZSmp.webp" alt="Search Taxcode on Facebook"/
+    = render partial: 'sidebar_city'
