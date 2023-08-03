@@ -1,5 +1,6 @@
 module ApplicationHelper
-
+  include Pagy::Frontend
+  
   def breadcrumb_navigation
     current_page = request.fullpath
 
