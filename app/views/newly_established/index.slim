@@ -1,0 +1,28 @@
+.content-area.container.pt-5
+  .area-section
+    h1[style="font-size: 25px"]
+        | Tra cứu mã số thuế các công ty mới thành lập
+    .list-type
+      ul
+        - @new_companies.each do |new_company|
+          .content
+            h4
+              = link_to new_company.name, '#', class: "content-name"
+            strong #
+            | Mã số thuế: 
+            = new_company.tax_code&.code
+            br
+            strong
+              i.fa-solid.fa-person 
+            |  Người đại diện: 
+            = new_company.represent.name 
+            br
+            strong
+              i.fa-solid.fa-location-dot 
+            = full_address(new_company)
+            hr
+  .sidebar-blog
+      h6 
+        | Tra cứu mã số thuế trên facebook
+      img src="https://masothue.com/assets/images/xfacebook-masothue.vn.png.pagespeed.ic.eTS6GzZSmp.webp" alt="Search Taxcode on Facebook"/
+      = render partial: 'sidebar'
