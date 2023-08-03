@@ -31,3 +31,15 @@ $font-family_1: "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light",
 body {
   font-family: $font-family_1;
 }
+
+.breadcrumb {
+  font-size: 14px;
+  display: flex;
+  gap: 10px;
+  padding-top: 20px;
+  padding-left: 12px;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
