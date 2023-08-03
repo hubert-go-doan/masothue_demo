@@ -22,7 +22,7 @@ nav.navbar.navbar-expand-lg.bg-danger.sticky-top.pb-3.pt-3
                 = link_to "#", class: "dropdown-item" do
                   | Theo tỉnh thành phố
               li
-                = link_to "#", class: "dropdown-item" do
+                = link_to status_index_path, class: "dropdown-item" do
                   | Trạng thái công ty
         form.d-flex[style="padding-left: 117px" role="search"]
           input.form-control.me-2[style="width: 600px;" type="search" placeholder="Nhập mã số thuế, CMND, tên công ty" aria-label="Search"]

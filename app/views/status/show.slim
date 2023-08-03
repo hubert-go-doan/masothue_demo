@@ -1,0 +1,29 @@
+.content-area.container.pt-5
+  .area-section
+    h2[style="border-bottom: 2px solid red; padding-bottom: 10px; font-size: 30px"]
+      | Mã số thuế 
+      = @status.name
+    .list-type
+      ul
+        - @data.each do |category|
+          .content
+            h4
+              = link_to category.name, '#', class: "content-name"
+            strong #
+            | Mã số thuế: 
+            = category.tax_code&.code
+            br
+            strong
+              i.fa-solid.fa-person 
+            |  Người đại diện: 
+            = category.instance_of?(Company) ? category.represent.name : category.name
+            br
+            strong
+              i.fa-solid.fa-location-dot 
+            = full_address(category)
+            hr
+  .sidebar-blog
+      h6 
+        | Tra cứu mã số thuế trên facebook
+      img src="https://masothue.com/assets/images/xfacebook-masothue.vn.png.pagespeed.ic.eTS6GzZSmp.webp" alt="Search Taxcode on Facebook"/
+      = render partial: 'sidebar'

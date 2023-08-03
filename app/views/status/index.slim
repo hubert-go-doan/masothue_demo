@@ -1,0 +1,16 @@
+.content-area.container.pt-5
+  .area-section
+    h1[style="font-size: 25px"]
+      | Tra cứu mã số thuế theo trạng thái thuế
+    .list-type
+      ul
+        - @statuses.each do |status|
+          li 
+            = link_to status.name, status_path(status), class: "custom-link"
+
+  .sidebar-blog
+    h6 
+      | Tra cứu mã số thuế trên facebook
+    img src="https://masothue.com/assets/images/xfacebook-masothue.vn.png.pagespeed.ic.eTS6GzZSmp.webp" alt="Search Taxcode on Facebook"/
+    = render partial: 'sidebar'
+
