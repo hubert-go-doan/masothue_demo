@@ -2,34 +2,34 @@ header
   nav#sidebarMenu.sidebar.collapse.d-lg-block.collapse.bg-body-tertiary
     .position-sticky
       .list-group-flush.mx-3.mt-4.pt-2
-    li.list-group-item.list-group-item-action.py-3.active.ripple.h5[aria-current="true"]
+    .sidebar-admin.py-3.h5 class=(current_page?(admin_companies_path) ? 'active' : '')
       i.fa-solid.fa-building.fa-fw.me-2
       = link_to 'Company', admin_companies_path
 
-    li.list-group-item.list-group-item-action.py-3.active.ripple.h5[aria-current="true"]
+    .sidebar-admin.py-3.h5 class=(current_page?(admin_tax_codes_path) ? 'active' : '')
       i.fa-solid.fa-code.fa-fw.me-2
       = link_to 'Tax code', admin_tax_codes_path
 
-    li.list-group-item.list-group-item-action.py-3.active.ripple.h5[aria-current="true"]
+    .sidebar-admin.py-3.h5 class=(current_page?(admin_people_path) ? 'active' : '')
       i.fa-solid.fa-person.fa-lg.fa-fw.me-2
       = link_to 'Person', admin_people_path
 
-    li.list-group-item.list-group-item-action.py-3.active.ripple.h5[aria-current="true"]
+    .sidebar-admin.py-3.h5 class=(current_page?(admin_contacts_path) ? 'active' : '')
       i.fa-solid.fa-address-book.fa-fw.me-2
       = link_to 'Contacts', admin_contacts_path
 
-    li.list-group-item.list-group-item-action.py-3.active.ripple.h5[aria-current="true"]
+    .sidebar-admin.py-3.h5 class=(current_page?(admin_company_types_path) ? 'active' : '')
       i.fas.fa-chart-line.fa-fw.me-2
       = link_to 'Company Type', admin_company_types_path
 
-    li.list-group-item.list-group-item-action.py-3.active.ripple.h5[aria-current="true"]
+    .sidebar-admin.py-3.h5 class=(current_page?(admin_business_areas_path) ? 'active' : '')
       i.fa-solid.fa-industry.fa-fw.me-2
-      = link_to 'Type of industry', admin_root_path
+      = link_to 'Business Area', admin_business_areas_path
 
   nav#main-navbar.navbar.navbar-expand-lg.navbar-light.bg-white.fixed-top
     .container-fluid
       a.navbar-brand[href="/admin"]
-        |  <img src="https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp" height="40", alt="MST Logo", loading="lazy", style="padding-left: 27px;" /> 
+        | <img src="https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp" height="40", alt="MST Logo", loading="lazy", style="padding-left: 27px;" /> 
       
       form.d-none.d-md-flex.input-group.w-auto.my-auto
         input.form-control.rounded[autocomplete="off" type="search" placeholder="Search..." style="width: 500px"]
@@ -42,7 +42,7 @@ header
             = link_to "Edit Account", edit_user_registration_path, class: "nav-link"
           li.nav-item
             / = link_to "Sign Out", destroy_user_session_path, class: "btn btn-small btn-primary mx-2", data: {tubor_method: :delete, tubor_confirm: "Are you sure you want to sign out?" }
-            = button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-small btn-primary mx-2"
+            = button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-small btn-dark mx-2"
         - else
           li.nav-item
             = link_to "Sign Up", new_user_registration_path, class: "nav-link"

@@ -1,0 +1,9 @@
+.container-form.rounded-4.shadow.bg-body.rounded.border-1
+  div[style="padding: 30px 30px 55px 30px"]
+    = simple_form_for [:admin, business_area] do |f|
+      .row.mb-3 
+        .col 
+            = f.input :name, lable: "Name Business Area",  input_html: {class: 'form-control'}, placeholder: "Name Buniness Area"
+            = f.input :detail, lable: "Detail(Option)",  input_html: {class: 'form-control'}, placeholder: "Description Detail "
+      = link_to "Back", admin_business_areas_path, class: "btn btn-secondary float-start", style: "padding: 5px 30px"
+      = f.button :submit, value:"Submit", class: "btn btn-primary float-end", style: "padding: 5px 30px"

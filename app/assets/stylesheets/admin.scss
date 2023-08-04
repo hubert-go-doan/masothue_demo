@@ -26,7 +26,6 @@ $background-color_1: #f0f0f0;
   width: 264px;
   height: 100vh;
   background-color: $background-color_1;
-  padding-left: 20px;
   margin-top: 60px;
   position: fixed;
   top: 0;
@@ -38,19 +37,26 @@ $background-color_1: #f0f0f0;
     padding: 0;
     margin: 0;
   }
-  li {
-    margin-bottom: 10px;
+  .sidebar-admin {
+    padding: 20px;
+    transition: transform 0.2s;
     a {
-      color: $color_1;
       text-decoration: none;
-      &:hover {
-        color: $color_2;
-      }
+      color: $color_1;
     }
-    i {
-      &:hover {
-        color: $color_2;
-      }
+  }
+  .sidebar-admin:hover {
+    cursor: pointer;
+    color: #007bff;
+    transform: scale(1.05);
+    a {
+      color: #007bff;
+    }
+  }
+  .active {
+    color: #007bff;
+    a {
+      color: #007bff;
     }
   }
 }
@@ -126,4 +132,15 @@ $background-color_1: #f0f0f0;
 .taxcode-title {
   padding-left: 300px;
   padding-top: 40px;
+}
+
+// CSS- BUSINESS AREA
+
+.business-area-table {
+  max-width: 1600px;
+  margin: 10px auto;
+}
+
+.style-date {
+  margin-bottom: 0px;
 }

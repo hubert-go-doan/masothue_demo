@@ -1,8 +1,8 @@
 class Admin::CompaniesController < ApplicationController
   layout 'admin_layout'
 
-  before_action :prepare_data, only: [:new, :create, :edit]
-  before_action :prepare_company, only: [:edit, :update, :destroy]
+  before_action :prepare_data, only: %i[new create edit]
+  before_action :prepare_company, only: %i[edit update destroy]
 
   def index 
     @companies = Company.all
