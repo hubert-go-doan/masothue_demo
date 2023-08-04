@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         get :person_options
       end
     end
+    resources :business_areas
   end
 
   # route homepage
