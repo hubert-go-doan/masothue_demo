@@ -1,7 +1,7 @@
 header
   nav#sidebarMenu.sidebar.collapse.d-lg-block.collapse.bg-body-tertiary
     .position-sticky
-      .list-group-flush.mx-3.mt-4.pt-2
+      .list-group-flush.mx-3.mt-4
     .sidebar-admin.py-3.h5 class=(current_page?(admin_companies_path) ? 'active' : '')
       i.fa-solid.fa-building.fa-fw.me-2
       = link_to 'Company', admin_companies_path
@@ -26,14 +26,14 @@ header
       i.fa-solid.fa-industry.fa-fw.me-2
       = link_to 'Business Area', admin_business_areas_path
 
-  nav#main-navbar.navbar.navbar-expand-lg.navbar-light.bg-white.fixed-top
+  nav#main-navbar.navbar.navbar-expand-lg.navbar-light.fixed-top.header-dashboard
     .container-fluid
       a.navbar-brand[href="/admin"]
         | <img src="https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp" height="40", alt="MST Logo", loading="lazy", style="padding-left: 27px;" /> 
       
       form.d-none.d-md-flex.input-group.w-auto.my-auto
         input.form-control.rounded[autocomplete="off" type="search" placeholder="Search..." style="width: 500px"]
-        span.input-group-text.border-0
+        span.input-group-text.border-0[style="margin-left: 10px; padding: 0px 16px; border-radius: 6px"]
           i.fas.fa-search
 
       ul.navbar-nav
