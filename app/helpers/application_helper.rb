@@ -34,6 +34,38 @@ module ApplicationHelper
       else
         crumbs << 'Loại hình doanh nghiệp'
       end
+    elsif current_page.include?('cities/ward')
+      ward_id = params[:id]
+      if ward_id.present?
+        ward = Ward.find(ward_id)
+        city = ward.district.city
+        crumbs << link_to('Tỉnh thành phố', cities_path)
+        crumbs << link_to(city.name, city_path(city))
+        crumbs << link_to(ward.district.name, district_path(ward.district))
+        crumbs << ward.name
+      else
+        crumbs << link_to('Tỉnh thành phố', cities_path)
+      end
+    elsif current_page.include?('cities/district')
+      district_id = params[:id]
+      if district_id.present?
+        district = District.find(district_id)
+        city = district.city
+        crumbs << link_to('Tỉnh thành phố', cities_path)
+        crumbs << link_to(city.name, city_path(city))
+        crumbs << district.name
+      else
+        crumbs << link_to('Tỉnh thành phố', cities_path)
+      end
+    elsif current_page.include?('cities')
+      city_id = params[:id]
+      if city_id.present?
+        city = City.find(city_id)
+        crumbs << link_to('Tỉnh thành phố', cities_path)
+        crumbs << city.name
+      else
+        crumbs << 'Tỉnh thành phố'
+      end
     else
       if current_page.include?('contacts')
         crumbs << 'Liên hệ'

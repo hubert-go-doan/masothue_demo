@@ -1,0 +1,8 @@
+h5[style="color: #0275d8"]
+  = @city.name
+- @districts.each do |district|
+  ul
+    li
+      = link_to district_path(district), class: "city-item" do
+        i.fa-solid.fa-chevron-right.fa-2xs
+        = district.name
