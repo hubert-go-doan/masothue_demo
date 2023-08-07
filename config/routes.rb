@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   resources :business_areas
   resources :newly_established
   resources :status
+  resources :cities
+  get 'cities/district/:id', to: 'cities#show_district', as: 'district'
+  get 'cities/ward/:id', to: 'cities#show_ward', as: 'ward'
   get '/contacts', to: 'contacts#new'
   post '/contacts', to: 'contacts#create'
 end

@@ -2,12 +2,12 @@
 .content-area.container.pt-4
   .area-section
     h1[style="font-size: 25px"]
-      | Tra cứu mã số thuế theo loại hình doanh nghiệp
+      | Tra cứu mã số thuế theo theo tỉnh thành phố
     .list-type
       ul
-        - @company_types.each do |company_type|
+        - @cities.each do |city|
           li 
-            = link_to company_type.type_name, company_type_path(company_type), class: "custom-link"
+            = link_to city.name, city_path(city), class: "custom-link"
 
   .sidebar-blog
     h6 
@@ -15,3 +15,4 @@
     img src="https://masothue.com/assets/images/xfacebook-masothue.vn.png.pagespeed.ic.eTS6GzZSmp.webp" alt="Search Taxcode on Facebook"/
     = render partial: 'sidebar'
 
+  

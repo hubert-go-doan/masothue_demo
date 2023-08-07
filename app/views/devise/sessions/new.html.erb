@@ -6,6 +6,7 @@
           <div class="card-body p-5">
             <h2 class="text-center" >Welcome back!</h2>
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
 
               <div class="form-group">
                 <%= f.label :email %>

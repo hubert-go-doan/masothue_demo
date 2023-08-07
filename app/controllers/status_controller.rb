@@ -3,17 +3,28 @@ class StatusController < ApplicationController
 
   def index
     @statuses = Status.all
+    prepare_breadcrumb_data
   end
 
   def show
-    @status = Status.find(params[:id]) 
+    @status = Status.find_by(id: params[:id])
+    redirect_to status_index_path if @status.nil?
     @data = (@status.companies + @status.people).shuffle
-    rescue ActiveRecord::RecordNotFound 
-      redirect_to status_index_path   
+
+    prepare_breadcrumb_data unless @status.nil?
   end
-  
+
   private
-    def prepare_cities
-      @cities =  City.order(:id)
-    end
+
+  def prepare_cities
+    @cities = City.order(:id)
+  end
+
+  def prepare_breadcrumb_data
+    @breadcrumb_data = [
+      { name: 'Tra cứu mã số thuế', path: root_path },
+      { name: 'Trạng thái thuế', path: status_index_path }
+    ]
+    @breadcrumb_data << { name: @status.name, path: status_path(@status) } if action_name == 'show'
+  end
 end
