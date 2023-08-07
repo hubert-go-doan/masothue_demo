@@ -1,0 +1,9 @@
+.breadcrumb.container
+  - @breadcrumb_data.each_with_index do |crumb, index|
+    - if index == @breadcrumb_data.size - 1
+      = crumb[:name]
+    - else
+      = link_to crumb[:name], crumb[:path]
+    - if index < @breadcrumb_data.size - 1
+      span
+        |  >

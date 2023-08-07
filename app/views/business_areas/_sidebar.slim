@@ -3,6 +3,6 @@
   - @cities.each do |city|
     ul
       li
-        = link_to '#', class: "city-item" do
+        = link_to city_path(city), class: "city-item" do
           i.fa-solid.fa-chevron-right.fa-2xs
           = city.name

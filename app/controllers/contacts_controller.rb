@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
   def new
     @contact = Contact.new
+    prepare_breadcrumb_data
   end
 
   def create
@@ -9,6 +10,7 @@ class ContactsController < ApplicationController
     if @contact.save
       redirect_to contacts_path
     else
+      prepare_breadcrumb_data 
       render :new, status: :unprocessable_entity
     end
   end     
@@ -20,5 +22,12 @@ class ContactsController < ApplicationController
         :email, 
         :content
       )
+    end
+
+    def prepare_breadcrumb_data
+      @breadcrumb_data = [
+        { name: 'Tra cứu mã số thuế', path: root_path },
+        { name: 'Liên hệ', path: contacts_path }
+      ]
     end
 end
