@@ -1,0 +1,23 @@
+.container[style='padding-top: 40px']
+  h4[style="border-bottom: 2px solid red; padding-bottom: 10px"]
+    | Tra cứu mã số thuế và danh sách công ty tại 
+    = @entity.city.name
+  .list-type
+    ul
+      - @related_companies_city.each do |company|
+        .content
+          h4
+            = link_to company.name, info_detail_path(id: company.id, type: 'company'), class: "content-name"
+          strong #
+          | Mã số thuế: 
+          = company.tax_code&.code
+          br
+          strong
+            i.fa-solid.fa-person 
+          |  Người đại diện: 
+          = company.represent.name 
+          br
+          strong
+            i.fa-solid.fa-location-dot 
+          = full_address(company)
+          hr

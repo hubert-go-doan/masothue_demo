@@ -1,0 +1,8 @@
+h5[style="color: #0275d8"]
+  = @entity.city.name+ ' - '+ @entity.district.name
+- @related_wards.each do |ward|
+  ul
+    li
+      = link_to ward_path(ward), class: "city-item" do
+        i.fa-solid.fa-chevron-right.fa-2xs
+        = ward.name

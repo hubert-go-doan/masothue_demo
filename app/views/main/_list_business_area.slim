@@ -1,0 +1,16 @@
+.container[style='padding-top: 40px']
+  h1[style="font-size: 25px"]
+    | Ngành nghề kinh doanh
+  table.table[style="font-size: 16px; margin-top: 35px"]
+    thead
+      th[colspan=2]
+        | Ngành
+    tbody
+        tr
+          td
+            | Tên
+          td
+            = link_to @entity.business_area.name, business_area_path(@entity.business_area), class: "nav-link", style:'font-weight:bold'
+            - if @entity.business_area.detail.present?
+              | Chi tiết: 
+              = @entity.business_area.detail

@@ -1,7 +1,7 @@
 - @data.each do |category|
   .content
     h4
-      = link_to category.name, '#', class: "content-name"
+      = link_to category.name, info_detail_path(id: category.id, type: category.class.name.downcase), class: "content-name"
     strong #
     | Mã số thuế: 
     = category.tax_code&.code

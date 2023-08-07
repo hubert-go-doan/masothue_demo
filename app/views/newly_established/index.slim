@@ -8,7 +8,7 @@
         - @new_companies.each do |new_company|
           .content
             h4
-              = link_to new_company.name, '#', class: "content-name"
+              = link_to new_company.name, info_detail_path(id: new_company.id, type: 'company'), class: "content-name"
             strong #
             | Mã số thuế: 
             = new_company.tax_code&.code

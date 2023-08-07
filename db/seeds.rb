@@ -39,7 +39,7 @@
 # )
 
 # Ward.create(
-#   name: 'Phường 22',
+#   name: 'Phường 27',
 #   district_id: 2
 # )
 
