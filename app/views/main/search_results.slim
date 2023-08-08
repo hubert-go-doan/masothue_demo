@@ -13,7 +13,7 @@
           - if params[:city_id].blank? || (result.respond_to?(:city_id) && result.city_id == params[:city_id].to_i)
             .content
               h4
-                = link_to result.name, info_detail_path(id: result.id, type: result.instance_of?(Company) ? 'company' : 'person'), class: "content-name"
+                = link_to result.name, info_detail_path(id: result.id, type: result.class.name.downcase), class: "content-name"
               strong #
               | Mã số thuế: 
               = result.tax_code&.code
