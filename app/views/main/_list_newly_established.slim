@@ -1,0 +1,22 @@
+.container[style='padding-top: 40px']
+  h4[style="border-bottom: 2px solid red; padding-bottom: 10px"]
+    | Tra cứu mã số thuế và danh sách công ty mới thành lập
+  .list-type
+    ul
+      - @new_entity.each do |category|
+        .content
+          h4
+            = link_to category.name, info_detail_path(id: category.id, type: category.class.name.downcase), class: "content-name"
+          strong #
+          | Mã số thuế: 
+          = category.tax_code&.code
+          br
+          strong
+            i.fa-solid.fa-person 
+          |  Người đại diện: 
+          = @entity.instance_of?(Company) ? @entity.represent.name.upcase : @entity.name.upcase
+          br
+          strong
+            i.fa-solid.fa-location-dot 
+          = full_address(category)
+          hr

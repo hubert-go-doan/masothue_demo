@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   resources :newly_established
   resources :status
   resources :cities
+  get 'info_detail/:id/:type', to: 'main#info_detail', as: :info_detail
   get 'cities/district/:id', to: 'cities#show_district', as: 'district'
   get 'cities/ward/:id', to: 'cities#show_ward', as: 'ward'
   get '/contacts', to: 'contacts#new'

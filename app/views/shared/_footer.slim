@@ -3,40 +3,41 @@ footer.text-center.text-lg-start.bg-white.text-muted
   section
     .container.text-center.text-md-start.mt-5
       .row.mt-3
-        .col-md-3.col-lg-4.col-xl-3.mx-auto.mb-4
+        .col-md-3.col-lg-4.col-xl-3.mx-auto.mb-4[style='font-size:14px']
           / h6.text-uppercase.fw-bold.mb-4
           /   i.fas.fa-gem.me-3.text-secondary
           /   | TaxCodeInfo
           = link_to root_path, class: "navbar-brand" do
             = image_tag "https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp", width: "175px", height: "42", alt: "logo_masothue"
-          p
+          p[style='padding-top: 15px']
             | Trang web giúp bạn tra cứu mã số thuế cá nhân, doanh nghiệp nhanh nhất, chính xác nhất !
           p 
             | Email: info@masothue.com
-        .col-md-2.col-lg-2.col-xl-2.mx-auto.mb-4
-          h6.text-uppercase.fw-bold.mb-4
-            |  Truy cập nhanh 
+          h6.text-uppercase.fw-bold.mb-4[style='color: #DC3545; font-size:14px']
+            |  Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi 
+        .col-md-2.col-lg-2.col-xl-2.mx-auto.mb-4[style='font-size:14px']
           p
-            = link_to "#!", class: "text-reset" do
+            = link_to business_areas_path, class: "nav-link" do
               | Tra cứu mã số thuế theo ngành nghề
           p
-            = link_to "#!", class: "text-reset" do
+            = link_to company_types_path, class: "nav-link" do
               | Tra cứu mã số thuế theo loại hình doanh nghiệp
           p
-            = link_to "#!", class: "text-reset" do
+            = link_to status_index_path, class: "nav-link" do
               | Tra cứu mã số thuế theo tình trạng DN
-        .col-md-3.col-lg-2.col-xl-2.mx-auto.mb-4
-          h6.text-uppercase.fw-bold.mb-4
+        .col-md-3.col-lg-2.col-xl-2.mx-auto.mb-4[style='font-size:14px']
+          / h6.text-uppercase.fw-bold.mb-4
+          /   |  
           p
-            = link_to "#!", class: "text-reset" do
+            = link_to "#!", class: "nav-link" do
               | Tra cứu mã số thuế cá nhân
           p
-            = link_to "#!", class: "text-reset" do
+            = link_to newly_established_index_path, class: "nav-link" do
               | Doanh nghiệp mới thành lập
           p
-            = link_to "#!", class: "text-reset" do
+            = link_to cities_path, class: "nav-link" do
               | Mã số thuế theo tỉnh thành phố
-        .col-md-4.col-lg-3.col-xl-3.mx-auto.mb-md-0.mb-4
+        .col-md-4.col-lg-3.col-xl-3.mx-auto.mb-md-0.mb-4[style='font-size:14px']
           h6.text-uppercase.fw-bold.mb-4
             | Chính sách
           p
