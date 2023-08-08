@@ -38,4 +38,6 @@ Rails.application.routes.draw do
   get 'cities/ward/:id', to: 'cities#show_ward', as: 'ward'
   get '/contacts', to: 'contacts#new'
   post '/contacts', to: 'contacts#create'
+
+  get 'search', to: 'main#search', as: :search
 end

@@ -34,8 +34,8 @@
 # )
 
 # Ward.create(
-#   name: 'Phường 15',
-#   district_id: 1
+#   name: 'Phường 8',
+#   district_id: 4
 # )
 
 # Ward.create(
