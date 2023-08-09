@@ -2,7 +2,7 @@ class Admin::ContactsController < ApplicationController
   layout 'admin_layout'
 
   def index
-    @contacts = Contact.all
+    @pagy, @contacts = pagy(Contact.all, items: 15)
   end
 
   def destroy

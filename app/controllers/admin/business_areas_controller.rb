@@ -4,7 +4,7 @@ class Admin::BusinessAreasController < ApplicationController
   before_action :prepare_business_area, only: %i[edit update destroy]
 
   def index 
-    @business_areas = BusinessArea.all
+    @pagy, @business_areas = pagy(BusinessArea.all, items: 15)
   end
 
   def new

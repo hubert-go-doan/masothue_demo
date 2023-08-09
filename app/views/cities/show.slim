@@ -23,6 +23,8 @@
               i.fa-solid.fa-location-dot 
             = full_address(company)
             hr
+    - if @companies.present?
+      == pagy_bootstrap_nav(@pagy)
   .sidebar-blog
       h6 
         | Tra cứu mã số thuế trên facebook

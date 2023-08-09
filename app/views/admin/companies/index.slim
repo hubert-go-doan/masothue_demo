@@ -72,4 +72,6 @@
           / = link_to "Delete", admin_company_path(company), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
           = button_to admin_company_path(company), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "btn btn-link-dark btn-sm btn-rounded", role: "button" do 
             i.fa.fa-trash
+== pagy_bootstrap_nav(@pagy)
+
         

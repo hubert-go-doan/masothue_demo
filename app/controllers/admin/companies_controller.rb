@@ -5,7 +5,7 @@ class Admin::CompaniesController < ApplicationController
   before_action :prepare_company, only: %i[edit update destroy]
 
   def index 
-    @companies = Company.all
+    @pagy, @companies = pagy(Company.all, items: 15)
   end
 
   def new
