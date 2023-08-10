@@ -2,7 +2,7 @@ class Admin::CompanyTypesController < ApplicationController
     layout 'admin_layout'
   
     def index
-      @company_types = CompanyType.all
+      @pagy, @company_types = pagy(CompanyType.all, items: 10)
       @type_sum = CompanyType.count
       @company_sum = Company.count
       @person_sum = Person.count

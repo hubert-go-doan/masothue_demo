@@ -3,14 +3,14 @@ class BusinessAreasController < ApplicationController
   before_action :prepare_cities, only: %i[index show]
 
   def index
-    @business_areas = BusinessArea.all
+    @pagy, @business_areas = pagy(BusinessArea.all)
     prepare_breadcrumb_data
   end
 
   def show
     @business_area = BusinessArea.find_by(id:params[:id])
     redirect_to business_areas_path if @business_area.nil?
-    @data = @business_area.companies.shuffle
+    @pagy, @data = pagy(@business_area.companies.order(date_start: :desc))
 
     prepare_breadcrumb_data unless @business_area.nil?
   end

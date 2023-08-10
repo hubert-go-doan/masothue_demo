@@ -10,7 +10,7 @@ class CompanyTypesController < ApplicationController
   def show
     @company_type = CompanyType.find_by(id: params[:id])
     redirect_to company_types_path if @company_type.nil?
-    @data = (@company_type.companies + @company_type.people).shuffle
+    @pagy, @data = pagy_array((@company_type.companies + @company_type.people).sort_by(&:date_start).reverse)
 
     prepare_breadcrumb_data unless @company_type.nil?
   end

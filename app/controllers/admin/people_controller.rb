@@ -5,7 +5,7 @@ class Admin::PeopleController < ApplicationController
   before_action :prepare_person, only: %i[edit update destroy]
 
   def index
-    @persons = Person.all
+    @pagy, @persons = pagy(Person.all, items: 15)
   end
 
   def new

@@ -1,0 +1,31 @@
+$main-color: #e3e3e3;
+$second-color: #dc3545;
+
+.pagination {
+  display: flex;
+  align-items: flex-end;
+  list-style: none;
+  padding-left: 10px;
+  bottom: 0;
+  .active {
+    .page-link {
+      background-color: $second-color;
+      color: #fff;
+      border: 1px solid $main-color;
+      &:hover {
+        background-color: $second-color;
+      }
+    }
+  }
+
+  .page-link {
+    display: block;
+    color: #7e7e7e;
+    border: 1px solid $main-color;
+    margin: 0px 6px;
+
+    &:hover {
+      background-color: $main-color;
+    }
+  }
+}

@@ -6,7 +6,7 @@ class Admin::TaxCodesController < ApplicationController
   before_action :fetch_taxable_types, only: %i[new create]
 
   def index
-    @tax_codes = TaxCode.includes(:taxable).all
+    @pagy, @tax_codes = pagy(TaxCode.includes(:taxable).all, items: 15)
   end
 
   def company_options

@@ -12,7 +12,7 @@ class CitiesController < ApplicationController
       { name: @city.name, path: city_path(@city) }
     ])
     @districts = @city.districts
-    @companies = @city.companies.to_a.shuffle
+    @pagy, @companies = pagy(@city.companies.order(date_start: :desc)) 
     rescue ActiveRecord::RecordNotFound
       redirect_to cities_path
   end
@@ -26,7 +26,7 @@ class CitiesController < ApplicationController
       { name: @district.name, path: district_path(@district) }
     ])
     @wards = @district.wards
-    @companies = @district.companies.to_a.shuffle
+    @pagy, @companies = pagy(@district.companies.order(date_start: :desc))
   end
 
   def show_ward
@@ -40,7 +40,7 @@ class CitiesController < ApplicationController
       { name: @ward.name, path: ward_path(@ward) }
     ])
     @wards = @district.wards
-    @companies = @ward.companies.to_a.shuffle
+    @pagy,@companies = pagy(@ward.companies.order(date_start: :desc))
   end
   
   private

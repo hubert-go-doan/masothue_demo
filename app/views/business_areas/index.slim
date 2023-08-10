@@ -10,7 +10,7 @@
         - @business_areas.each do |busi_area|
           li 
             = link_to busi_area.name, business_area_path(busi_area), class: "custom-link"
-
+    == pagy_bootstrap_nav(@pagy)
   .sidebar-blog
     h6 
       | Tra cứu mã số thuế trên facebook

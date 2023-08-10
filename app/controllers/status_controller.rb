@@ -9,7 +9,7 @@ class StatusController < ApplicationController
   def show
     @status = Status.find_by(id: params[:id])
     redirect_to status_index_path if @status.nil?
-    @data = (@status.companies + @status.people).shuffle
+    @pagy, @data = pagy_array((@status.companies + @status.people).sort_by(&:date_start).reverse)
 
     prepare_breadcrumb_data unless @status.nil?
   end
