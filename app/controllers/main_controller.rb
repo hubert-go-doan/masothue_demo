@@ -2,7 +2,7 @@ class MainController < ApplicationController
   before_action :prepare_cities, only: %i[home info_detail search]
 
   def home
-    @data = (Company.order(Arel.sql('RANDOM()')).limit(10) + Person.order(Arel.sql('RANDOM()')).limit(10)).shuffle
+    @data = (Company.order('RANDOM()').limit(10) + Person.order('RANDOM()').limit(10)).shuffle
   end
 
   def search
@@ -15,7 +15,7 @@ class MainController < ApplicationController
       @results += Person.where("LOWER(people.name) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%").joins(:tax_code)
     end
 
-    @results = @results.select { |result| city_id.blank? || (result.respond_to?(:city_id) && result.city_id == city_id.to_i) }
+    @results = @results.select { |result| city_id.blank? || result.city_id == city_id.to_i }
 
     @pagy, @paginated_results = pagy_array(@results)
 
