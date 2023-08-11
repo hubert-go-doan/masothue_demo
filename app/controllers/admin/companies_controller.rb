@@ -5,15 +5,18 @@ class Admin::CompaniesController < ApplicationController
   before_action :prepare_company, only: %i[edit update destroy]
 
   def index 
+    authorize Company
     @pagy, @companies = pagy(Company.all, items: 15)
   end
 
   def new
+    authorize Company
     @company = Company.new
   end
 
   def create
     @company = Company.new(company_params)
+    authorize @company
     if @company.save 
       redirect_to admin_companies_path
     else 
@@ -22,9 +25,11 @@ class Admin::CompaniesController < ApplicationController
   end
 
   def edit
+    authorize @company
   end
 
   def update
+    authorize @company
     if @company.update(company_params)
       redirect_to admin_companies_path 
     else
@@ -33,6 +38,7 @@ class Admin::CompaniesController < ApplicationController
   end
 
   def destroy
+    authorize @company
     @company.destroy
     redirect_to admin_companies_path, status: :see_other
   end

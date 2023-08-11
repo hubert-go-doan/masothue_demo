@@ -28,16 +28,20 @@ Rails.application.routes.draw do
 
   # route homepage
   root 'main#home'
-  resources :company_types
+  resources :company_types  
   resources :business_areas
   resources :newly_established
   resources :status
   resources :cities
+  resources :tax_code_personal do
+    collection do
+      get 'search', to: 'tax_code_personal#search', as: :search_person
+    end
+  end
   get 'info_detail/:id/:type', to: 'main#info_detail', as: :info_detail
   get 'cities/district/:id', to: 'cities#show_district', as: 'district'
   get 'cities/ward/:id', to: 'cities#show_ward', as: 'ward'
   get '/contacts', to: 'contacts#new'
   post '/contacts', to: 'contacts#create'
-
   get 'search', to: 'main#search', as: :search
 end

@@ -6,6 +6,7 @@ class Admin::TaxCodesController < ApplicationController
   before_action :fetch_taxable_types, only: %i[new create]
 
   def index
+    authorize TaxCode
     @pagy, @tax_codes = pagy(TaxCode.includes(:taxable).all, items: 15)
   end
 
@@ -20,11 +21,13 @@ class Admin::TaxCodesController < ApplicationController
   end
 
   def new
+    authorize TaxCode
     @tax_code = TaxCode.new
   end
 
   def create
     @tax_code = TaxCode.new(taxcode_params)
+    authorize @tax_code
     if @tax_code.save 
       redirect_to admin_tax_codes_path
     else 
@@ -34,6 +37,7 @@ class Admin::TaxCodesController < ApplicationController
 
   def destroy
     @tax_code = TaxCode.find(params[:id])
+    authorize @tax_code
     @tax_code.destroy
     redirect_to admin_tax_codes_path, status: :see_other
   end
