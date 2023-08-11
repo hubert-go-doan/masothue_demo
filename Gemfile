@@ -37,6 +37,8 @@ gem 'bootstrap-datepicker-rails'
 
 gem 'devise'
 
+gem 'pundit'
+
 gem 'rubocop'
 
 gem 'rubocop-rails'

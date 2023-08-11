@@ -5,15 +5,18 @@ class Admin::PeopleController < ApplicationController
   before_action :prepare_person, only: %i[edit update destroy]
 
   def index
+    authorize Person
     @pagy, @persons = pagy(Person.all, items: 15)
   end
 
   def new
+    authorize Person
     @person = Person.new
   end
 
   def create
     @person = Person.new(person_params)
+    authorize @person
     if @person.save
       redirect_to admin_people_path, notice: 'Person was successfully created!'
     else
@@ -22,9 +25,11 @@ class Admin::PeopleController < ApplicationController
   end
 
   def edit
+    authorize @person
   end
 
   def update
+    authorize @person
     if @person.update(person_params)
       redirect_to admin_people_path, notice: 'Person was successfully updated!'
     else
@@ -33,6 +38,7 @@ class Admin::PeopleController < ApplicationController
   end
 
   def destroy
+    authorize @person
     @person.destroy
     redirect_to admin_people_path, notice: 'Person was successfully destroyed.'
   end

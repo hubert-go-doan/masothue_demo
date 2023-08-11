@@ -2,6 +2,7 @@ class Admin::CompanyTypesController < ApplicationController
     layout 'admin_layout'
   
     def index
+      authorize CompanyType
       @pagy, @company_types = pagy(CompanyType.all, items: 10)
       @type_sum = CompanyType.count
       @company_sum = Company.count
