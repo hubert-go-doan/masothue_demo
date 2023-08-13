@@ -1,0 +1,14 @@
+.add-style
+  = link_to admin_business_areas_path, class: 'cursor-pointer text-dark' do
+    h3 
+      | Management 
+      strong[style="color: red;"] Business Area
+
+  = form_tag search_business_are_admin_business_areas_path, method: :get, class: 'd-flex', style: 'height: 40px', role: 'search' do
+    = text_field_tag :q, params[:q], class: 'form-control me-2', style: 'width: 400px; ', type: 'search', placeholder: 'Search...', aria_label: 'Search'
+    button.btn.btn-dark(type="submit")
+      i.fas.fa-search
+      
+  = link_to new_admin_business_area_path, class: 'btn cursor-pointer button_add btn-primary', type: 'button' do
+    i.fa-solid.fa-plus.me-2
+    |  Add Business Area 

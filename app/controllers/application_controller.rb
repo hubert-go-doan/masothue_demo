@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    admin_root_path 
+    admin_tax_codes_path 
   end
 
   def user_not_authorized

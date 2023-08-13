@@ -4,7 +4,7 @@
       = link_to category.name, info_detail_path(id: category.id, type: category.class.name.downcase), class: "content-name"
     strong #
     | Mã số thuế: 
-    = category.tax_code&.code
+    = link_to category.tax_code&.code, info_detail_path(id: category.id, type: category.class.name.downcase), class: "text-decoration-none text-dark"
     br
     strong
       i.fa-solid.fa-person 

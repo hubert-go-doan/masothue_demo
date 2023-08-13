@@ -1,18 +1,17 @@
-  .row
-    nav.navbar.navbar-expand-lg.header-dashboard
-      .container-fluid
-        #navbarSupportedContent.collapse.navbar-collapse
-          ul.navbar-nav.me-auto.mb-2.mb-lg-0
-            li.nav-item
-
-          ul.navbar-nav
-            - if current_user
-              li.nav-item
-                = link_to "Edit Account", edit_user_registration_path, class: "nav-link"
-              li.nav-item
-                = button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-small btn-primary mx-2"
-            - else
-              li.nav-item
-                = link_to "Sign Up", new_user_registration_path, class: "nav-link"
-              li.nav-items
-                = button_to "Sign In", new_user_session_path, class: "btn btn-small border-dark rounded-3 btn-light mx-2"
+      
+  nav#main-navbar.navbar.navbar-expand-lg.navbar-light.fixed-top.header-dashboard
+    .container-fluid
+      a.navbar-brand[href="/admin/tax_codes"]
+        | <img src="https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp" height="40", alt="MST Logo", loading="lazy", style="padding-left: 27px;" /> 
+      h3.font-weight-bold.text-light Tax Code Management System
+      ul.navbar-nav
+        - if current_user
+          li.nav-item
+            = link_to "Edit Account", edit_user_registration_path, class: "nav-link text-light"
+          li.nav-item
+            = button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-small btn-light mx-2"
+        - else
+          li.nav-item
+            = link_to "Sign Up", new_user_registration_path, class: "nav-link"
+          li.nav-item
+            = link_to "Sign In", new_user_session_path, class: "btn btn-small border-dark rounded-3 btn-light mx-2"

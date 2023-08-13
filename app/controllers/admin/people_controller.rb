@@ -3,10 +3,35 @@ class Admin::PeopleController < ApplicationController
 
   before_action :prepare_data, only: %i[new create edit]
   before_action :prepare_person, only: %i[edit update destroy]
+  before_action :prepare_data_filter, only: %i[index search]
+
+  def search 
+    query = params[:q]&.strip&.downcase
+    @pagy, @persons = pagy_array([])
+    
+    if query.present?
+      @persons = Person.where("LOWER(people.cmnd) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%").joins(:tax_code)
+    end
+    
+    if @persons.blank?
+      render 'no_result'
+    else
+      render 'index'
+    end
+  end 
 
   def index
     authorize Person
-    @pagy, @persons = pagy(Person.all, items: 15)
+    persons = Person.all
+       
+    if params[:city_id].present?
+      persons = persons.where(city_id: params[:city_id])
+    end
+
+    if params[:status_id].present?
+      persons = persons.where(status_id: params[:status_id])
+    end
+    @pagy, @persons = pagy(persons, items: 10)
   end
 
   def new
@@ -40,7 +65,7 @@ class Admin::PeopleController < ApplicationController
   def destroy
     authorize @person
     @person.destroy
-    redirect_to admin_people_path, notice: 'Person was successfully destroyed.'
+    redirect_to admin_people_path, notice: 'Person was successfully deleted!'
   end
 
 
@@ -58,5 +83,10 @@ class Admin::PeopleController < ApplicationController
 
   def person_params
     params.require(:person).permit(:name, :cmnd, :date_start, :phone_number, :managed_by, :address, :city_id, :district_id, :ward_id, :company_type_id, :status_id)
+  end
+
+  def prepare_data_filter
+    @cities = City.order(:id)
+    @status_list = Status.pluck(:name, :id)
   end
 end

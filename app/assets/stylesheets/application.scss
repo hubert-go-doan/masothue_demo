@@ -14,7 +14,6 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 @import "font-awesome";
-@import "bootstrap-datepicker";
 @import "homepage";
 @import "company_type";
 @import "pagination_mainpage";
@@ -42,4 +41,16 @@ body {
     text-decoration: none;
     color: black;
   }
+}
+
+abbr[title] {
+  color: #dc3545;
+  cursor: help;
+  text-decoration-skip-ink: none;
+  text-decoration: none;
+}
+
+small {
+  color: #dc3545;
+  text-transform: capitalize;
 }

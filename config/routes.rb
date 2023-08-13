@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  # route error
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
+
   # route devise
   devise_for :users, controllers: {
     registrations: 'registrations',
-    sessions: 'sessions',
+    sessions: 'sessions', 
     passwords: 'passwords'
   }
 
@@ -13,17 +17,35 @@ Rails.application.routes.draw do
     get 'districts_by_city', to: 'districts#districts_by_city'
     get 'wards_by_district', to: 'wards#wards_by_district'
     
-    resources :companies
-    resources :people
+    resources :companies do
+      collection do 
+        get 'search', to: 'companies#search', as: :search_company
+      end
+    end
+
+    resources :people do 
+      collection do
+        get 'search', to: 'people#search', as: :search_person
+      end
+    end
+
     resources :company_types, only: [:index]
+    resources :represents
     resources :contacts, only: [:index, :show, :edit, :update, :destroy]
+
     resources :tax_codes do
       collection do
         get :company_options
         get :person_options
+        get 'search', to: 'tax_codes#search', as: :search_tax_code
       end
     end
-    resources :business_areas
+
+    resources :business_areas do
+      collection do
+        get 'search', to: 'business_areas#search', as: :search_business_are 
+      end
+    end
   end
 
   # route homepage

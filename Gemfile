@@ -33,8 +33,6 @@ gem 'simple_form'
 
 gem 'pagy'
 
-gem 'bootstrap-datepicker-rails'
-
 gem 'devise'
 
 gem 'pundit'
@@ -93,4 +91,3 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "hotwire-rails", "~> 0.1.3"

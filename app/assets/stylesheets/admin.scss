@@ -16,11 +16,37 @@
 @import "font-awesome";
 @import "pagination_admin";
 
+$font-family_1: "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light",
+  "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+
+@font-face {
+  font-family: "Open Sans", sans-serif;
+  src: url("/app/assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf")
+    format("truetype");
+}
+
+body {
+  font-family: $font-family_1;
+}
+
 $color_1: #333;
 $color_2: #007bff;
 $color_3: white;
 $color_4: #999;
+$color_5: #dc3545;
 $background-color_1: #f0f0f0;
+
+abbr[title] {
+  color: $color_5;
+  cursor: help;
+  text-decoration-skip-ink: none;
+  text-decoration: none;
+}
+
+small {
+  color: $color_5;
+  text-transform: capitalize;
+}
 
 // CSS - SideBar
 .sidebar {
@@ -39,7 +65,8 @@ $background-color_1: #f0f0f0;
     margin: 0;
   }
   .sidebar-admin {
-    padding: 20px;
+    font-weight: 600;
+    padding-left: 38px;
     transition: transform 0.2s;
     a {
       text-decoration: none;
@@ -48,29 +75,34 @@ $background-color_1: #f0f0f0;
   }
   .sidebar-admin:hover {
     cursor: pointer;
-    color: #007bff;
+    color: #e70909;
     transform: scale(1.05);
     a {
-      color: #007bff;
+      color: #e70909;
     }
   }
   .active {
-    color: #007bff;
+    color: #e70909;
     a {
-      color: #007bff;
+      color: #e70909;
     }
   }
 }
 
 .header-dashboard {
-  background-color: #965151;
+  background-color: #221717;
+}
+
+.back-home {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
 }
 // CSS - Company
 
 .add-style {
   display: flex;
   justify-content: space-between;
-  padding-top: 15px;
   padding-right: 20px;
   h3 {
     padding-left: 16px;
@@ -82,13 +114,15 @@ $background-color_1: #f0f0f0;
 }
 
 .button_add {
-  padding: 8px;
+  padding: 10px;
 }
 
 .content-table {
   display: flex;
   max-width: 100%;
   overflow-x: auto;
+  padding-left: 16px;
+  padding-top: 30px;
 }
 
 .sum {
@@ -117,6 +151,7 @@ $background-color_1: #f0f0f0;
 .style-form {
   padding-left: 200px;
   padding-top: 25px;
+  font-weight: 600;
 }
 
 .style-form-back {
@@ -143,8 +178,25 @@ $background-color_1: #f0f0f0;
 .business-area-table {
   max-width: 1600px;
   margin: 10px auto;
+  padding-left: 16px;
 }
 
 .style-date {
   margin-bottom: 0px;
+}
+
+.filter-select {
+  width: 200px;
+}
+
+.style-form-new {
+  padding: 19px 30px 55px 30px;
+}
+
+.body-content {
+  margin-top: 90px;
+}
+
+.alert-success {
+  width: 370px;
 }
