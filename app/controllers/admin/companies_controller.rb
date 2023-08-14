@@ -3,10 +3,36 @@ class Admin::CompaniesController < ApplicationController
 
   before_action :prepare_data, only: %i[new create edit]
   before_action :prepare_company, only: %i[edit update destroy]
+  before_action :prepare_data_filter, only: %i[index search]
+
+  def search 
+    query = params[:q]&.strip&.downcase
+    @pagy, @companies = pagy_array([])
+    
+    if query.present?
+      @companies = Company.where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%").joins(:represent, :tax_code)
+    end
+    
+    if @companies.blank?
+      render 'no_result'
+    else
+      render 'index'
+    end
+  end 
 
   def index 
     authorize Company
-    @pagy, @companies = pagy(Company.all, items: 15)
+    companies = Company.all
+    
+    if params[:city_id].present?
+      companies = companies.where(city_id: params[:city_id])
+    end
+
+    if params[:status_id].present?
+      companies = companies.where(status_id: params[:status_id])
+    end
+
+    @pagy, @companies = pagy(companies, items: 10)
   end
 
   def new
@@ -18,7 +44,7 @@ class Admin::CompaniesController < ApplicationController
     @company = Company.new(company_params)
     authorize @company
     if @company.save 
-      redirect_to admin_companies_path
+      redirect_to admin_companies_path, notice: 'Company was successfully created!'
     else 
       render :new, status: :unprocessable_entity
     end
@@ -31,7 +57,7 @@ class Admin::CompaniesController < ApplicationController
   def update
     authorize @company
     if @company.update(company_params)
-      redirect_to admin_companies_path 
+      redirect_to admin_companies_path, notice: 'Company was successfully updated!'
     else
       render :edit, status: :unprocessable_entity   
     end 
@@ -40,7 +66,7 @@ class Admin::CompaniesController < ApplicationController
   def destroy
     authorize @company
     @company.destroy
-    redirect_to admin_companies_path, status: :see_other
+    redirect_to admin_companies_path, status: :see_other, notice: 'Company was successfully deleted!'
   end
 
   def prepare_data
@@ -54,6 +80,12 @@ class Admin::CompaniesController < ApplicationController
   def prepare_company
     @company = Company.find(params[:id])
   end
+
+  def prepare_data_filter
+    @cities = City.order(:id)
+    @status_list = Status.pluck(:name, :id)
+  end
+
 
   private
     def company_params

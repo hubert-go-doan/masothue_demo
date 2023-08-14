@@ -5,9 +5,30 @@ class Admin::TaxCodesController < ApplicationController
 
   before_action :fetch_taxable_types, only: %i[new create]
 
+  def search 
+    query = params[:q]&.strip&.downcase
+    @pagy, @tax_codes = pagy_array([])
+    
+    if query.present?
+      @tax_codes = TaxCode.where("tax_codes.code LIKE ? ", "%#{query}%")
+    end
+    
+    if @tax_codes.blank?
+      render 'no_result'
+    else
+      render 'index'
+    end
+  end 
+
   def index
     authorize TaxCode
-    @pagy, @tax_codes = pagy(TaxCode.includes(:taxable).all, items: 15)
+    tax_codes = TaxCode.includes(:taxable).all
+
+    if params[:taxable_type].present?
+      tax_codes = tax_codes.where(taxable_type: params[:taxable_type])
+    end
+    
+    @pagy, @tax_codes = pagy(tax_codes, items: 10)
   end
 
   def company_options
@@ -29,7 +50,7 @@ class Admin::TaxCodesController < ApplicationController
     @tax_code = TaxCode.new(taxcode_params)
     authorize @tax_code
     if @tax_code.save 
-      redirect_to admin_tax_codes_path
+      redirect_to admin_tax_codes_path, notice: 'Tax Code was successfully created!'
     else 
       render :new, status: :unprocessable_entity
     end
@@ -39,7 +60,7 @@ class Admin::TaxCodesController < ApplicationController
     @tax_code = TaxCode.find(params[:id])
     authorize @tax_code
     @tax_code.destroy
-    redirect_to admin_tax_codes_path, status: :see_other
+    redirect_to admin_tax_codes_path, status: :see_other, notice: 'Tax Code was successfully deleted!'
   end
 
   def fetch_taxable_types

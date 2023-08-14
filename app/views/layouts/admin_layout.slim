@@ -6,19 +6,11 @@ html
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
+    link[rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"]
     = stylesheet_link_tag "admin", "data-turbo-track": "reload"
     = javascript_importmap_tags
   body
-    = render 'shared/header_dashboard'
     = render 'layouts/sidebar'
-    - if flash[:notice]
-      .alert.alert-success.alert-dismissible.fade.show.mb-0[role="alert"]
-        = flash[:notice]
-        button.btn-close[type="button" data-bs-dismiss="alert" aria-label="Close"]
-    - if flash[:alert]
-      .alert.alert-warning.alert-dismissible.fade.show.mb-0[role="alert"]
-        = flash[:alert]
-        button.btn-close[type="button" data-bs-dismiss="alert" aria-label="Close"]
     .container-fluid[style="padding:0"]
       .content[style="padding-left:277px"]
         = yield

@@ -3,6 +3,21 @@ class Admin::BusinessAreasController < ApplicationController
 
   before_action :prepare_business_area, only: %i[edit update destroy]
 
+  def search 
+    query = params[:q]&.strip&.downcase
+    @pagy, @business_areas = pagy_array([])
+    
+    if query.present?
+      @business_areas = BusinessArea.where("business_areas.name LIKE ? ", "%#{query}%")
+    end
+    
+    if @business_areas.blank?
+      render 'no_result'
+    else
+      render 'index'
+    end
+  end 
+      
   def index 
     authorize BusinessArea
     @pagy, @business_areas = pagy(BusinessArea.all, items: 15)

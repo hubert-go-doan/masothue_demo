@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
     
     if @contact.save
-      redirect_to contacts_path
+      redirect_to contacts_path, notice: "Contact sent successfully!"
     else
       prepare_breadcrumb_data 
       render :new, status: :unprocessable_entity

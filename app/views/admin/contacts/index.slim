@@ -1,31 +1,37 @@
-div
-  h3[style="padding-top: 20px;"]
-    | Management Contacts
-  table.table.table-hover.table-bordered
-    thead
-      tr
-        th[style="width: 20px;" scope="col"]
-          | #
-        th[style="width: 90px" scope="col"]
-          | Name
-        th[style="width: 90px" scope="col"]
-          | Email
-        th[scope="col"]
-          | Content
-        th[style="width: 35px;" scope="col"]
-
-    tbody
-      - @contacts.each_with_index do |contact, index|
+= render 'shared/flash'
+.body-content  
+  .add-style
+    = link_to admin_contacts_path, class: 'cursor-pointer text-dark' do
+      h3 
+        | Management 
+        strong[style="color: red; width: 400px"] Form
+  .pt-3.content-table
+    table.table.table-hover.table-bordered
+      thead
         tr
-          td
-            = index + 1
-          td
-            = contact.name
-          td
-            = contact.email
-          td[style="word-wrap: break-word; white-space: normal;"]
-            = contact.content
-          td
-            = button_to 'Delete', admin_contact_path(contact), method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-link btn-sm btn-rounded", role: "button"
-== pagy_bootstrap_nav(@pagy)
-            
+          th[style="width: 20px;" scope="col"]
+            | #
+          th[style="width: 90px" scope="col"]
+            | Name
+          th[style="width: 90px" scope="col"]
+            | Email
+          th[scope="col"]
+            | Content
+          th[style="width: 35px;" scope="col"]
+
+      tbody
+        - @contacts.each_with_index do |contact, index|
+          tr
+            td
+              = index + 1
+            td
+              = contact.name
+            td
+              = contact.email
+            td[style="word-wrap: break-word; white-space: normal;"]
+              = contact.content
+            td
+              = button_to admin_contact_path(contact), method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-link-dark btn-sm btn-rounded", role: "button" do 
+                i.fa.fa-trash
+  == pagy_bootstrap_nav(@pagy)
+              

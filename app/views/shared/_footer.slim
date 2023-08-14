@@ -1,12 +1,25 @@
+
+footer.text-center.text-white[style="background-color: #f1f1f1;"]
+  .container.p-2
+    section
+      = link_to '#!', class: 'btn btn-outline-dark btn-floating m-3', role: 'button' do
+        i.fab.fa-facebook-f
+      = link_to '#!', class: 'btn btn-outline-dark btn-floating m-3', role: 'button' do
+        i.fab.fa-twitter
+      = link_to '#!', class: 'btn btn-outline-dark btn-floating m-3', role: 'button' do
+        i.fab.fa-google
+      = link_to '#!', class: 'btn btn-outline-dark btn-floating m-3', role: 'button' do
+        i.fab.fa-instagram
+      = link_to '#!', class: 'btn btn-outline-dark btn-floating m-3', role: 'button' do
+        i.fab.fa-linkedin-in
+      = link_to '#!', class: 'btn btn-outline-dark btn-floating m-3', role: 'button' do
+        i.fab.fa-github
+
 footer.text-center.text-lg-start.bg-white.text-muted
-  section.d-flex.justify-content-center.justify-content-lg-between.p-4.border-bottom
   section
     .container.text-center.text-md-start.mt-5
       .row.mt-3
         .col-md-3.col-lg-4.col-xl-3.mx-auto.mb-4[style='font-size:14px']
-          / h6.text-uppercase.fw-bold.mb-4
-          /   i.fas.fa-gem.me-3.text-secondary
-          /   | TaxCodeInfo
           = link_to root_path, class: "navbar-brand" do
             = image_tag "https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp", width: "175px", height: "42", alt: "logo_masothue"
           p[style='padding-top: 15px']
@@ -26,8 +39,6 @@ footer.text-center.text-lg-start.bg-white.text-muted
             = link_to status_index_path, class: "nav-link" do
               | Tra cứu mã số thuế theo tình trạng DN
         .col-md-3.col-lg-2.col-xl-2.mx-auto.mb-4[style='font-size:14px']
-          / h6.text-uppercase.fw-bold.mb-4
-          /   |  
           p
             = link_to "#!", class: "nav-link" do
               | Tra cứu mã số thuế cá nhân
@@ -49,7 +60,7 @@ footer.text-center.text-lg-start.bg-white.text-muted
           p
             i.fas.fa-phone.me-3.text-secondary
             |  Liên hệ
-  .text-center.p-4[style="background-color: rgba(0, 0, 0, 0.025);"]
+  .text-center.p-4
     |  © 2023 Copyright: 
-    = link_to root_path, class: "text-reset fw-bold" do
+    = link_to root_path, class: "text-reset fw-bold text-decoration-none" do
       | TaxCodeInfo
