@@ -5,7 +5,17 @@ class DataCrawlerService
 
   BASE_URL = 'https://masothue.com'
 
-  def self.call
+  def initialize
+    @count = 0
+  end
+
+  def call
+    crawl_and_save_provinces
+  end
+
+  private 
+
+  def crawl_and_save_provinces
     page = Nokogiri::HTML(URI.open(BASE_URL))
     cities_list = page.css('aside ul.row')
     cities_list.css('li.cat-item').each do |li|
@@ -16,9 +26,7 @@ class DataCrawlerService
     end
   end
 
-  private
-
-  def self.crawl_and_save_districts(province, province_url)
+  def crawl_and_save_districts(province, province_url)
     page = Nokogiri::HTML(URI.open(province_url))
     district_list = page.css('ul.row')
     district_list.css('li.cat-item').each do |li|
@@ -29,9 +37,7 @@ class DataCrawlerService
     end
   end
   
-  private
-
-  def self.crawl_and_save_wards(district, district_url)
+  def crawl_and_save_wards(district, district_url)
     page = Nokogiri::HTML(URI.open(district_url))
     ward_list = page.css('ul.row')
     ward_list.css('li.cat-item').each do |li|
@@ -42,12 +48,9 @@ class DataCrawlerService
     end
   end
 
-  private
-
-  def self.crawl_and_save_companies_in_ward(ward, ward_url, district)
+  def crawl_and_save_companies_in_ward(ward, ward_url, district)
     page = Nokogiri::HTML(URI.open(ward_url))
     company_list = page.css('.tax-listing')
-    count = 0  
     company_list.css('div[data-prefetch]').each do |div|
       break if count >= 2
       h3 = div.css('h3 a')
@@ -69,13 +72,11 @@ class DataCrawlerService
           next
         end
       end
-      count += 1
+      @count += 1
     end
   end
 
-  private
-
-  def self.crawl_and_save_company(company_url, city, district, ward)
+  def crawl_and_save_company(company_url, city, district, ward)
     page = Nokogiri::HTML(URI.open(company_url))
     puts "#{company_url}" 
 
@@ -144,9 +145,7 @@ class DataCrawlerService
     tax_code.update(taxable: company)
   end
 
-  private
-
-  def self.crawl_and_save_person(company_url, city, district, ward)
+  def crawl_and_save_person(company_url, city, district, ward)
     page = Nokogiri::HTML(URI.open(company_url))
     puts "#{company_url}"
 
