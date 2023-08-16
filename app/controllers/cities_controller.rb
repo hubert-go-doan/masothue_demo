@@ -6,7 +6,7 @@ class CitiesController < ApplicationController
   end
 
   def show
-    @city = City.includes(:districts, :companies).find(params[:id])
+    @city = City.includes(:districts, companies: [:tax_code, :represent]).find(params[:id])
     prepare_breadcrumb([
       { name: 'Tỉnh thành phố', path: cities_path },
       { name: @city.name, path: city_path(@city) }
