@@ -21,7 +21,7 @@
             br
             strong
               i.fa-solid.fa-location-dot 
-            = full_address(category)
+            = category.address
             hr
     - if @data.present?
       == pagy_bootstrap_nav(@pagy)

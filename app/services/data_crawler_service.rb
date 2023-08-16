@@ -2,23 +2,22 @@ require 'nokogiri'
 require 'open-uri'
 
 class DataCrawlerService
-  # CRAWL DATA CITIES
 
   BASE_URL = 'https://masothue.com'
 
-  def self.crawl_and_save_provinces
+  def self.call
     page = Nokogiri::HTML(URI.open(BASE_URL))
     cities_list = page.css('aside ul.row')
     cities_list.css('li.cat-item').each do |li|
       province_name = li.css('a').text
       province_url = "#{BASE_URL}#{li.css('a').attr('href').value}"
       province = City.find_or_create_by(name: province_name)
-      # puts province_name
       crawl_and_save_districts(province, province_url)
     end
   end
 
-  # CRAWL DATA DISTRICTS
+  private
+
   def self.crawl_and_save_districts(province, province_url)
     page = Nokogiri::HTML(URI.open(province_url))
     district_list = page.css('ul.row')
@@ -26,12 +25,12 @@ class DataCrawlerService
       district_name = li.css('a').text
       district_url = "#{BASE_URL}#{li.css('a').attr('href').value}"
       district = District.find_or_create_by(name: district_name, city_id: province.id)
-      # puts district_name
       crawl_and_save_wards(district, district_url)
     end
   end
   
-  # CRAWL DATA WARDS  
+  private
+
   def self.crawl_and_save_wards(district, district_url)
     page = Nokogiri::HTML(URI.open(district_url))
     ward_list = page.css('ul.row')
@@ -39,10 +38,11 @@ class DataCrawlerService
       ward_name= li.css('a').text
       ward_url = "#{BASE_URL}#{li.css('a').attr('href').value}"
       ward = Ward.find_or_create_by(name: ward_name, district_id: district.id)
-      # puts ward_name
       crawl_and_save_companies_in_ward(ward, ward_url, district)
     end
   end
+
+  private
 
   def self.crawl_and_save_companies_in_ward(ward, ward_url, district)
     page = Nokogiri::HTML(URI.open(ward_url))
@@ -72,6 +72,8 @@ class DataCrawlerService
       count += 1
     end
   end
+
+  private
 
   def self.crawl_and_save_company(company_url, city, district, ward)
     page = Nokogiri::HTML(URI.open(company_url))
@@ -142,6 +144,7 @@ class DataCrawlerService
     tax_code.update(taxable: company)
   end
 
+  private
 
   def self.crawl_and_save_person(company_url, city, district, ward)
     page = Nokogiri::HTML(URI.open(company_url))
