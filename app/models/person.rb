@@ -9,7 +9,7 @@ class Person < ApplicationRecord
 
   validates :cmnd, uniqueness: true
   validates :name, :address, :managed_by, :date_start, presence: true
-  validates :phone_number, :cmnd, numericality: { only_integer: true }
+  validates :phone_number, numericality: { only_integer: true }
   validate :presence_of_foreign_keys
 
   private

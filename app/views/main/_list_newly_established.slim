@@ -14,7 +14,7 @@
           strong
             i.fa-solid.fa-person 
           |  Người đại diện: 
-          = @entity.instance_of?(Company) ? @entity.represent.name.upcase : @entity.name.upcase
+          = category.instance_of?(Company) ? category.represent.name : category.name
           br
           strong
             i.fa-solid.fa-location-dot 
