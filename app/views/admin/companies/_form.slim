@@ -37,7 +37,7 @@
         .col[style="padding-top: 31px"]
             = link_to "New Create Represent", new_admin_represent_path
         .col 
-            = f.input :business_area_id, required: true, prompt: "Business Area ", label: "Business Area", collection: @business_area_list
+            = f.input :business_area_id, prompt: "Business Area ", label: "Business Area", collection: @business_area_list
         .col[style="padding-top: 31px"]
             = link_to "New Create Business Areas", new_admin_business_area_path
         

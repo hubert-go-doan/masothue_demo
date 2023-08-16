@@ -44,7 +44,7 @@
             strong
               = company.tax_code&.code || 'No Tax code'
           td
-            = full_address(company)
+            = company.address
           td
             = company.represent.name 
           td 
@@ -54,11 +54,11 @@
           td 
             = company.managed_by
           td 
-            = company.business_area.name
+            = company.business_area&.name
           td
             = company.status.name 
           td 
-            = company.company_type.type_name 
+            = company.company_type&.type_name 
           / td
           /   = link_to "View", admin_company_path(company), class: "btn btn-link btn-sm btn-rounded", role: "button"
           td

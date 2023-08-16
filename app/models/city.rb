@@ -3,5 +3,5 @@ class City < ApplicationRecord
   has_many :companies
   has_many :people
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 end
