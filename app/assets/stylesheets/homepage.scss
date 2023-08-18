@@ -36,6 +36,9 @@ $color_solid: #ed2f2f;
 
 .content-area {
   display: flex;
+  h1 {
+    font-size: 24px;
+  }
 }
 
 .sidebar-blog {
@@ -95,15 +98,32 @@ $color_solid: #ed2f2f;
   }
 }
 
-.search-personal{
+.search-personal {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px 0px 150px 0px;
-  button{
+  button {
     font-size: 18px;
     padding: 10px;
     border: none;
     background-color: #ed2f2f;
   }
+}
+
+.form-search-home {
+  padding-left: 117px;
+  input {
+    width: 600px;
+  }
+  button {
+    padding: 7px;
+    font-size: 18px;
+  }
+}
+
+.filter-select {
+  width: 300px;
+  padding: 14px;
+  margin: auto;
 }

@@ -2,20 +2,20 @@
   = link_to admin_people_path, class: 'cursor-pointer text-dark' do
     h3 
       | Management 
-      strong[style="color: red;"] Person
-  = form_tag search_person_admin_people_path, method: :get, class: 'd-flex', style: 'height: 40px', role: 'search' do
-    = text_field_tag :q, params[:q], class: 'form-control me-2', style: 'width: 450px; ', type: 'search', placeholder: 'Search...', aria_label: 'Search'
+      strong.text-danger Person
+  = form_tag search_person_admin_people_path, method: :get, class: 'd-flex style-search', role: 'search' do
+    = text_field_tag :q, params[:q], class: 'form-control me-2', type: 'search', placeholder: 'Search...', aria_label: 'Search'
     button.btn.btn-dark(type="submit")
       i.fas.fa-search
     
   .filter-select
     = form_tag admin_people_path, method: :get do
-      = text_field_tag :q, params[:q], style: 'display: none', type: 'search', aria_label: 'Search'
+      = text_field_tag :q, params[:q], class: "d-none", type: 'search', aria_label: 'Search'
       = select_tag :city_id, options_for_select([["Lọc theo Tỉnh/Thành", ""]] + @cities.pluck(:name, :id), params[:city_id]), class: 'form-select', onchange: 'this.form.submit()'
 
   .filter-select
     = form_tag admin_people_path, method: :get do
-      = text_field_tag :q, params[:q], style: 'display: none', type: 'search', aria_label: 'Search'
+      = text_field_tag :q, params[:q], class: "d-none", type: 'search', aria_label: 'Search'
       = select_tag :status_id, options_for_select([["Lọc theo Trạng thái", ""]] + @status_list, params[:status_id]), class: 'form-select', onchange: 'this.form.submit()'
 
   = link_to new_admin_person_path, class: 'btn cursor-pointer button_add btn-primary', type: 'button' do

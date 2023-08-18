@@ -15,6 +15,8 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "pagination_admin";
+@import "admin_companies";
+@import "admin_tax_code";
 
 $font-family_1: "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light",
   "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
@@ -189,14 +191,24 @@ small {
   width: 200px;
 }
 
-.style-form-new {
-  padding: 19px 30px 55px 30px;
-}
-
 .body-content {
   margin-top: 90px;
 }
 
 .alert-success {
   width: 370px;
+}
+
+// Global
+.sub-back-button {
+  padding: 5px 30px;
+}
+
+.style-form-new {
+  padding: 19px 30px 55px 30px;
+}
+
+.style-search {
+  height: 40px;
+  width: 420px;
 }

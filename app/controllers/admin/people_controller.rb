@@ -5,32 +5,30 @@ class Admin::PeopleController < ApplicationController
   before_action :prepare_person, only: %i[edit update destroy]
   before_action :prepare_data_filter, only: %i[index search]
 
-  def search 
+  def search
     query = params[:q]&.strip&.downcase
-    @pagy, @persons = pagy_array([])
-    
-    if query.present?
-      @persons = Person.where("LOWER(people.cmnd) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%").joins(:tax_code)
-    end
-    
+
+    @persons = []
+
+    @persons = Person.where("LOWER(people.cmnd) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%").joins(:tax_code) if query.present?
+
+    @pagy, @persons = pagy_array(@persons, items: 10)
+
     if @persons.blank?
       render 'no_result'
     else
       render 'index'
     end
-  end 
+  end
 
   def index
     authorize Person
-    persons = Person.all
-       
-    if params[:city_id].present?
-      persons = persons.where(city_id: params[:city_id])
-    end
 
-    if params[:status_id].present?
-      persons = persons.where(status_id: params[:status_id])
-    end
+    persons = Person.includes(:tax_code, :status, :company_type, :ward, :district, :city).all
+
+    persons = persons.where(city_id: params[:city_id]) if params[:city_id].present?
+
+    persons = persons.where(status_id: params[:status_id]) if params[:status_id].present?
     @pagy, @persons = pagy(persons, items: 10)
   end
 
@@ -59,7 +57,7 @@ class Admin::PeopleController < ApplicationController
       redirect_to admin_people_path, notice: 'Person was successfully updated!'
     else
       render :edit, status: :unprocessable_entity
-    end 
+    end
   end
 
   def destroy
@@ -68,11 +66,10 @@ class Admin::PeopleController < ApplicationController
     redirect_to admin_people_path, notice: 'Person was successfully deleted!'
   end
 
-
   def prepare_person
     @person = Person.find(params[:id])
   end
-  
+
   def prepare_data
     @city_list = City.pluck(:name, :id)
     @company_type_list = CompanyType.pluck(:type_name, :id)

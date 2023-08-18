@@ -1,7 +1,7 @@
 = render 'shared/breadcrumb'
 .content-area.container.pt-4
   .area-section
-    h2[style="border-bottom: 2px solid red; padding-bottom: 10px"]
+    h1
       | Mã số thuế công ty 
       = @business_area.name
     .list-type
@@ -12,7 +12,7 @@
               = link_to company.name, info_detail_path(id: company.id, type: 'company'), class: "content-name"
             strong #
             | Mã số thuế: 
-            = company.tax_code&.code
+            = link_to company.tax_code&.code, info_detail_path(id: company.id, type: 'company'), class: "text-decoration-none text-dark"
             br
             strong
               i.fa-solid.fa-person 

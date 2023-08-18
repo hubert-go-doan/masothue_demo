@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_15_074834) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_18_003755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_074834) do
     t.string "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_business_areas_on_name", unique: true
   end
 
   create_table "cities", force: :cascade do |t|
@@ -89,6 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_074834) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_people_on_city_id"
+    t.index ["cmnd"], name: "index_people_on_cmnd", unique: true
     t.index ["company_type_id"], name: "index_people_on_company_type_id"
     t.index ["district_id"], name: "index_people_on_district_id"
     t.index ["status_id"], name: "index_people_on_status_id"
@@ -114,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_074834) do
     t.bigint "taxable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_tax_codes_on_code", unique: true
     t.index ["taxable_type", "taxable_id"], name: "index_tax_codes_on_taxable_type_and_taxable_id", unique: true
   end
 

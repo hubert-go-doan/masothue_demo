@@ -5,7 +5,7 @@
         = link_to root_path, class: "navbar-brand" do
           = image_tag "https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp", width: "175px", height: "42", alt: "Logo"
       #navbarNav.navbar-collapse.p-5
-        ul.navbar-nav[style="font-weight: bold;"]
+        ul.navbar-nav.fw-bold
           li.nav-item.ps-5
              = link_to root_path, class: "nav-link" do
               | Trang chủ
@@ -19,6 +19,6 @@
              = link_to contacts_path, class: "nav-link" do
               | Liên hệ
       .email-navbar
-        i.fa-regular.fa-envelope.fa-2xl[style='color: #ed0c23; padding-right:10px']
-        span[style="font-weight: 300;"]
+        i.fa-regular.fa-envelope.fa-2xl.text-danger
+        span.fw-lighter.ps-1
           | Email: info@masothue.com

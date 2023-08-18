@@ -7,9 +7,9 @@
             = f.label :name, "Name Represent"
             = f.text_field :name, class: 'form-control', placeholder: "Name Represent"
           .col.
-            = f.label :day_of_birth, style: "display: block"
+            = f.label :day_of_birth, class: "d-block"
             = f.date_field :day_of_birth, class: "day-of-birth form-control"
         .row.mb-3
           .col
-            = link_to "Back", new_admin_company_path, class: "btn btn-secondary float-start", style: "padding: 5px 30px"
-            = f.submit "Submit", class: "btn btn-primary float-end", style: "padding: 5px 30px"
+            = link_to "Back", new_admin_company_path, class: "btn btn-secondary float-start sub-back-button"
+            = f.submit "Submit", class: "btn btn-primary float-end sub-back-button"

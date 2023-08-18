@@ -7,10 +7,10 @@ class ContactPolicy < ApplicationPolicy
   end
 
   def index?
-    user.present? 
+    user.present?
   end
 
   def destroy?
-    user.present? 
+    user.present?
   end
 end

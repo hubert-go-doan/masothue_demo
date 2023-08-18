@@ -1,6 +1,28 @@
 require:
   - rubocop-rails
 
+AllCops:
+  TargetRubyVersion: 3.2.2
+  DisplayStyleGuide: true
+  DisplayCopNames: true
+  Exclude:
+    - .gems/**/*
+    - bin/**/*
+    - config/**/*
+    - db/**/*
+    - log/**/*
+    - public/**/*
+    - tmp/**/*
+    - vendor/**/*
+    - lib/tasks/**/*
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+    - config.ru
+    - Guardfile
+    - Rakefile
+    - node_modules/**/*
+    - app/queries/**/*
+
 Style/Encoding:
   Enabled: false
 
@@ -14,7 +36,17 @@ Style/InlineComment:
 
 Layout/LineLength:
   Description: "Limit lines to 100 characters. (Default is 80)"
-  Max: 100
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Security/Open:
+  Exclude:
+    - "app/services/data_crawler_service.rb"
 
 Style/FrozenStringLiteralComment:
   Description: To help transition from Ruby 2.3.0 to Ruby 3.0.
@@ -30,9 +62,36 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
   Enabled: false
 
-Style/UnneededPercentQ:
+Style/RedundantPercentQ:
   Enabled: false
 
+Lint/MissingSuper:
+  Exclude:
+    - "app/services/**/*"
+
+Metrics/ClassLength:
+  Max: 300
+
+Metrics/ModuleLength:
+  Max: 300
+
+Metrics/MethodLength:
+  Max: 50
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
 # Prettier hashes.
 Layout/HashAlignment:
   EnforcedHashRocketStyle: table

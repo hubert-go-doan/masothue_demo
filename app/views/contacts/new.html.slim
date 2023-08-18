@@ -13,7 +13,7 @@ section.mb-4
           .pt-3
             = f.input :email, label: 'Email',input_html: {class: 'form-control' }
           .pt-3
-              = f.input :content, as: :text, label: 'Nội dung', input_html: { class: 'form-control', style: 'height: 200px; width: 100%;' }
+              = f.input :content, as: :text, label: 'Nội dung', input_html: { class: 'form-control w-100', style: 'height: 200px;' }
           .pt-3
             = f.button :submit, class: 'btn btn-danger cursor-pointer', value: 'Gửi liên hệ'
       .col-md-6.text-center

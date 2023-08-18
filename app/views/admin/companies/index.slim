@@ -29,10 +29,11 @@
             | Company Type
           th[colspan="2", style="width: 100px"]
       tbody
+
       - @companies.each_with_index do |company, index|
         tr
           td
-            =index + 1
+            = index +1
           td
             .d-flex.align-items-center
               div
@@ -44,7 +45,7 @@
             strong
               = company.tax_code&.code || 'No Tax code'
           td
-            = company.address
+            = full_address(company)
           td
             = company.represent.name 
           td 

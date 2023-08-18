@@ -1,4 +1,3 @@
 module Admin::BusinessAreasHelper
-  def index
-  end
+  def index; end
 end

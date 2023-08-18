@@ -1,7 +1,7 @@
 = render 'shared/breadcrumb'
 .content-area.container.pt-4
   .area-section
-    h2[style="border-bottom: 2px solid red; padding-bottom: 10px"]
+    h1
       | Tra cứu mã số thuế và danh sách công ty tại 
       = @city.name
     .list-type
@@ -9,10 +9,10 @@
         - @companies.each do |company|
           .content
             h4
-              = link_to company.name, info_detail_path(id: company.id, type: company.class.name.downcase), class: "content-name"
+              = link_to company.name, info_detail_path(id: company.id, type: 'company'), class: "content-name"
             strong #
             | Mã số thuế: 
-            = company.tax_code&.code
+            = link_to company.tax_code&.code, info_detail_path(id: company.id, type: 'company'), class: "text-decoration-none text-dark"
             br
             strong
               i.fa-solid.fa-person 
@@ -21,7 +21,7 @@
             br
             strong
               i.fa-solid.fa-location-dot 
-            = company.address
+            = full_address(company)
             hr
     - if @companies.present?
       == pagy_bootstrap_nav(@pagy)

@@ -9,10 +9,10 @@ class Admin::RepresentsController < ApplicationController
   def create
     @represent = Represent.new(represent_params)
     authorize @represent
-    if @represent.save 
+    if @represent.save
       flash[:notice] = "Create successfully represent..."
       redirect_to new_admin_company_path
-    else 
+    else
       render :new, status: :unprocessable_entity
     end
   end
@@ -21,9 +21,8 @@ class Admin::RepresentsController < ApplicationController
 
   def represent_params
     params.require(:represent).permit(
-      :name, 
+      :name,
       :day_of_birth
     )
   end
-  
 end

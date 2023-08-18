@@ -1,7 +1,7 @@
 = render 'shared/breadcrumb'
 .content-area.container.pt-4
   .area-section
-    h2[style="border-bottom: 2px solid red; padding-bottom: 10px; font-size: 30px"]
+    h1
       | Mã số thuế 
       = @status.name
     .list-type
@@ -21,7 +21,7 @@
             br
             strong
               i.fa-solid.fa-location-dot 
-            = category.address
+            = full_address(category)
             hr
     == pagy_bootstrap_nav(@pagy)
   .sidebar-blog

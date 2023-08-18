@@ -6,43 +6,43 @@ class CitiesController < ApplicationController
   end
 
   def show
-    @city = City.includes(:districts, :companies).find(params[:id])
+    @city = City.find(params[:id])
     prepare_breadcrumb([
-      { name: 'Tỉnh thành phố', path: cities_path },
-      { name: @city.name, path: city_path(@city) }
-    ])
+                         { name: 'Tỉnh thành phố', path: cities_path },
+                         { name: @city.name, path: city_path(@city) }
+                       ])
     @districts = @city.districts
-    @pagy, @companies = pagy(@city.companies.order(date_start: :desc)) 
-    rescue ActiveRecord::RecordNotFound
-      redirect_to cities_path
+    @pagy, @companies = pagy(@city.companies.order(date_start: :desc).includes(:tax_code, :represent, :district, :ward))
+  rescue ActiveRecord::RecordNotFound
+    redirect_to cities_path
   end
 
   def show_district
-    @district = District.includes(:city, :wards, :companies).find(params[:id])
+    @district = District.includes(:city, :wards).find(params[:id])
     @city = @district.city
     prepare_breadcrumb([
-      { name: 'Tỉnh thành phố', path: cities_path },
-      { name: @city.name, path: city_path(@city) },
-      { name: @district.name, path: district_path(@district) }
-    ])
+                         { name: 'Tỉnh thành phố', path: cities_path },
+                         { name: @city.name, path: city_path(@city) },
+                         { name: @district.name, path: district_path(@district) }
+                       ])
     @wards = @district.wards
-    @pagy, @companies = pagy(@district.companies.order(date_start: :desc))
+    @pagy, @companies = pagy(@district.companies.order(date_start: :desc).includes(:tax_code, :represent, :city, :ward))
   end
 
   def show_ward
-    @ward = Ward.includes(district: [:city, :wards, :companies]).find(params[:id])
+    @ward = Ward.find(params[:id])
     @city = @ward.district.city
     @district = @ward.district
     prepare_breadcrumb([
-      { name: 'Tỉnh thành phố', path: cities_path },
-      { name: @city.name, path: city_path(@city) },
-      { name: @district.name, path: district_path(@district) },
-      { name: @ward.name, path: ward_path(@ward) }
-    ])
+                         { name: 'Tỉnh thành phố', path: cities_path },
+                         { name: @city.name, path: city_path(@city) },
+                         { name: @district.name, path: district_path(@district) },
+                         { name: @ward.name, path: ward_path(@ward) }
+                       ])
     @wards = @district.wards
-    @pagy,@companies = pagy(@ward.companies.order(date_start: :desc))
+    @pagy, @companies = pagy(@ward.companies.order(date_start: :desc).includes(:tax_code, :represent, :city, :district))
   end
-  
+
   private
 
   def prepare_cities
