@@ -7,7 +7,6 @@ class CompanyTypePolicy < ApplicationPolicy
   end
 
   def index?
-    user.present? 
+    user.present?
   end
-
 end

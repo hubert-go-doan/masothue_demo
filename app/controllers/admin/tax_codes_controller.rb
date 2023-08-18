@@ -1,33 +1,27 @@
 class Admin::TaxCodesController < ApplicationController
   layout 'admin_layout'
-  
-  OBJECT_TAXCODE = %w[Company Person]
+
+  OBJECT_TAXCODE = %w[Company Person].freeze
 
   before_action :fetch_taxable_types, only: %i[new create]
 
-  def search 
+  def search
     query = params[:q]&.strip&.downcase
     @pagy, @tax_codes = pagy_array([])
-    
-    if query.present?
-      @tax_codes = TaxCode.where("tax_codes.code LIKE ? ", "%#{query}%")
-    end
-    
+
+    @tax_codes = TaxCode.where("tax_codes.code LIKE ? ", "%#{query}%") if query.present?
+
     if @tax_codes.blank?
       render 'no_result'
     else
       render 'index'
     end
-  end 
+  end
 
   def index
     authorize TaxCode
-    tax_codes = TaxCode.includes(:taxable).all
-
-    if params[:taxable_type].present?
-      tax_codes = tax_codes.where(taxable_type: params[:taxable_type])
-    end
-    
+    tax_codes = TaxCode.includes(taxable: :represent).all
+    tax_codes = tax_codes.where(taxable_type: params[:taxable_type]) if params[:taxable_type].present?
     @pagy, @tax_codes = pagy(tax_codes, items: 10)
   end
 
@@ -49,9 +43,9 @@ class Admin::TaxCodesController < ApplicationController
   def create
     @tax_code = TaxCode.new(taxcode_params)
     authorize @tax_code
-    if @tax_code.save 
+    if @tax_code.save
       redirect_to admin_tax_codes_path, notice: 'Tax Code was successfully created!'
-    else 
+    else
       render :new, status: :unprocessable_entity
     end
   end
@@ -70,9 +64,10 @@ class Admin::TaxCodesController < ApplicationController
   def render_taxable_objects
     render json: @taxable_objects
   end
-  
+
   private
-    def taxcode_params
-      params.require(:tax_code).permit(:code, :taxable_type, :taxable_id)
-    end
+
+  def taxcode_params
+    params.require(:tax_code).permit(:code, :taxable_type, :taxable_id)
+  end
 end

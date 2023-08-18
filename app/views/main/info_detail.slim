@@ -1,9 +1,9 @@
 = render 'shared/breadcrumb'
-.content-area.container[style='padding-top: 20px']
+.content-area.container.pt-4
   .area-section
-    h1[style="font-size: 24px"]
+    h1
       = @entity.tax_code&.code.to_s + '-' + @entity.name.upcase
-    table.table[style="font-size: 16px; margin-top: 35px"]
+    table.table.mt-4
       thead
         th[colspan=2]
           = @entity.name.upcase
@@ -15,12 +15,13 @@
               | Tên quốc tế
             td
               = @entity.name.upcase
-          tr
-            td
-              i.fa.fa-reorder.fa-xs.pe-2
-              | Tên viết tắt
-            td
-              = @entity.sub_name.upcase
+          - if @entity.sub_name.present?    
+            tr
+              td
+                i.fa.fa-reorder.fa-xs.pe-2
+                | Tên viết tắt
+              td
+                = @entity.sub_name.upcase
         tr
           td
             i.fa.fa-hashtag.fa-xs.pe-2
@@ -63,12 +64,13 @@
             | Loại hình DN
           td
             = @entity.company_type.type_name
-        tr 
-          td
-            i.fa.fa-info.fa-xs.pe-2
-            | Tình trạng
-          td
-            = @entity.status.name
+        - if @entity.status.name.present?     
+          tr 
+            td
+              i.fa.fa-info.fa-xs.pe-2
+              | Tình trạng
+            td
+              = @entity.status.name
     - if @entity.instance_of?(Company)
       = render partial: 'list_business_area'
       = render partial: 'list_ward'

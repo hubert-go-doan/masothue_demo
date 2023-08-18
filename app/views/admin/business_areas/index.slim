@@ -4,7 +4,7 @@
   .business-area-table
     table.table.table-hover.align-middle.mb-0.bg-white.table-responsive
       thead.bg-light
-        tr[style= "color: red"]
+        tr.text-danger
           th
             | Name Business Area
           th[colspan="2", style="width: 15px"]
@@ -12,7 +12,7 @@
       - @business_areas.each do |business_area|
         tr
           td
-            = business_area.name
+            = link_to business_area.name, business_area_path(business_area), class: "nav-link"
           td
             = link_to edit_admin_business_area_path(business_area), class: "btn btn-link btn-sm btn-rounded", role: "button" do 
               i.fa.solid.fa-pen-to-square

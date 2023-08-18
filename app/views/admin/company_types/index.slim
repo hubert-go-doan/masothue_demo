@@ -2,16 +2,16 @@
   .add-style
     h3
       | Management 
-      strong[style="color: red"] Company Type
+      strong.text-danger Company Type
     = link_to new_admin_person_path, class: 'btn cursor-pointer button_add btn-secondary disabled',  type: 'button' do
       i.fa-solid.fa-plus.me-2
       | Add Company Type
   .p-3.content-table
-    table.table.table-hover.align-middle.mb-0.bg-white.table-responsive.table-bordered.shadow[style= "width: 1200px"]
+    table.table.table-hover.align-middle.mb-0.bg-white.table-responsive.table-bordered.shadow.w-75
       thead.bg-light
         tr
           th[style="width: 50px"]
-            | #
+            | # STT
           th
             | Name Type
           th
@@ -25,7 +25,7 @@
         tr
           td
             = index + 1
-          td[style="font-weight: bold"]
+          td.fw-bold
             = counts[:type_name]
           td 
             = counts[:company_count]
@@ -44,5 +44,5 @@
         | Tổng số lượng cá nhân: 
         = @person_sum
   == pagy_bootstrap_nav(@pagy)
-  i[style="padding-left: 20px"]   
+  i.ps-2
     | Chart(more develop)...

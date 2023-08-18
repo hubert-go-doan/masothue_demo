@@ -1,3 +1,2 @@
 module Admin::SharedHelper
 end
-

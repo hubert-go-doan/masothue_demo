@@ -3,7 +3,7 @@ class Admin::ContactsController < ApplicationController
 
   def index
     authorize Contact
-    @pagy, @contacts = pagy(Contact.all, items: 15)
+    @pagy, @contacts = pagy(Contact.all, items: 10)
   end
 
   def destroy

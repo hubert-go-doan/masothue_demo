@@ -3,22 +3,20 @@ class Admin::BusinessAreasController < ApplicationController
 
   before_action :prepare_business_area, only: %i[edit update destroy]
 
-  def search 
+  def search
     query = params[:q]&.strip&.downcase
     @pagy, @business_areas = pagy_array([])
-    
-    if query.present?
-      @business_areas = BusinessArea.where("business_areas.name LIKE ? ", "%#{query}%")
-    end
-    
+
+    @business_areas = BusinessArea.where("business_areas.name LIKE ? ", "%#{query}%") if query.present?
+
     if @business_areas.blank?
       render 'no_result'
     else
       render 'index'
     end
-  end 
-      
-  def index 
+  end
+
+  def index
     authorize BusinessArea
     @pagy, @business_areas = pagy(BusinessArea.all, items: 15)
   end
@@ -31,9 +29,9 @@ class Admin::BusinessAreasController < ApplicationController
   def create
     @business_area = BusinessArea.new(business_area_params)
     authorize @business_area
-    if @business_area.save 
+    if @business_area.save
       redirect_to admin_business_areas_path, notice: 'Business Area was successfully created!'
-    else 
+    else
       render :new, status: :unprocessable_entity
     end
   end
@@ -42,7 +40,7 @@ class Admin::BusinessAreasController < ApplicationController
     authorize @business_area
   end
 
-  def update  
+  def update
     authorize @business_area
     if @business_area.update(business_area_params)
       redirect_to admin_business_areas_path, notice: 'Business Area was successfully updated!'
@@ -62,7 +60,8 @@ class Admin::BusinessAreasController < ApplicationController
   end
 
   private
-    def business_area_params
-      params.require(:business_area).permit(:name, :detail)
-    end
+
+  def business_area_params
+    params.require(:business_area).permit(:name, :detail)
+  end
 end

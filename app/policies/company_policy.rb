@@ -7,27 +7,26 @@ class CompanyPolicy < ApplicationPolicy
   end
 
   def index?
-    user.present? 
+    user.present?
   end
 
   def new?
-    user.present? 
+    user.present?
   end
 
   def create?
-    user.present? 
+    user.present?
   end
 
   def edit?
-    user.present? 
+    user.present?
   end
 
   def update?
-    user.present? 
+    user.present?
   end
 
   def destroy?
-    user.present? 
+    user.present?
   end
-
 end

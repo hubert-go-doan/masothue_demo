@@ -7,10 +7,10 @@ class RepresentPolicy < ApplicationPolicy
   end
 
   def new?
-    user.present? 
+    user.present?
   end
 
   def create?
-    user.present? 
+    user.present?
   end
 end

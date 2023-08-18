@@ -2,19 +2,20 @@
   = link_to admin_tax_codes_path, class: 'cursor-pointer text-dark' do
     h3 
       | Management 
-      strong[style="color: red;"] Tax Code
+      strong.text-danger Tax Code
 
-  = form_tag search_tax_code_admin_tax_codes_path, method: :get, class: 'd-flex', style: 'height: 40px', role: 'search' do
-    = text_field_tag :q, params[:q], class: 'form-control me-2', style: 'width: 200px; ', type: 'search', placeholder: 'Search Tax Code...', aria_label: 'Search'
+  = form_tag search_tax_code_admin_tax_codes_path, method: :get, class: 'd-flex style-search', role: 'search' do
+    = text_field_tag :q, params[:q], class: 'form-control me-2', type: 'search', placeholder: 'Search Tax Code...', aria_label: 'Search'
     button.btn.btn-dark(type="submit")
       i.fas.fa-search
       
   .filter-select
     = form_tag admin_tax_codes_path, method: :get do
-      = text_field_tag :q, params[:q], style: 'display: none', type: 'search', aria_label: 'Search'
+      = text_field_tag :q, params[:q], class: "d-none", type: 'search', aria_label: 'Search'
       = select_tag :taxable_type, options_for_select([["Lọc theo loại", ""]] + [["Company", "Company"], ["Person", "Person"]], params[:taxable_type]), class: 'form-select', onchange: 'this.form.submit()'
 
-  i[style="color: #333333ba; width: 440px; font-size: 15px"] "Each company or individual has only an tax code, which cannot be changed"
+  i.note-text 
+    |"Each company or individual has only an tax code, which cannot be changed"
   = link_to new_admin_tax_code_path, class: 'btn cursor-pointer button_add btn-primary', type: 'button' do
     i.fa-solid.fa-plus.me-2
     |  Add Tax Code 

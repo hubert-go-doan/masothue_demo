@@ -4,7 +4,7 @@
     = link_to admin_contacts_path, class: 'cursor-pointer text-dark' do
       h3 
         | Management 
-        strong[style="color: red; width: 400px"] Form
+        strong.text-danger Form
   .pt-3.content-table
     table.table.table-hover.table-bordered
       thead
@@ -28,7 +28,7 @@
               = contact.name
             td
               = contact.email
-            td[style="word-wrap: break-word; white-space: normal;"]
+            td
               = contact.content
             td
               = button_to admin_contact_path(contact), method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-link-dark btn-sm btn-rounded", role: "button" do 
