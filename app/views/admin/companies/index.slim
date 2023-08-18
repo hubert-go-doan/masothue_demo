@@ -45,7 +45,7 @@
             strong
               = company.tax_code&.code || 'No Tax code'
           td
-            = company.address
+            = full_address(company)
           td
             = company.represent.name 
           td 

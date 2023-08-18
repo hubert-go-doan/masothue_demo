@@ -25,7 +25,7 @@
               br
               strong
                 i.fa-solid.fa-location-dot 
-              = result.address
+              = full_address(result)
               hr
       == pagy_bootstrap_nav(@pagy)
     - else

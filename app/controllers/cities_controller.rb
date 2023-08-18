@@ -12,7 +12,7 @@ class CitiesController < ApplicationController
                          { name: @city.name, path: city_path(@city) }
                        ])
     @districts = @city.districts
-    @pagy, @companies = pagy(@city.companies.order(date_start: :desc).includes(:tax_code, :represent))
+    @pagy, @companies = pagy(@city.companies.order(date_start: :desc).includes(:tax_code, :represent, :district, :ward))
   rescue ActiveRecord::RecordNotFound
     redirect_to cities_path
   end
@@ -26,7 +26,7 @@ class CitiesController < ApplicationController
                          { name: @district.name, path: district_path(@district) }
                        ])
     @wards = @district.wards
-    @pagy, @companies = pagy(@district.companies.order(date_start: :desc).includes(:tax_code, :represent))
+    @pagy, @companies = pagy(@district.companies.order(date_start: :desc).includes(:tax_code, :represent, :city, :ward))
   end
 
   def show_ward
@@ -40,7 +40,7 @@ class CitiesController < ApplicationController
                          { name: @ward.name, path: ward_path(@ward) }
                        ])
     @wards = @district.wards
-    @pagy, @companies = pagy(@ward.companies.order(date_start: :desc).includes(:tax_code, :represent))
+    @pagy, @companies = pagy(@ward.companies.order(date_start: :desc).includes(:tax_code, :represent, :city, :district))
   end
 
   private

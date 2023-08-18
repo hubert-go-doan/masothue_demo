@@ -9,7 +9,7 @@ class Admin::TaxCodesController < ApplicationController
     query = params[:q]&.strip&.downcase
     @pagy, @tax_codes = pagy_array([])
 
-    @tax_codes = TaxCode.where("tax_codes.code LIKE ? ", "%#{query}%") if query.present?
+    @tax_codes = TaxCode.where("tax_codes.code LIKE ? ", "%#{query}%").includes(taxable: %i[represent city district ward]) if query.present?
 
     if @tax_codes.blank?
       render 'no_result'
@@ -20,7 +20,7 @@ class Admin::TaxCodesController < ApplicationController
 
   def index
     authorize TaxCode
-    tax_codes = TaxCode.includes(taxable: :represent).all
+    tax_codes = TaxCode.includes(taxable: %i[represent city district ward]).all
     tax_codes = tax_codes.where(taxable_type: params[:taxable_type]) if params[:taxable_type].present?
     @pagy, @tax_codes = pagy(tax_codes, items: 10)
   end

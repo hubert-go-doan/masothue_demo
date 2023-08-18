@@ -37,7 +37,7 @@
           td
             = taxable.is_a?(Company) && taxable.represent&.name || taxable.name
           td 
-            = taxable.address
+            = full_address(taxable)
           td
             = taxcode.taxable_type
           td

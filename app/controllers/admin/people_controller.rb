@@ -24,7 +24,7 @@ class Admin::PeopleController < ApplicationController
   def index
     authorize Person
 
-    persons = Person.includes(:tax_code, :status, :company_type).all
+    persons = Person.includes(:tax_code, :status, :company_type, :ward, :district, :city).all
 
     persons = persons.where(city_id: params[:city_id]) if params[:city_id].present?
 

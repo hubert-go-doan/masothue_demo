@@ -9,7 +9,7 @@ class BusinessAreasController < ApplicationController
   def show
     @business_area = BusinessArea.find_by(id: params[:id])
     redirect_to business_areas_path if @business_area.nil?
-    @pagy, @data = pagy(@business_area.companies.order(date_start: :desc).includes(:tax_code, :represent))
+    @pagy, @data = pagy(@business_area.companies.order(date_start: :desc).includes(:tax_code, :represent, :city, :district, :ward))
     prepare_breadcrumb_data unless @business_area.nil?
   end
 

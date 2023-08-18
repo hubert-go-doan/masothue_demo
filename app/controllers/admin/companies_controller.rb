@@ -10,7 +10,7 @@ class Admin::CompaniesController < ApplicationController
 
     @companies = []
 
-    @companies = Company.where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%").joins(:represent, :tax_code).includes(:tax_code, :represent, :business_area, :status, :company_type) if query.present?
+    @companies = Company.where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%").joins(:represent, :tax_code).includes(:tax_code, :represent, :business_area, :status, :company_type, :city, :district, :ward) if query.present?
 
     @pagy, @companies = pagy_array(@companies, items: 10)
 
@@ -24,7 +24,7 @@ class Admin::CompaniesController < ApplicationController
   def index
     authorize Company
 
-    companies = Company.includes(:tax_code, :represent, :status, :business_area, :company_type).all
+    companies = Company.includes(:tax_code, :represent, :status, :business_area, :company_type, :city, :district, :ward).all
 
     companies = companies.where(city_id: params[:city_id]) if params[:city_id].present?
 
