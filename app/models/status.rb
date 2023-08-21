@@ -1,4 +1,4 @@
 class Status < ApplicationRecord
-  has_many :companies, dependent: :destroy
-  has_many :people, dependent: :destroy
+  has_many :companies, dependent: :nullify
+  has_many :people, dependent: :nullify
 end

@@ -11,7 +11,7 @@ module Admin::SharedHelper
       city_name = addressable.city&.name || City.find_by(id: addressable.city_id)&.name
     end
 
-    if address_parts.size >= 3
+    if address_parts.size >= 4
       "#{address_parts[0]}, #{address_parts[1..].join(', ')}"
     else
       "#{addressable.address}, #{ward_name}, #{district_name}, #{city_name}, Việt Nam"

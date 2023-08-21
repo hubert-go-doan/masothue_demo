@@ -1,7 +1,7 @@
 class City < ApplicationRecord
   has_many :districts, dependent: :destroy
-  has_many :companies, dependent: :destroy
-  has_many :people, dependent: :destroy
+  has_many :companies
+  has_many :people
 
   validates :name, presence: true
 end

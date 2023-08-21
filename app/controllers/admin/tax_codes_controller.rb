@@ -41,7 +41,9 @@ class Admin::TaxCodesController < ApplicationController
   end
 
   def create
-    @tax_code = TaxCode.new(taxcode_params)
+    tax_code_params_stripped = taxcode_params
+    tax_code_params_stripped[:code].strip! if tax_code_params_stripped[:code].present?
+    @tax_code = TaxCode.new(tax_code_params_stripped)
     authorize @tax_code
     if @tax_code.save
       redirect_to admin_tax_codes_path, notice: 'Tax Code was successfully created!'
