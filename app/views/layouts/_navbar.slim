@@ -1,24 +1,27 @@
 .container
   .row
-    nav.navbar.navbar-expand-lg.navbar-light
-      .header-logo
-        = link_to root_path, class: "navbar-brand" do
-          = image_tag "https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp", width: "175px", height: "42", alt: "Logo"
-      #navbarNav.navbar-collapse.p-5
-        ul.navbar-nav.fw-bold
-          li.nav-item.ps-5
-             = link_to root_path, class: "nav-link" do
-              | Trang chủ
-          li.nav-item.ps-5
-             = link_to tax_code_personal_index_path, class: "nav-link" do
-              | Tra cứu thuế cá nhân
-          li.nav-item.ps-5
-            = link_to business_areas_path, class: "nav-link" do
-              | Ngành nghề
-          li.nav-item.ps-5
-             = link_to contacts_path, class: "nav-link" do
-              | Liên hệ
-      .email-navbar
-        i.fa-regular.fa-envelope.fa-2xl.text-danger
-        span.fw-lighter.ps-1
-          | Email: info@masothue.com
+    .navbar.navbar-expand-xl.navbar-light
+      .container-fluid
+        .navbar-brand.header-logo
+          = link_to root_path do
+            = image_tag "https://masothue.com/assets/images/175x42xlogo-masothue.png.pagespeed.ic.jF0RE_Y4qA.webp", width: "175px", height: "42", alt: "Logo"
+        button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+          span.navbar-toggler-icon
+        #navbarNav.collapse.navbar-collapse.p-5.flex-nowrap
+          ul.navbar-nav.fw-bold
+            li.nav-item.ps-5
+              = link_to root_path, class: "nav-link" do
+                | Trang chủ
+            li.nav-item.ps-5
+              = link_to tax_code_personal_index_path, class: "nav-link" do
+                | Tra cứu thuế cá nhân
+            li.nav-item.ps-5
+              = link_to business_areas_path, class: "nav-link" do
+                | Ngành nghề
+            li.nav-item.ps-5
+              = link_to contacts_path, class: "nav-link" do
+                | Liên hệ
+            li.nav-item.ps-5.fw-lighter.email-navbar.ps-1
+              = link_to '/', class: "nav-link" do
+                i.fa-regular.fa-envelope.fa-2xl.text-danger
+                | Email: info@masothue.com

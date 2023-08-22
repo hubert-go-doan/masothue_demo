@@ -2,6 +2,199 @@ $color_1: #0275d8;
 $color_text: #575560;
 $color_solid: #ed2f2f;
 
+// Mobilde
+@media (max-width: 739px) {
+  .form-search-home {
+    padding-left: 0px;
+    input {
+      width: 200px;
+    }
+  }
+  .content-slider {
+    display: none;
+  }
+  .info-home {
+    display: none;
+    padding-top: 0;
+  }
+  #carouselExampleCaptions {
+    display: none;
+  }
+  .sidebar-blog {
+    display: none;
+  }
+}
+
+// Tablet
+@media (min-width: 740px) and (max-width: 1023px) {
+  .form-search-home {
+    padding-left: 10px;
+    input {
+      width: 400px;
+    }
+  }
+  .info-home {
+    padding-top: 50px;
+  }
+  .content-slider {
+    position: absolute;
+    left: -344px;
+    bottom: 70px;
+    h5 {
+      font-size: 10px;
+    }
+  }
+  .carousel-inner {
+    h1 {
+      font-size: 15px;
+      color: #333e48;
+      font-weight: 300;
+      line-height: 1em;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+    p {
+      color: rgba(60, 58, 58, 0.661);
+    }
+    h5 {
+      color: #34bcec;
+      font-weight: bold;
+    }
+  }
+  .sidebar-blog {
+    padding-left: 10px;
+    min-width: 207px;
+
+    h6 {
+      font-size: 1rem;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    h5 {
+      padding-top: 20px;
+      margin-bottom: 28px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid $color_solid;
+    }
+
+    ul {
+      border-bottom: 1px solid #ececec;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    i {
+      padding-right: 20px;
+    }
+
+    .city-item {
+      text-decoration: none;
+      color: $color_text;
+      font-size: 16px;
+    }
+
+    .city-item:hover {
+      color: black;
+      font-weight: bold;
+      scale: 0.6;
+      cursor: pointer;
+    }
+  }
+}
+
+//PC
+@media (min-width: 1024px) {
+  .form-search-home {
+    padding-left: 117px;
+    input {
+      width: 500px;
+    }
+    button {
+      padding: 7px;
+      font-size: 18px;
+    }
+  }
+  .info-home {
+    padding-top: 50px;
+  }
+  .content-slider {
+    position: absolute;
+    left: -515px;
+    bottom: 100px;
+  }
+  .carousel-inner {
+    h1 {
+      font-size: 5;
+      color: #333e48;
+      font-weight: 300;
+      line-height: 1em;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+    p {
+      color: rgba(60, 58, 58, 0.661);
+    }
+    h5 {
+      color: #34bcec;
+      font-weight: bold;
+    }
+  }
+  .sidebar-blog {
+    padding-left: 10px;
+    min-width: 278px;
+
+    h6 {
+      margin-top: 56px;
+      font-size: 1rem;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    h5 {
+      padding-top: 20px;
+      margin-bottom: 28px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid $color_solid;
+    }
+
+    ul {
+      border-bottom: 1px solid #ececec;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    i {
+      padding-right: 20px;
+    }
+
+    .city-item {
+      text-decoration: none;
+      color: $color_text;
+      font-size: 16px;
+    }
+
+    .city-item:hover {
+      color: black;
+      font-weight: bold;
+      scale: 0.6;
+      cursor: pointer;
+    }
+  }
+}
+
 .content {
   .content-name {
     font-size: 1.2rem;
@@ -10,82 +203,10 @@ $color_solid: #ed2f2f;
   }
 }
 
-.content-slider {
-  position: absolute;
-  left: -515px;
-  bottom: 160px;
-}
-
-.carousel-inner {
-  h1 {
-    font-size: 2.4em;
-    color: #333e48;
-    font-weight: 300;
-    line-height: 1em;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-  }
-  p {
-    color: rgba(60, 58, 58, 0.661);
-  }
-  h5 {
-    color: #34bcec;
-    font-weight: bold;
-  }
-}
-
 .content-area {
   display: flex;
   h1 {
     font-size: 24px;
-  }
-}
-
-.sidebar-blog {
-  padding-left: 10px;
-  min-width: 278px;
-
-  h6 {
-    margin-top: 56px;
-    font-size: 1rem;
-  }
-
-  img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-
-  h5 {
-    padding-top: 20px;
-    margin-bottom: 28px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid $color_solid;
-  }
-
-  ul {
-    border-bottom: 1px solid #ececec;
-  }
-
-  li {
-    list-style: none;
-  }
-
-  i {
-    padding-right: 20px;
-  }
-
-  .city-item {
-    text-decoration: none;
-    color: $color_text;
-    font-size: 16px;
-  }
-
-  .city-item:hover {
-    color: black;
-    font-weight: bold;
-    scale: 0.6;
-    cursor: pointer;
   }
 }
 
@@ -111,19 +232,12 @@ $color_solid: #ed2f2f;
   }
 }
 
-.form-search-home {
-  padding-left: 117px;
-  input {
-    width: 600px;
-  }
-  button {
-    padding: 7px;
-    font-size: 18px;
-  }
-}
-
 .filter-select {
   width: 300px;
   padding: 14px;
   margin: auto;
+}
+
+nav.navbar {
+  width: 100%;
 }
