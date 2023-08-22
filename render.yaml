@@ -1,11 +1,11 @@
 databases:
   - name: taxcode
     databaseName: taxcode
-    user: taxcode
+    user: taxcode_user
 
 services:
   - type: web
-    name: taxcode
+    name: taxcodeinfo
     runtime: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
