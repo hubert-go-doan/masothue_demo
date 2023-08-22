@@ -6,32 +6,32 @@ Rails.application.routes.draw do
   # route devise
   devise_for :users, controllers: {
     registrations: 'registrations',
-    sessions: 'sessions', 
-    passwords: 'passwords'
+    sessions:      'sessions',
+    passwords:     'passwords'
   }
 
   # route admin
   namespace :admin do
     root to: 'base#index'
-    
+
     get 'districts_by_city', to: 'districts#districts_by_city'
     get 'wards_by_district', to: 'wards#wards_by_district'
-    
+
     resources :companies do
-      collection do 
+      collection do
         get 'search', to: 'companies#search', as: :search_company
       end
     end
 
-    resources :people do 
+    resources :people do
       collection do
-        get 'search', to: 'people#search', as: :search_person
+        get :search, to: 'people#search', as: :search_person
       end
     end
 
     resources :company_types, only: [:index]
     resources :represents
-    resources :contacts, only: [:index, :show, :edit, :update, :destroy]
+    resources :contacts, only: %i[index show edit update destroy]
 
     resources :tax_codes do
       collection do
@@ -43,14 +43,14 @@ Rails.application.routes.draw do
 
     resources :business_areas do
       collection do
-        get 'search', to: 'business_areas#search', as: :search_business_are 
+        get 'search', to: 'business_areas#search', as: :search_business_are
       end
     end
   end
 
   # route homepage
   root 'main#home'
-  resources :company_types  
+  resources :company_types
   resources :business_areas
   resources :newly_established
   resources :status
