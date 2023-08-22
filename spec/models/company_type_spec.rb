@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CompanyType, type: :model do
   describe "associations" do
-    it { should have_many(:companies) }
-    it { should have_many(:people) }
+    it { should have_many(:companies).dependent(:nullify) }
+    it { should have_many(:people).dependent(:nullify) }
   end
 end

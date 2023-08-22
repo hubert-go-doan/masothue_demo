@@ -7,7 +7,7 @@ RSpec.describe City, type: :model do
 
   describe "associations" do
     it { should have_many(:districts).dependent(:destroy) }
-    it { should have_many(:companies) }
-    it { should have_many(:people) }
+    it { should have_many(:companies).dependent(:destroy) }
+    it { should have_many(:people).dependent(:destroy) }
   end
 end
