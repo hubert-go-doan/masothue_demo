@@ -1,12 +1,10 @@
-$(document).ready(() => {
+$(document).on('turbo:load', () => {
   const taxableIdField = $('#tax-code-taxable-id');
   const originalOptions = taxableIdField.html();
-
   taxableIdField.prop('disabled', true);
 
   $('#tax-code-taxable-type').on('change', ({ target }) => {
     const selectedType = target.value;
-
     if (selectedType === '' || selectedType === 'Select Type') {
       taxableIdField.html(originalOptions).val('').prop('disabled', true);
     } else {
