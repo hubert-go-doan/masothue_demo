@@ -1,4 +1,4 @@
-$(document).ready(() => {
+$(document).on('turbo:load', () => {
   const citySelect = $('#city-select');
   const districtSelect = $('#district-select');
   const wardSelect = $('#ward-select');
