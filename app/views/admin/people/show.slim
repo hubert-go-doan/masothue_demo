@@ -1,0 +1,41 @@
+.body-content
+  h3.pb-4.fw-bold.detail-title
+    | THÔNG TIN CHI TIẾT
+  .content-details.row
+    .col
+      p
+        | Mã số thuế 
+      = @person.tax_code&.code || 'Chưa có MST'
+    .col 
+      p
+        | Tên cá nhân 
+      = @person.name
+    .col 
+      p
+        | CMND/CCCD
+      = @person.cmnd
+    .col 
+      p
+        | Ngày HD
+      = @person.date_start
+    .col
+      p
+        | Quản lí bởi 
+      = @person.managed_by
+    .col 
+      p
+        | Trạng Thái 
+      = @person.status.name
+    .col 
+      p
+        | Số điện thoại
+      = @person.phone_number
+    .col
+      p
+        | Loại hình DN
+      = @person.company_type.type_name
+    .col 
+      p
+        | Địa chỉ
+      = full_address(@person) 
+= link_to "Back", admin_people_path, class: "sub-back-button btn btn-secondary float-start"

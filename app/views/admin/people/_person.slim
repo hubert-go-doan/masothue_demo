@@ -1,0 +1,22 @@
+= turbo_frame_tag person do 
+  .list-person.d-flex
+    = link_to admin_person_path(person), data: { turbo_frame: "_top" }, class: "nav-link", role: "button" do 
+      h6
+        = person.name
+    h6
+      strong
+        = person.tax_code&.code || 'No Tax code'
+    h6
+      = person.cmnd 
+    h6.address-style
+      = full_address(person)
+    .form-icon
+      .icon-item
+        = link_to admin_person_path(person), data: { turbo_frame: "_top" }, class: "btn btn-link-info text-danger btn-sm btn-rounded", role: "button" do 
+          i.fa.solid.fa-info.btn-info
+      .icon-item
+        = link_to edit_admin_person_path(person), data: { turbo_frame: dom_id(person) }, class: "btn btn-link btn-sm btn-rounded", role: "button" do 
+          i.fa.solid.fa-pen-to-square
+      .icon-item
+        = button_to admin_person_path(person), method: :delete, data: { turbo_confirm: 'Are you sure delete?' }, class: "btn btn-link-dark btn-sm btn-rounded", role: "button" do
+          i.fa.fa-trash

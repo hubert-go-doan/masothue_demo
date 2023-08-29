@@ -19,7 +19,7 @@
               </div>
           
               <div class="actions pt-3">
-                <%= f.submit "Log in", class: "btn btn-primary form-control password-input"%>
+                <%= f.submit "Log in", class: "btn btn-primary form-control password-input", data: {turbo: false} %>
               </div>
             <% end %>
             <%= link_to "Back", root_path, class: "mt-3" %>

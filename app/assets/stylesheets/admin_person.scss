@@ -1,0 +1,27 @@
+.list-person {
+  h6 {
+    padding: 20px 10px 0px 20px;
+    width: 300px;
+  }
+  .address-style {
+    padding: 20px 10px 0px 20px;
+    width: 500px;
+  }
+  .form-icon {
+    margin-left: 20px;
+    display: flex;
+    .icon-item {
+      padding: 20px;
+    }
+  }
+}
+.detail-title {
+  padding-left: 535px;
+}
+.content-details {
+  p {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+  }
+}

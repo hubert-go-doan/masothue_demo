@@ -2,6 +2,9 @@ $(document).on('turbo:load', () => {
   const citySelect = $('#city-select');
   const districtSelect = $('#district-select');
   const wardSelect = $('#ward-select');
+  // $(body).on('change', 'selector' => (
+
+  // ))
 
   citySelect.on('change', () => {
     const selectedCityId = citySelect.val();

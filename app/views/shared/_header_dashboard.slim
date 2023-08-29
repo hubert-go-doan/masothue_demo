@@ -9,7 +9,7 @@
           li.nav-item
             = link_to "Edit Account", edit_user_registration_path, class: "nav-link text-light"
           li.nav-item
-            = button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-small btn-light mx-2"
+            = button_to "Sign Out", destroy_user_session_path, method: :delete, data: {turbo: false}, class: "btn btn-small btn-light mx-2"
         - else
           li.nav-item
             = link_to "Sign Up", new_user_registration_path, class: "nav-link"

@@ -16,6 +16,7 @@
 @import "font-awesome";
 @import "pagination_admin";
 @import "admin_companies";
+@import "admin_person";
 @import "admin_tax_code";
 
 $font-family_1: "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light",
@@ -106,6 +107,7 @@ small {
   display: flex;
   justify-content: space-between;
   padding-right: 20px;
+  padding-bottom: 10px;
   h3 {
     padding-left: 16px;
   }

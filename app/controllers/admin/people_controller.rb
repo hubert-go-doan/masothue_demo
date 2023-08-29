@@ -2,7 +2,7 @@ class Admin::PeopleController < ApplicationController
   layout 'admin_layout'
 
   before_action :prepare_data, only: %i[new create edit]
-  before_action :prepare_person, only: %i[edit update destroy]
+  before_action :prepare_person, only: %i[edit update destroy show]
   before_action :prepare_data_filter, only: %i[index search]
 
   def search
@@ -21,10 +21,15 @@ class Admin::PeopleController < ApplicationController
     end
   end
 
+  def show
+    authorize Person
+    redirect_to admin_person_path if @person.nil?
+  end
+
   def index
     authorize Person
 
-    persons = Person.includes(:tax_code, :status, :company_type, :ward, :district, :city).all
+    persons = Person.includes(:tax_code, :ward, :district, :city).all
 
     persons = persons.where(city_id: params[:city_id]) if params[:city_id].present?
 
@@ -46,7 +51,9 @@ class Admin::PeopleController < ApplicationController
         format.turbo_stream
       end
     else
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -57,7 +64,10 @@ class Admin::PeopleController < ApplicationController
   def update
     authorize @person
     if @person.update(person_params)
-      redirect_to admin_people_path, notice: 'Person was successfully updated!'
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to admin_people_path, notice: 'Person was successfully updated!' }
+      end
     else
       render :edit, status: :unprocessable_entity
     end

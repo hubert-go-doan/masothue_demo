@@ -29,4 +29,8 @@ class PersonPolicy < ApplicationPolicy
   def destroy?
     user.present?
   end
+
+  def show?
+    user.present?
+  end
 end

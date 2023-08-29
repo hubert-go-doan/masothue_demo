@@ -33,10 +33,11 @@ class Admin::BusinessAreasController < ApplicationController
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to admin_business_areas_path, notice: 'Business Area was successfully created!' }
-        # format.turbo_stream { render turbo_stream: turbo_stream.append("new_business_area", target: "new_business_area", partial: "business_areas/business_area", locals: { business_area: @business_area }) }
       end
     else
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 

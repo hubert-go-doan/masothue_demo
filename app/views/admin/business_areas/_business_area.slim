@@ -4,7 +4,6 @@
       thead.bg-light
         tr.text-danger
           th
-            / | Name Business Area
           th[colspan="2", style="width: 15px"]
       tbody
         tr
@@ -16,3 +15,6 @@
           td
             = button_to admin_business_area_path(business_area), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "btn btn-link-dark btn-sm btn-rounded", role: "button" do
               i.fa.fa-trash
+
+
+

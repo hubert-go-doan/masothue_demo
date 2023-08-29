@@ -31,7 +31,7 @@
             td
               = contact.content
             td
-              = button_to admin_contact_path(contact), method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-link-dark btn-sm btn-rounded", role: "button" do 
+              = button_to admin_contact_path(contact), method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-link-dark btn-sm btn-rounded", data: {turbo: false}, role: "button" do 
                 i.fa.fa-trash
   == pagy_bootstrap_nav(@pagy)
               
