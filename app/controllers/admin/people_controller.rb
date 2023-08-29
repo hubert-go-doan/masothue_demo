@@ -41,7 +41,10 @@ class Admin::PeopleController < ApplicationController
     @person = Person.new(person_params)
     authorize @person
     if @person.save
-      redirect_to admin_people_path, notice: 'Person was successfully created!'
+      respond_to do |format|
+        format.html { redirect_to admin_people_path, notice: 'Person was successfully created!' }
+        format.turbo_stream
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -63,7 +66,10 @@ class Admin::PeopleController < ApplicationController
   def destroy
     authorize @person
     @person.destroy
-    redirect_to admin_people_path, notice: 'Person was successfully deleted!'
+    respond_to do |format|
+      format.html { redirect_to admin_people_path, tatus: :see_other, notice: 'Person was successfully deleted!' }
+      format.turbo_stream
+    end
   end
 
   def prepare_person

@@ -1,0 +1,7 @@
+<%= turbo_stream.append "business-areas" do %>
+   <%= render partial: 'business_area', locals: {business_area: @business_area} %> 
+<% end %>
+
+<%= turbo_stream.update 'new_business_area', "" %>
+
+

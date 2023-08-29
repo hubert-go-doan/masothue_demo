@@ -8,7 +8,7 @@
     = text_field_tag :q, params[:q], class: 'form-control me-2', type: 'search', placeholder: 'Search...', aria_label: 'Search'
     button.btn.btn-dark(type="submit")
       i.fas.fa-search
-      
-  = link_to new_admin_business_area_path, class: 'btn cursor-pointer button_add btn-primary', type: 'button' do
+  
+  = link_to new_admin_business_area_path, data: { turbo_frame: 'new_business_area' }, class: 'btn cursor-pointer button_add btn-primary', type: 'button' do
     i.fa-solid.fa-plus.me-2
     |  Add Business Area 

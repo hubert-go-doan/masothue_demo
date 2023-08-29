@@ -34,4 +34,4 @@
             = f.input :status_id, required: true, prompt: "Status ", label: "Status", collection: @status_list
       
       = link_to "Back", admin_people_path, class: "sub-back-button btn btn-secondary float-start"
-      = f.button :submit, value:"Submit", class: "sub-back-button btn btn-primary float-end"
+      = f.button :submit, value:"Submit", class: "sub-back-button btn btn-primary float-end", data: { turbo: false }
