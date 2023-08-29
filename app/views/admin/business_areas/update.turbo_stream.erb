@@ -1,5 +1,2 @@
-<%= turbo_stream.replace "business-areas" do %>
-   <%= render partial: 'business_area', locals: {business_area: @business_area} %> 
-<% end %>
-
+<%= turbo_stream.replace "business-areas", partial: "business_area", locals: { business_area: @business_area } %>
 <%= turbo_stream.update BusinessArea.new, "" %>

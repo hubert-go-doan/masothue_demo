@@ -1,7 +1,7 @@
 .body-content
-  = turbo_frame_tag 'new_business_area' do 
-    h3.style-form
-      | New Business Area
-    = render partial: 'form', locals: {business_area: @business_area}
+  h3.style-form
+    | New Business Area
 
+  = turbo_frame_tag 'new_business_area' do 
+    = render 'form', business_area: @business_area
 

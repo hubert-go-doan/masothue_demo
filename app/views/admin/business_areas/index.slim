@@ -1,6 +1,9 @@
 = render 'shared/flash'
 .body-content
   = render partial: 'header'
-  = turbo_frame_tag 'new_business_area'
-  = turbo_frame_tag 'business-areas' do
-    = render 'business_area', business_areas: @business_areas
+  = turbo_frame_tag BusinessArea.new 
+  / = turbo_frame_tag 'business-areas' do
+  /   = render partial: 'business_areas', locals: {business_areas: @business_areas}
+  = turbo_frame_tag "business-areas" do
+    = render @business_areas
+    == pagy_bootstrap_nav(@pagy)

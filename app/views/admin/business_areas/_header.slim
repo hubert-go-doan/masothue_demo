@@ -9,6 +9,6 @@
     button.btn.btn-dark(type="submit")
       i.fas.fa-search
   
-  = link_to new_admin_business_area_path, data: { turbo_frame: 'new_business_area' }, class: 'btn cursor-pointer button_add btn-primary', type: 'button' do
+  = link_to new_admin_business_area_path, data: { turbo_frame: dom_id(BusinessArea.new) }, class: 'btn cursor-pointer button_add btn-primary', type: 'button' do
     i.fa-solid.fa-plus.me-2
     |  Add Business Area 
