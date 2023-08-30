@@ -78,7 +78,7 @@ class Admin::PeopleController < ApplicationController
     authorize @person
     @person.destroy
     respond_to do |format|
-      format.html { redirect_to admin_people_path, tatus: :see_other, notice: 'Person was successfully deleted!' }
+      format.html { redirect_to admin_people_path, status: :see_other, notice: 'Person was successfully deleted!' }
       format.turbo_stream { flash.now[:notice] = "Person was successfully deleted!" }
     end
   end
