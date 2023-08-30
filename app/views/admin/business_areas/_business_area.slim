@@ -1,20 +1,11 @@
 = turbo_frame_tag business_area do 
-  .business-area-table
-    table.table.table-hover.align-middle.mb-0.bg-white.table-responsive
-      thead.bg-light
-        tr.text-danger
-          th
-          th[colspan="2", style="width: 15px"]
-      tbody
-        tr
-          td
-            = link_to business_area.name, business_area_path(business_area), class: "nav-link", data: { turbo_frame: "_top" }
-          td
-            = link_to edit_admin_business_area_path(business_area), data: { turbo_frame: dom_id(business_area) }, class: "btn btn-link btn-sm btn-rounded", role: "button" do
-              i.fa.solid.fa-pen-to-square
-          td
-            = button_to admin_business_area_path(business_area), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "btn btn-link-dark btn-sm btn-rounded", role: "button" do
-              i.fa.fa-trash
-
-
-
+  .list-business-areas
+    .title-business-area
+      = link_to business_area.name, business_area_path(business_area), class: "nav-link", data: { turbo_frame: "_top" }
+    .form-icon
+      .icon-item
+        = link_to edit_admin_business_area_path(business_area), data: { turbo_frame: dom_id(business_area) }, class: "btn btn-link btn-sm btn-rounded", role: "button" do
+          i.fa.solid.fa-pen-to-square
+      .icon-item
+        = button_to admin_business_area_path(business_area), method: :delete, data: { turbo_confirm: 'Are you sure delete?' }, class: "btn btn-link-dark btn-sm btn-rounded", role: "button" do
+          i.fa.fa-trash

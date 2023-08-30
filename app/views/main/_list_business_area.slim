@@ -7,12 +7,12 @@
         th[colspan=2]
           | Ngành
       tbody
-          tr
-            td
-              | Tên
-            td
-              - if @entity.business_area.present?
-                = link_to @entity.business_area.name, business_area_path(@entity.business_area), class: "nav-link fw-bold"
-                - if @entity.business_area.detail.present?
-                  | Chi tiết: 
-                  = @entity.business_area.detail
+        tr
+          td
+            | Tên
+          td
+            - if @entity.business_area.present?
+              = link_to @entity.business_area.name, business_area_path(@entity.business_area), class: "nav-link fw-bold"
+              - if @entity.business_area.detail.present?
+                | Chi tiết: 
+                = @entity.business_area.detail

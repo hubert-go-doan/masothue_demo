@@ -49,3 +49,7 @@ small {
 .dropdown-item:active {
   background-color: $color_primary;
 }
+
+.carousel-indicators [data-bs-target] {
+  background-color: $color_primary;
+}
