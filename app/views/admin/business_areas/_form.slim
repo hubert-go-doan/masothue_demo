@@ -3,13 +3,8 @@
     = simple_form_for [:admin, business_area] do |f|
       .row.mb-3 
         .col 
-          div.text-danger
-            ul
-              - business_area.errors.each do |error|
-                li
-                  = error.full_message
           = f.input :name, required: true, lable: "Name Business Area",  input_html: {class: 'form-control'}, placeholder: "Name Buniness Area"
           = f.input :detail, lable: "Detail(Option)",  input_html: {class: 'form-control'}, placeholder: "Description Detail "
-      = link_to "Back", admin_business_areas_path, class: "sub-back-button btn btn-secondary float-start"
+      = link_to "Back", request.referer || admin_business_areas_path, class: "sub-back-button btn btn-secondary float-start"
       = f.button :submit, value:"Submit", class: "sub-back-button btn btn-primary float-end"
 

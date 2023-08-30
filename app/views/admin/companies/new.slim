@@ -1,6 +1,7 @@
 = render 'shared/flash'
 .body-content
-  h3.style-form
-    | New Company 
-  = render partial: 'form', locals: {company: @company}
-  
+  = turbo_frame_tag 'new_company' do 
+    h3.style-form
+      | New Company 
+    = render partial: 'form', locals: {company: @company}
+    

@@ -29,4 +29,8 @@ class CompanyPolicy < ApplicationPolicy
   def destroy?
     user.present?
   end
+
+  def show?
+    user.present?
+  end
 end

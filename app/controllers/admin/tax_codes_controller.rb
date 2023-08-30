@@ -46,9 +46,14 @@ class Admin::TaxCodesController < ApplicationController
     @tax_code = TaxCode.new(tax_code_params_stripped)
     authorize @tax_code
     if @tax_code.save
-      redirect_to admin_tax_codes_path, notice: 'Tax Code was successfully created!'
+      respond_to do |format|
+        format.html { redirect_to admin_tax_codes_path, notice: 'Tax Code was successfully created!' }
+        format.turbo_stream
+      end
     else
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 

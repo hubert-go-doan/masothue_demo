@@ -1,11 +1,12 @@
-= render 'shared/flash'
+#flash.flash
+  = render "layouts/flash"
 .body-content  
   .add-style
     = link_to admin_contacts_path, class: 'cursor-pointer text-dark' do
       h3 
         | Management 
         strong.text-danger Form
-  .pt-3.content-table
+  .pt-3.content-table[style='margin-top: -38px']
     table.table.table-hover.table-bordered
       thead
         tr

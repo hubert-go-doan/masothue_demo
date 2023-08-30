@@ -1,0 +1,3 @@
+= turbo_stream.replace dom_id(@business_area), partial: "business_area", locals: { business_area: @business_area }
+= turbo_stream.update BusinessArea.new, ""
+= render_turbo_stream_flash_messages 

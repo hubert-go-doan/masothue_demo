@@ -31,7 +31,7 @@ class Admin::BusinessAreasController < ApplicationController
     authorize @business_area
     if @business_area.save
       respond_to do |format|
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = "Business Area was successfully created" }
         format.html { redirect_to admin_business_areas_path, notice: 'Business Area was successfully created!' }
       end
     else
@@ -49,8 +49,8 @@ class Admin::BusinessAreasController < ApplicationController
     authorize @business_area
     if @business_area.update(business_area_params)
       respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to admin_business_areas_path, notice: 'Business Area was successfully updated!' }
+        format.turbo_stream { flash.now[:notice] = "Business Area was successfully updated" }
+        format.html { redirect_to admin_business_areas_path, notice: 'Business Area was successfully updated' }
       end
     else
       render :edit, status: :unprocessable_entity
@@ -61,8 +61,8 @@ class Admin::BusinessAreasController < ApplicationController
     authorize @business_area
     @business_area.destroy
     respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to admin_business_areas_path, notice: 'Business Area was successfully deleted!' }
+      format.turbo_stream { flash.now[:notice] = "Business Area was successfully deleted" }
+      format.html { redirect_to admin_business_areas_path, notice: 'Business Area was successfully deleted' }
     end
   end
 

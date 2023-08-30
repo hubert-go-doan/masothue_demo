@@ -2,18 +2,14 @@ class Admin::CompaniesController < ApplicationController
   layout 'admin_layout'
 
   before_action :prepare_data, only: %i[new create edit]
-  before_action :prepare_company, only: %i[edit update destroy]
+  before_action :prepare_company, only: %i[edit update destroy show]
   before_action :prepare_data_filter, only: %i[index search]
 
   def search
     query = params[:q]&.strip&.downcase
-
     @companies = []
-
     @companies = Company.where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%").joins(:represent, :tax_code).includes(:tax_code, :represent, :business_area, :status, :company_type, :city, :district, :ward) if query.present?
-
     @pagy, @companies = pagy_array(@companies, items: 10)
-
     if @companies.blank?
       render 'no_result'
     else
@@ -23,28 +19,42 @@ class Admin::CompaniesController < ApplicationController
 
   def index
     authorize Company
-
-    companies = Company.includes(:tax_code, :represent, :status, :business_area, :company_type, :city, :district, :ward).all
-
+    companies = Company.includes(:tax_code, :represent, :city, :district, :ward).all
     companies = companies.where(city_id: params[:city_id]) if params[:city_id].present?
-
     companies = companies.where(status_id: params[:status_id]) if params[:status_id].present?
-
     @pagy, @companies = pagy(companies, items: 10)
+  end
+
+  def show
+    authorize Company
+    redirect_to admin_company_path if @company.nil?
   end
 
   def new
     authorize Company
     @company = Company.new
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update(
+          dom_id(@company), partial: "form", locals: { company: @company }
+        )
+      end
+      format.html
+    end
   end
 
   def create
     @company = Company.new(company_params)
     authorize @company
     if @company.save
-      redirect_to admin_companies_path, notice: 'Company was successfully created!'
+      respond_to do |format|
+        format.html { redirect_to admin_companies_path, notice: 'Company was successfully created!' }
+        format.turbo_stream { flash.now[:notice] = "Company was successfully created!" }
+      end
     else
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -55,7 +65,10 @@ class Admin::CompaniesController < ApplicationController
   def update
     authorize @company
     if @company.update(company_params)
-      redirect_to admin_companies_path, notice: 'Company was successfully updated!'
+      respond_to do |format|
+        format.html { redirect_to admin_companies_path, notice: 'Company was successfully updated!' }
+        format.turbo_stream { flash.now[:notice] = "Company was successfully updated!" }
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -64,7 +77,10 @@ class Admin::CompaniesController < ApplicationController
   def destroy
     authorize @company
     @company.destroy
-    redirect_to admin_companies_path, status: :see_other, notice: 'Company was successfully deleted!'
+    respond_to do |format|
+      format.html { redirect_to admin_companies_path, status: :see_other, notice: 'Company was successfully deleted!' }
+      format.turbo_stream { flash.now[:notice] = "Company was successfully deleted!" }
+    end
   end
 
   def prepare_data

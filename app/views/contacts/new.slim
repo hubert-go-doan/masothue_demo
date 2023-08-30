@@ -1,5 +1,6 @@
+#flash.flash
+  = render "layouts/flash"
 = render 'shared/breadcrumb'
-= render 'shared/flash'
 section.mb-4
   h1.h1-responsive.text-center
     | Liên hệ
@@ -15,7 +16,7 @@ section.mb-4
           .pt-3
               = f.input :content, as: :text, label: 'Nội dung', input_html: { class: 'form-control w-100', style: 'height: 200px;' }
           .pt-3
-            = f.button :submit, class: 'btn btn-danger cursor-pointer', value: 'Gửi liên hệ'
+            = f.button :submit, class: 'btn btn-danger cursor-pointer', value: 'Gửi liên hệ', data: {turbo: false}
       .col-md-6.text-center
         h4
           | Thông tin liên hệ

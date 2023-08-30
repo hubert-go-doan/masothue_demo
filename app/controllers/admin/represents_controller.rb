@@ -10,10 +10,14 @@ class Admin::RepresentsController < ApplicationController
     @represent = Represent.new(represent_params)
     authorize @represent
     if @represent.save
-      flash[:notice] = "Create successfully represent..."
-      redirect_to new_admin_company_path
+      respond_to do |format|
+        format.html { redirect_to new_admin_company_path, notice: 'Create successfully represent' }
+        format.turbo_stream { flash.now[:notice] = "Create successfully represent" }
+      end
     else
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 

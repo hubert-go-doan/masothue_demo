@@ -1,0 +1,3 @@
+= turbo_stream.replace dom_id(@company), partial: "company", locals: { company: @company }
+= turbo_stream.update Company.new, ""
+= render_turbo_stream_flash_messages 

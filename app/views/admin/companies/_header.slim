@@ -19,6 +19,6 @@
       = text_field_tag :q, params[:q], class: "d-none", type: 'search', aria_label: 'Search'
       = select_tag :status_id, options_for_select([["Lọc theo Trạng thái", ""]] + @status_list, params[:status_id]), class: 'form-select', onchange: 'this.form.submit()'
 
-  = link_to new_admin_company_path, class: 'btn cursor-pointer button_add btn-primary', type: 'button' do
+  = link_to new_admin_company_path, class: 'btn cursor-pointer button_add btn-primary', data: { turbo_frame: dom_id(Company.new) }, type: 'button' do
     i.fa-solid.fa-plus.me-2
     |  Add Company 

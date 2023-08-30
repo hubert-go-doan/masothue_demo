@@ -7,13 +7,9 @@ class Admin::PeopleController < ApplicationController
 
   def search
     query = params[:q]&.strip&.downcase
-
     @persons = []
-
     @persons = Person.where("LOWER(people.cmnd) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%").joins(:tax_code) if query.present?
-
     @pagy, @persons = pagy_array(@persons, items: 10)
-
     if @persons.blank?
       render 'no_result'
     else
@@ -28,11 +24,8 @@ class Admin::PeopleController < ApplicationController
 
   def index
     authorize Person
-
     persons = Person.includes(:tax_code, :ward, :district, :city).all
-
     persons = persons.where(city_id: params[:city_id]) if params[:city_id].present?
-
     persons = persons.where(status_id: params[:status_id]) if params[:status_id].present?
     @pagy, @persons = pagy(persons, items: 10)
   end
@@ -40,6 +33,14 @@ class Admin::PeopleController < ApplicationController
   def new
     authorize Person
     @person = Person.new
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update(
+          dom_id(@person), partial: "form", locals: { person: @person }
+        )
+      end
+      format.html
+    end
   end
 
   def create
@@ -48,7 +49,7 @@ class Admin::PeopleController < ApplicationController
     if @person.save
       respond_to do |format|
         format.html { redirect_to admin_people_path, notice: 'Person was successfully created!' }
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = "Person was successfully created!" }
       end
     else
       respond_to do |format|
@@ -65,8 +66,8 @@ class Admin::PeopleController < ApplicationController
     authorize @person
     if @person.update(person_params)
       respond_to do |format|
-        format.turbo_stream
         format.html { redirect_to admin_people_path, notice: 'Person was successfully updated!' }
+        format.turbo_stream { flash.now[:notice] = "Person was successfully updated!" }
       end
     else
       render :edit, status: :unprocessable_entity
@@ -78,7 +79,7 @@ class Admin::PeopleController < ApplicationController
     @person.destroy
     respond_to do |format|
       format.html { redirect_to admin_people_path, tatus: :see_other, notice: 'Person was successfully deleted!' }
-      format.turbo_stream
+      format.turbo_stream { flash.now[:notice] = "Person was successfully deleted!" }
     end
   end
 
