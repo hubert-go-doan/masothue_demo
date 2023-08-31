@@ -53,7 +53,9 @@ class Admin::BusinessAreasController < ApplicationController
         format.html { redirect_to admin_business_areas_path, notice: 'Business Area was successfully updated' }
       end
     else
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
