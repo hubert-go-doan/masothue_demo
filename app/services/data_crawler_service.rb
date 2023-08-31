@@ -73,7 +73,7 @@ class DataCrawlerService
 
   def crawl_and_save_company(company_url, city, district, ward)
     page = Nokogiri::HTML(URI.open(company_url))
-    puts "#{company_url}"
+    puts company_url
 
     representative_name = page.css('tr[itemprop="alumni"] span[itemprop="name"] a').text
     represent = Represent.find_or_create_by(name: representative_name)

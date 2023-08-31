@@ -70,7 +70,9 @@ class Admin::PeopleController < ApplicationController
         format.turbo_stream { flash.now[:notice] = "Person was successfully updated!" }
       end
     else
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 

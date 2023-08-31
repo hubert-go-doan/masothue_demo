@@ -16,7 +16,7 @@
                 = link_to result.name, info_detail_path(id: result.id, type: result.class.name.downcase), class: "content-name"
               strong #
               | Mã số thuế: 
-              = link_to result.tax_code&.code.presence || '', info_detail_path(id: result.id, type: result.class.name.downcase), class: "text-decoration-none text-dark"
+              = link_to result.tax_code&.code.to_s, info_detail_path(id: result.id, type: result.class.name.downcase), class: "text-decoration-none text-dark"
               br
               strong
                 i.fa-solid.fa-person 
