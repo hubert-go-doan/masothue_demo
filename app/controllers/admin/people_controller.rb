@@ -1,7 +1,7 @@
 class Admin::PeopleController < ApplicationController
   layout 'admin_layout'
 
-  before_action :prepare_data, only: %i[new create edit]
+  before_action :prepare_data, only: %i[new create edit update]
   before_action :prepare_person, only: %i[edit update destroy show]
   before_action :prepare_data_filter, only: %i[index search]
 
