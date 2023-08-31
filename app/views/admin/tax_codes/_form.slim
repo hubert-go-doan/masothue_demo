@@ -10,5 +10,5 @@
         .col
           = f.input :taxable_id, collection: [], label_method: :name, value_method: :id, prompt: 'Please Choose Type', input_html: {id: 'tax-code-taxable-id'}
       = link_to "Back", admin_tax_codes_path, class: "sub-back-button btn btn-secondary float-start"
-      = f.button :submit, value: "Submit", class: "sub-back-button btn btn-primary float-end"
+      = f.button :submit, value: "Submit", class: "sub-back-button btn btn-primary float-end", data: {turbo: false}
 

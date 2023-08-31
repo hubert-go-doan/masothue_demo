@@ -6,8 +6,9 @@ export default class extends Controller {
   connect() {
     console.log("connected", this.element);
     flatpickr(".day-of-birth", {
-      enableTime: true,
-      dateFormat: "F j, Y h:i K",
+      altInput: true,
+      altFormat: "F j, Y",
+      dateFormat: "Y-m-d",
     });
   }
 }

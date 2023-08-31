@@ -1,0 +1,49 @@
+.body-content
+  h3.pb-4.fw-bold.detail-title
+    | THÔNG TIN CHI TIẾT
+  .content-details.row
+    .col
+      p
+        | Mã số thuế 
+      = @company.tax_code&.code || 'Chưa có MST'
+    .col 
+      p
+        | Tên công ty
+      = @company.name
+    .col 
+      p
+        | Tên viết tắt
+      = @company.sub_name
+    .col 
+      p
+        | Người đại diện
+      = @company.represent.name
+    .col 
+      p
+        | Ngày HD
+      = @company.date_start
+    .col
+      p
+        | Quản lý bởi 
+      = @company.managed_by
+    .col 
+      p
+        | Trạng thái 
+      = @company.status.name
+    .col 
+      p
+        | Số điện thoại
+      = @company.phone_number
+    .col
+      p
+        | Loại hình DN
+      = @company.company_type&.type_name
+    .col
+      p
+        | Loại ngành nghề
+      = @company.business_area&.name
+    .col 
+      p
+        | Địa chỉ
+      = full_address(@company) 
+= link_to "Back", admin_companies_path, class: "sub-back-button btn btn-secondary float-start"

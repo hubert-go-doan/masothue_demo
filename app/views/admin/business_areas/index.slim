@@ -1,22 +1,8 @@
-= render 'shared/flash'
+#flash.flash
+  = render "layouts/flash"
 .body-content
   = render partial: 'header'
-  .business-area-table
-    table.table.table-hover.align-middle.mb-0.bg-white.table-responsive
-      thead.bg-light
-        tr.text-danger
-          th
-            | Name Business Area
-          th[colspan="2", style="width: 15px"]
-      tbody
-      - @business_areas.each do |business_area|
-        tr
-          td
-            = link_to business_area.name, business_area_path(business_area), class: "nav-link"
-          td
-            = link_to edit_admin_business_area_path(business_area), class: "btn btn-link btn-sm btn-rounded", role: "button" do 
-              i.fa.solid.fa-pen-to-square
-          td
-            = button_to admin_business_area_path(business_area), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "btn btn-link-dark btn-sm btn-rounded", role: "button" do 
-              i.fa.fa-trash
-  == pagy_bootstrap_nav(@pagy)
+  = turbo_frame_tag BusinessArea.new 
+  = turbo_frame_tag "business-areas" do
+    = render @business_areas
+    == pagy_bootstrap_nav(@pagy)

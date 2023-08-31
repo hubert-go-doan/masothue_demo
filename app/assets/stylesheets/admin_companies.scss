@@ -1,3 +1,33 @@
-.style-link-new{
- padding-top: 37px;
+.style-link-new {
+  padding-top: 37px;
+}
+
+.list-companies {
+  h6 {
+    padding: 20px 10px 0px 20px;
+    width: 545px;
+  }
+  .address-style {
+    padding: 20px 10px 0px 20px;
+    width: 500px;
+  }
+  .form-icon {
+    margin-left: 20px;
+    display: flex;
+    .icon-item {
+      padding: 20px;
+    }
+  }
+}
+
+.detail-title {
+  padding-left: 535px;
+}
+
+.content-details {
+  p {
+    font-size: 17px;
+    font-weight: bold;
+    color: red;
+  }
 }

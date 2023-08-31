@@ -22,6 +22,7 @@ AllCops:
     - Rakefile
     - node_modules/**/*
     - app/queries/**/*
+    - app/services/data_crawler_service.rb
 
 Style/Encoding:
   Enabled: false

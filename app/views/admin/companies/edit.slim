@@ -1,5 +1,6 @@
 .body-content
   h3.style-form
     | Edit Company 
-  = render partial: 'form', locals: {company: @company}
+  = turbo_frame_tag dom_id(@company) do 
+    = render partial: 'form', locals: {company: @company}
 

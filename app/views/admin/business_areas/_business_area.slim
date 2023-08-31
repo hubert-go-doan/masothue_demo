@@ -1,0 +1,11 @@
+= turbo_frame_tag business_area do 
+  .list-business-areas
+    .title-business-area
+      = link_to business_area.name, business_area_path(business_area), class: "nav-link", data: { turbo_frame: "_top" }
+    .form-icon
+      .icon-item
+        = link_to edit_admin_business_area_path(business_area), data: { turbo_frame: dom_id(business_area) }, class: "btn btn-link btn-sm btn-rounded", role: "button" do
+          i.fa.solid.fa-pen-to-square
+      .icon-item
+        = button_to admin_business_area_path(business_area), method: :delete, data: { turbo_confirm: 'Are you sure delete?' }, class: "btn btn-link-dark btn-sm btn-rounded", role: "button" do
+          i.fa.fa-trash

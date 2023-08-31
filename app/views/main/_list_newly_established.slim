@@ -9,7 +9,7 @@
             = link_to category.name, info_detail_path(id: category.id, type: category.class.name.downcase), class: "content-name"
           strong #
           | Mã số thuế: 
-          = link_to category.tax_code&.code, info_detail_path(id: category.id, type: category.class.name.downcase), class: "text-decoration-none text-dark"
+          = link_to category.tax_code&.code.to_s, info_detail_path(id: category.id, type: category.class.name.downcase), class: "text-decoration-none text-dark"
           br
           strong
             i.fa-solid.fa-person 
@@ -20,3 +20,4 @@
             i.fa-solid.fa-location-dot 
           = full_address(category)
           hr
+  == pagy_bootstrap_nav(@pagy)

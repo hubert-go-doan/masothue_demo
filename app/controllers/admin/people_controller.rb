@@ -2,18 +2,14 @@ class Admin::PeopleController < ApplicationController
   layout 'admin_layout'
 
   before_action :prepare_data, only: %i[new create edit]
-  before_action :prepare_person, only: %i[edit update destroy]
+  before_action :prepare_person, only: %i[edit update destroy show]
   before_action :prepare_data_filter, only: %i[index search]
 
   def search
     query = params[:q]&.strip&.downcase
-
     @persons = []
-
     @persons = Person.where("LOWER(people.cmnd) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%").joins(:tax_code) if query.present?
-
     @pagy, @persons = pagy_array(@persons, items: 10)
-
     if @persons.blank?
       render 'no_result'
     else
@@ -21,13 +17,15 @@ class Admin::PeopleController < ApplicationController
     end
   end
 
+  def show
+    authorize Person
+    redirect_to admin_person_path if @person.nil?
+  end
+
   def index
     authorize Person
-
-    persons = Person.includes(:tax_code, :status, :company_type, :ward, :district, :city).all
-
+    persons = Person.includes(:tax_code, :ward, :district, :city).all
     persons = persons.where(city_id: params[:city_id]) if params[:city_id].present?
-
     persons = persons.where(status_id: params[:status_id]) if params[:status_id].present?
     @pagy, @persons = pagy(persons, items: 10)
   end
@@ -35,15 +33,28 @@ class Admin::PeopleController < ApplicationController
   def new
     authorize Person
     @person = Person.new
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update(
+          dom_id(@person), partial: "form", locals: { person: @person }
+        )
+      end
+      format.html
+    end
   end
 
   def create
     @person = Person.new(person_params)
     authorize @person
     if @person.save
-      redirect_to admin_people_path, notice: 'Person was successfully created!'
+      respond_to do |format|
+        format.html { redirect_to admin_people_path, notice: 'Person was successfully created!' }
+        format.turbo_stream { flash.now[:notice] = "Person was successfully created!" }
+      end
     else
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -54,16 +65,24 @@ class Admin::PeopleController < ApplicationController
   def update
     authorize @person
     if @person.update(person_params)
-      redirect_to admin_people_path, notice: 'Person was successfully updated!'
+      respond_to do |format|
+        format.html { redirect_to admin_people_path, notice: 'Person was successfully updated!' }
+        format.turbo_stream { flash.now[:notice] = "Person was successfully updated!" }
+      end
     else
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     authorize @person
     @person.destroy
-    redirect_to admin_people_path, notice: 'Person was successfully deleted!'
+    respond_to do |format|
+      format.html { redirect_to admin_people_path, status: :see_other, notice: 'Person was successfully deleted!' }
+      format.turbo_stream { flash.now[:notice] = "Person was successfully deleted!" }
+    end
   end
 
   def prepare_person

@@ -10,4 +10,4 @@ import "taxcode"
 import "flash"
 import "dropdown_district_ward"
 
-Turbo.session.drive = false
+// Turbo.session.drive = false

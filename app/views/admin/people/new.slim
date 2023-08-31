@@ -1,5 +1,6 @@
 .body-content
-  h3.style-form
-    | New Person 
-  = render partial: 'form', locals: { person: @person }
+  = turbo_frame_tag 'new_person' do 
+    h3.style-form
+      | New Person 
+    = render partial: 'form', locals: { person: @person }
 

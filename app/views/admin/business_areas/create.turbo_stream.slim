@@ -1,0 +1,4 @@
+= turbo_stream.prepend "business-areas", partial: "business_area", locals: { business_area: @business_area }
+= render_turbo_stream_flash_messages 
+= turbo_stream.update BusinessArea.new, ""
+= turbo_stream.update Company.new, ""

@@ -1,25 +1,31 @@
 <section pt-3>
-  <div class="container py-5 h-100" style = "margin-top:160px">
+  <div class="container py-5 h-100" style = "margin-top: 70px">
     <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="text-center pb-4" >
+        <%= link_to root_path, class: "navbar-brand" do %>
+          <%= image_tag "logo/logo_login.png", alt: "logo_masothue" %>
+        <% end %>
+      </div>
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card shadow-2-strong" style="border-radius: 6px;">
           <div class="card-body p-5">
-            <h2 class="text-center" >Welcome back!</h2>
+            <h2 class="text-center fw-bold" >Sign in to Admin!</h2>
+            <p style="text-align: center;" >Please login with admin account</p>
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
               <%= render "devise/shared/error_messages", resource: resource %>
 
               <div class="form-group">
                 <%= f.label :email %>
-                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control email-input",placeholder: "Email"%>
+                <%= f.email_field :email, required: true, autofocus: true, autocomplete: "email", class: "form-control email-input",placeholder: "Email"%>
               </div>
           
               <div class="form-group", style="padding-top: 14px;">
                 <%= f.label :password %><br />
-                <%= f.password_field :password, autocomplete: "current-password", class: "form-control password-input",placeholder: "Password" %>
+                <%= f.password_field :password, required: true, autocomplete: "current-password", class: "form-control password-input",placeholder: "Password" %>
               </div>
           
               <div class="actions pt-3">
-                <%= f.submit "Log in", class: "btn btn-primary form-control password-input"%>
+                <%= f.submit "Log in", class: "btn btn-primary form-control password-input", data: {turbo: false} %>
               </div>
             <% end %>
             <%= link_to "Back", root_path, class: "mt-3" %>

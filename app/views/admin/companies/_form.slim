@@ -35,11 +35,11 @@
         .col 
             = f.input :represent_id, required: true, prompt: "Repersent ", label: "Repersent", collection: @represent_list
         .col.style-link-new
-            = link_to "New Create Represent", new_admin_represent_path
+            = link_to "New Create Represent", new_admin_represent_path, data: { turbo_frame: dom_id(Company.new) }
         .col 
             = f.input :business_area_id, prompt: "Business Area ", label: "Business Area", collection: @business_area_list
         .col.style-link-new
-            = link_to "New Create Business Areas", new_admin_business_area_path
+            = link_to "New Create Business Areas", new_admin_business_area_path, data: { turbo_frame: dom_id(Company.new) }
         
       = link_to "Back", admin_companies_path, class: "sub-back-button btn btn-secondary float-start"
       = f.button :submit, value:"Submit", class: "sub-back-button btn btn-primary float-end"

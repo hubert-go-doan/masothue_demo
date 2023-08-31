@@ -1,4 +1,5 @@
 .body-content
   h3.style-form
     | Edit Person 
-  = render partial: 'form', locals: { person: @person }
+  = turbo_frame_tag dom_id(@person) do 
+    = render partial: 'form', locals: { person: @person }
