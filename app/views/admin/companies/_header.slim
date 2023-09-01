@@ -1,9 +1,8 @@
 .add-style
   = link_to admin_companies_path, class: 'cursor-pointer text-dark' do
     h3 
+      strong.text-danger Company 
       | Management 
-      strong.text-danger Company
-
   = form_tag search_company_admin_companies_path, method: :get, class: 'd-flex', style: 'height: 40px', role: 'search' do
     = text_field_tag :q, params[:q], class: 'form-control me-2', style: 'width: 450px; ', type: 'search', placeholder: 'Search...', aria_label: 'Search'
     button.btn.btn-dark(type="submit")

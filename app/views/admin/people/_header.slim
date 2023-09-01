@@ -1,8 +1,9 @@
 .add-style
   = link_to admin_people_path, class: 'cursor-pointer text-dark' do
     h3 
+      strong.text-danger Person 
       | Management 
-      strong.text-danger Person
+    
   = form_tag search_person_admin_people_path, method: :get, class: 'd-flex style-search', role: 'search' do
     = text_field_tag :q, params[:q], class: 'form-control me-2', type: 'search', placeholder: 'Search...', aria_label: 'Search'
     button.btn.btn-dark(type="submit")
