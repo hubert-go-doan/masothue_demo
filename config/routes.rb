@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
   root 'main#home'
-  match '/404', to: "errors#not_found", via: :all
-  match '/500', to: "errors#internal_server_error", via: :all
-  devise_for :users, controllers: {
-    registrations: 'registrations',
-    sessions:      'sessions',
-    passwords:     'passwords'
-  }
-
+  match '/404', to: "errors#not_found", via: :all, as: :not_found
+  match '/500', to: "errors#internal_server_error", via: :all, as: :internal_server_error
   get 'info_detail/:id/:type', to: 'main#info_detail', as: :info_detail
   get 'cities/district/:id', to: 'cities#show_district', as: 'district'
   get 'cities/ward/:id', to: 'cities#show_ward', as: 'ward'
   get '/contacts', to: 'contacts#new'
   post '/contacts', to: 'contacts#create'
   get 'search', to: 'main#search', as: :search
+
+  devise_for :users, controllers: {
+    registrations: 'registrations',
+    sessions:      'sessions',
+    passwords:     'passwords'
+  }
 
   resources :company_types
   resources :business_areas
@@ -31,6 +31,10 @@ Rails.application.routes.draw do
     get 'districts_by_city', to: 'districts#districts_by_city'
     get 'wards_by_district', to: 'wards#wards_by_district'
 
+    resources :company_types, only: %i[index]
+    resources :represents
+    resources :contacts, only: %i[index show edit update destroy]
+
     resources :companies do
       collection do
         get 'search', to: 'companies#search', as: :search_company
@@ -42,12 +46,6 @@ Rails.application.routes.draw do
         get :search, to: 'people#search', as: :search_person
       end
     end
-
-    resources :company_types, only: %i[index]
-
-    resources :represents
-
-    resources :contacts, only: %i[index show edit update destroy]
 
     resources :tax_codes do
       collection do

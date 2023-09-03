@@ -11,8 +11,16 @@ class MainController < ApplicationController
     @results = []
 
     if query.present?
-      @results += Company.where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%").joins(:represent, :tax_code).includes(:tax_code, :represent, :city, :district, :ward)
-      @results += Person.where("LOWER(people.name) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%").joins(:tax_code).includes(:tax_code, :city, :district, :ward)
+      company_results = Company
+                        .left_joins(:represent, :tax_code)
+                        .includes(:tax_code, :represent, :city, :district, :ward)
+                        .where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+      person_results = Person
+                       .left_joins(:tax_code)
+                       .includes(:tax_code, :city, :district, :ward)
+                       .where("LOWER(people.name) LIKE ? OR LOWER(people.cmnd) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+
+      @results = company_results + person_results
     end
 
     @results = @results.select { |result| city_id.blank? || result.city_id == city_id.to_i }

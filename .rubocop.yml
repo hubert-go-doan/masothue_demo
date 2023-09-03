@@ -27,6 +27,9 @@ AllCops:
 Style/Encoding:
   Enabled: false
 
+Metrics/BlockLength:
+  Enabled: false
+
 Style/Documentation:
   Description: "Document classes and non-namespace modules."
   Enabled: false
