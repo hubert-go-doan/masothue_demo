@@ -8,4 +8,3 @@ RSpec.describe "RegistrationsControllers", type: :request do
     end
   end
 end
-200
