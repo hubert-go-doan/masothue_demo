@@ -24,8 +24,8 @@ To develop the TaxCodeInfo website, we utilize the following technologies:
 - Framework: Rails 7 (Have used Turbo and Stimulus), Bootstrap.
 - Database: PostgreSQL.
 - Gem: Devise, pundit, rspec, bullet, simple_form, pagy, rubocop...
-## DB Diagram
-![image](https://github.com/hubert-go-doan/masothue_demo/assets/137854325/1d17d5d8-7715-4be8-a472-df5249fc4bf0)
+## DB Diagram [Use tool Mermaid]
+![image](https://github.com/hubert-go-doan/masothue_demo/assets/137854325/08b3ef90-df56-487e-879b-60d3af2251a6)
 
 ## Setup environment
 - Installing Ruby (version: 3.2.2)
