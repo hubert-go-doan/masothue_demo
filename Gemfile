@@ -37,6 +37,8 @@ gem 'devise'
 
 gem 'pundit'
 
+gem 'rollbar'
+
 gem 'rubocop'
 
 gem 'rubocop-rails'
