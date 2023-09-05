@@ -12,6 +12,10 @@ class Person < ApplicationRecord
   validates :phone_number, numericality: { only_integer: true }
   validate :presence_of_foreign_keys
 
+  after_create_commit -> { broadcast_prepend_to "people", partial: "admin/people/person", locals: { person: self }, target: "people" }
+  after_update_commit -> { broadcast_replace_to "people", partial: "admin/people/person" }
+  after_destroy_commit -> { broadcast_remove_to "people" }
+
   private
 
   def presence_of_foreign_keys

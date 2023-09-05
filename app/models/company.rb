@@ -12,6 +12,10 @@ class Company < ApplicationRecord
   validates :phone_number, numericality: { only_integer: true }
   validate :presence_of_foreign_keys
 
+  after_create_commit -> { broadcast_prepend_to "companies", partial: "admin/companies/company", locals: { company: self }, target: "companies" }
+  after_update_commit -> { broadcast_replace_to "companies", partial: "admin/companies/company" }
+  after_destroy_commit -> { broadcast_remove_to "companies" }
+
   private
 
   def presence_of_foreign_keys
