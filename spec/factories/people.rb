@@ -11,10 +11,5 @@ FactoryBot.define do
     association :ward
     association :company_type
     association :status
-    city_id { city.id }
-    district_id { district.id }
-    ward_id { ward.id }
-    company_type_id { company_type.id }
-    status_id { status.id }
   end
 end
