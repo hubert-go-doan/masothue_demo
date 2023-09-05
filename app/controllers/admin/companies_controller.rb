@@ -8,7 +8,14 @@ class Admin::CompaniesController < ApplicationController
   def search
     query = params[:q]&.strip&.downcase
     @companies = []
-    @companies = Company.where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%").joins(:represent, :tax_code).includes(:tax_code, :represent, :business_area, :status, :company_type, :city, :district, :ward) if query.present?
+
+    if query.present?
+      @companies = Company
+                   .left_joins(:tax_code, :represent)
+                   .includes(:tax_code, :represent, :city, :district, :ward)
+                   .where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+    end
+
     @pagy, @companies = pagy_array(@companies, items: 10)
     if @companies.blank?
       render 'no_result'

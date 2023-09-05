@@ -7,7 +7,7 @@ class Admin::BusinessAreasController < ApplicationController
     query = params[:q]&.strip&.downcase
     @pagy, @business_areas = pagy_array([])
 
-    @business_areas = BusinessArea.where("business_areas.name LIKE ? ", "%#{query}%") if query.present?
+    @business_areas = BusinessArea.where("business_areas.name ILIKE ? ", "%#{query}%") if query.present?
 
     if @business_areas.blank?
       render 'no_result'
