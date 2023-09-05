@@ -4,7 +4,7 @@
 "This is a user-friendly, fast tax code lookup platform. Our user-friendly application is designed to provide you with quick and efficient access to both personal and business tax information. With taxcodeinfo, you can search for tax identification numbers quickly and conveniently, ensuring a smooth and seamless experience for all your tax-related needs."
 ## Description
 
-"My application will have the following permissions:
+My application will have the following permissions:
 
 System Administrator: This is the person who can log in to the system and perform the following operations on the system:
 
