@@ -77,6 +77,7 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'dotenv-rails'
 end
 
 group :development do

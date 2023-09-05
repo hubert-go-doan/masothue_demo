@@ -13,7 +13,8 @@ class CitiesController < ApplicationController
                        ])
     @districts = @city.districts
     @pagy, @companies = pagy(@city.companies.order(date_start: :desc).includes(:tax_code, :represent, :district, :ward))
-  rescue ActiveRecord::RecordNotFound
+  rescue ActiveRecord::RecordNotFound => e
+    Rollbar.error(e)
     redirect_to cities_path
   end
 
