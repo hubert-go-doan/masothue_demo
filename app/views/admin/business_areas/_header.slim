@@ -1,8 +1,8 @@
 .add-style
   = link_to admin_business_areas_path, class: 'cursor-pointer text-dark' do
     h3 
+      strong.text-danger Business Area 
       | Management 
-      strong.text-danger Business Area
 
   = form_tag search_business_are_admin_business_areas_path, method: :get, class: 'd-flex business-area-search', role: 'search' do
     = text_field_tag :q, params[:q], class: 'form-control me-2', type: 'search', placeholder: 'Search...', aria_label: 'Search'

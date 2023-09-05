@@ -37,7 +37,7 @@ class MainController < ApplicationController
 
   def info_detail
     @new_companies = Company.where("date_start >= ?", 20.days.ago).order(date_start: :desc).includes(:represent, :tax_code, :city, :district, :ward)
-    @new_persons = Person.where("date_start >= ?", 20.days.ago).order(date_start: :desc)
+    @new_persons = Person.where("date_start >= ?", 20.days.ago).order(date_start: :desc).includes(:tax_code, :city, :district, :ward)
     @pagy, @new_entity = pagy_array(@new_companies + @new_persons)
 
     type = params[:type]

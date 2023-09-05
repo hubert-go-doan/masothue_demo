@@ -1,8 +1,8 @@
 .add-style
   = link_to admin_tax_codes_path, class: 'cursor-pointer text-dark' do
     h3 
-      | Management 
-      strong.text-danger Tax Code
+      strong.text-danger Tax Code 
+      | Management
 
   = form_tag search_tax_code_admin_tax_codes_path, method: :get, class: 'd-flex style-search', role: 'search' do
     = text_field_tag :q, params[:q], class: 'form-control me-2', type: 'search', placeholder: 'Search Tax Code...', aria_label: 'Search'
