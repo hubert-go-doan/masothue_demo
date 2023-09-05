@@ -17,7 +17,6 @@ class MainController < ApplicationController
                         .where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
       person_results = Person
                        .left_joins(:tax_code)
-                       .includes(:tax_code, :city, :district, :ward)
                        .where("LOWER(people.name) LIKE ? OR LOWER(people.cmnd) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
 
       @results = company_results + person_results
