@@ -19,11 +19,12 @@
       
       .row.mb-3
         .col 
-          = f.input :city_id, required: true, prompt: "City", label: "City", collection: @city_list, input_html: { id: "city-select", data: { controller: "dropdown", action: "change->dropdown#updateDistricts", "dropdown-target": "citySelect" } }
+          = f.input :city_id, required: true, prompt: "City", label: "City", collection: @city_list, input_html: { id: "city-select", data: { controller: "dropdown"} }
         .col 
-          = f.input :district_id, required: true, prompt: "District", label: "District", collection: [], input_html: { id: "district-select", data: { controller: "dropdown", action: "change->dropdown#updateWards", "dropdown-target": "districtSelect" } }
+          = f.input :district_id, required: true, prompt: "District", label: "District", collection: [], input_html: { id: "district-select", data: { controller: "dropdown"} }
         .col 
-          = f.input :ward_id, required: true, prompt: "Ward", label: "Ward", collection: [], input_html: {id: "ward-select", data: { "dropdown-target": "wardSelect" } }
+          = f.input :ward_id, required: true, prompt: "Ward", label: "Ward", collection: [], input_html: {id: "ward-select" }
+
 
       .row.mb-3
         .col 

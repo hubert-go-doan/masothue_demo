@@ -72,8 +72,7 @@ Style/SymbolArray:
   Enabled: false
 
 Style/StringLiterals:
-  EnforcedStyle: double_quotes
-  Enabled: false
+  EnforcedStyle: single_quotes
 
 Style/RedundantPercentQ:
   Enabled: false

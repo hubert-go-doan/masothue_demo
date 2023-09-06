@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe TaxCode, type: :model do
-  describe "associations" do
+  describe 'associations' do
     it { should belong_to(:taxable) }
   end
-  describe "validations" do
+  describe 'validations' do
     let(:person) { build_stubbed(:person) }
 
     subject { build(:tax_code, taxable: person) }

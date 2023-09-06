@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "CitiesControllers", type: :request do
+RSpec.describe 'CitiesControllers', type: :request do
   let(:city) { create(:city) }
   let(:district) { create(:district, city:) }
   let(:ward) { create(:ward, district:) }

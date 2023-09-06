@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Person, type: :model do
-  describe "associations" do
+  describe 'associations' do
     it { should belong_to(:city) }
     it { should belong_to(:district) }
     it { should belong_to(:ward) }
@@ -10,7 +10,7 @@ RSpec.describe Person, type: :model do
     it { should have_one(:tax_code).dependent(:destroy) }
   end
 
-  describe "validations" do
+  describe 'validations' do
     let(:city) { create(:city) }
     let(:district) { create(:district, city:) }
     let(:ward) { create(:ward, district:) }

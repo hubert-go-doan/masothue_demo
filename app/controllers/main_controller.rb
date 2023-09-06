@@ -36,8 +36,8 @@ class MainController < ApplicationController
   end
 
   def info_detail
-    @new_companies = Company.where("date_start >= ?", 20.days.ago).order(date_start: :desc).includes(:represent, :tax_code, :city, :district, :ward)
-    @new_persons = Person.where("date_start >= ?", 20.days.ago).order(date_start: :desc).includes(:tax_code, :city, :district, :ward)
+    @new_companies = Company.where('date_start >= ?', 20.days.ago).order(date_start: :desc).includes(:represent, :tax_code, :city, :district, :ward)
+    @new_persons = Person.where('date_start >= ?', 20.days.ago).order(date_start: :desc).includes(:tax_code, :city, :district, :ward)
     @pagy, @new_entity = pagy_array(@new_companies + @new_persons)
 
     type = params[:type]
@@ -46,9 +46,9 @@ class MainController < ApplicationController
     case type
     when 'company'
       @entity = Company.find(id)
-      @related_companies_ward = Company.where(city_id: @entity.city_id, district_id: @entity.district_id, ward_id: @entity.ward_id).includes(:tax_code, :represent, :city, :district, :ward).order("RANDOM()").limit(5)
-      @related_companies_district = Company.where(city_id: @entity.city_id, district_id: @entity.district_id).includes(:tax_code, :represent, :city, :district, :ward).order("RANDOM()").limit(5)
-      @related_companies_city = Company.where(city_id: @entity.city_id).includes(:tax_code, :represent, :city, :district, :ward).order("RANDOM()").limit(5)
+      @related_companies_ward = Company.where(city_id: @entity.city_id, district_id: @entity.district_id, ward_id: @entity.ward_id).includes(:tax_code, :represent, :city, :district, :ward).order('RANDOM()').limit(5)
+      @related_companies_district = Company.where(city_id: @entity.city_id, district_id: @entity.district_id).includes(:tax_code, :represent, :city, :district, :ward).order('RANDOM()').limit(5)
+      @related_companies_city = Company.where(city_id: @entity.city_id).includes(:tax_code, :represent, :city, :district, :ward).order('RANDOM()').limit(5)
 
       @related_wards = Ward.where(district_id: @entity.district_id)
 

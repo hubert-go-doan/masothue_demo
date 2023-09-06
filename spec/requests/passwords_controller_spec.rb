@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "PasswordsControllers", type: :request do
+RSpec.describe 'PasswordsControllers', type: :request do
   describe 'GET #new' do
     it 'returns a success response' do
       get new_user_password_path

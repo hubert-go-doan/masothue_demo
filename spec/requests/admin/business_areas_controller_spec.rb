@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Admin::BusinessAreasControllers", type: :request do
+RSpec.describe 'Admin::BusinessAreasControllers', type: :request do
   let(:admin_user) { create(:user) }
   let(:business_area) { create(:business_area) }
 

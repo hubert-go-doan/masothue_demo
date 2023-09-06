@@ -43,7 +43,7 @@ class Admin::CompaniesController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.update(
-          dom_id(@company), partial: "form", locals: { company: @company }
+          dom_id(@company), partial: 'form', locals: { company: @company }
         )
       end
       format.html
@@ -56,7 +56,7 @@ class Admin::CompaniesController < ApplicationController
     if @company.save
       respond_to do |format|
         format.html { redirect_to admin_companies_path, notice: 'Company was successfully created!' }
-        format.turbo_stream { flash.now[:notice] = "Company was successfully created!" }
+        format.turbo_stream { flash.now[:notice] = 'Company was successfully created!' }
       end
     else
       respond_to do |format|
@@ -74,7 +74,7 @@ class Admin::CompaniesController < ApplicationController
     if @company.update(company_params)
       respond_to do |format|
         format.html { redirect_to admin_companies_path, notice: 'Company was successfully updated!' }
-        format.turbo_stream { flash.now[:notice] = "Company was successfully updated!" }
+        format.turbo_stream { flash.now[:notice] = 'Company was successfully updated!' }
       end
     else
       respond_to do |format|
@@ -88,7 +88,7 @@ class Admin::CompaniesController < ApplicationController
     @company.destroy
     respond_to do |format|
       format.html { redirect_to admin_companies_path, status: :see_other, notice: 'Company was successfully deleted!' }
-      format.turbo_stream { flash.now[:notice] = "Company was successfully deleted!" }
+      format.turbo_stream { flash.now[:notice] = 'Company was successfully deleted!' }
     end
   end
 

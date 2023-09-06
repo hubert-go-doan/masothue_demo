@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "MainControllers", type: :request do
+RSpec.describe 'MainControllers', type: :request do
   describe 'GET #home' do
     it 'returns a success response' do
       get root_path

@@ -1,55 +1,75 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["citySelect", "districtSelect", "wardSelect"];
-
   connect() {
-    console.log("Connected!");
+    this.disableSelectFields();
   }
 
-  updateDistricts() {
-    const selectedCityId = this.citySelectTarget.value;
-    console.log("selectedCityId: ", selectedCityId);
+  disableSelectFields() {
+    const citySelect = document.getElementById("city-select");
+    const districtSelect = document.getElementById("district-select");
+    const wardSelect = document.getElementById("ward-select");
 
-    if (selectedCityId) {
-      fetch(`/admin/districts_by_city?city_id=${selectedCityId}`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("data!", data);
-          this.districtSelectTarget.innerHTML = '<option value="">Chọn quận</option>';
-          this.wardSelectTarget.innerHTML = '<option value="">Chọn phường</option>';
+    districtSelect.disabled = true;
+    wardSelect.disabled = true;
 
-          data.forEach((district) => {
-            this.districtSelectTarget.insertAdjacentHTML(
-              "beforeend",
-              `<option value="${district.id}">${district.name}</option>`
-            );
+    citySelect.addEventListener("change", () => {
+      const selectedCityId = citySelect.value;
+
+      if (selectedCityId) {
+        fetch(`/admin/districts_by_city?city_id=${selectedCityId}`)
+          .then((response) => response.json())
+          .then((data) => {
+            districtSelect.innerHTML = '<option value="">Chọn quận</option>';
+            wardSelect.innerHTML = '<option value="">Chọn phường</option>';
+
+            data.forEach((district) => {
+              districtSelect.insertAdjacentHTML(
+                "beforeend",
+                `<option value="${district.id}">${district.name}</option>`
+              );
+            });
+
+            districtSelect.disabled = false;
+          })
+          .catch((error) => {
+            console.error(error);
           });
-        });
-    } else {
-      this.districtSelectTarget.innerHTML = '<option value="">Chọn quận</option>';
-      this.wardSelectTarget.innerHTML = '<option value="">Chọn phường</option>';
-    }
-  }
+      } 
+      else {
+        districtSelect.innerHTML = '<option value="">Chọn quận</option>';
+        wardSelect.innerHTML = '<option value="">Chọn phường</option>';
+        districtSelect.disabled = true;
+        wardSelect.disabled = true;
+      }
+    });
 
-  updateWards() {
-    const selectedDistrictId = this.districtSelectTarget.value;
+    districtSelect.addEventListener("change", () => {
+      const selectedDistrictId = districtSelect.value;
 
-    if (selectedDistrictId) {
-      fetch(`/admin/wards_by_district?district_id=${selectedDistrictId}`)
-        .then((response) => response.json())
-        .then((data) => {
-          this.wardSelectTarget.innerHTML = '<option value="">Chọn phường</option>';
+      if (selectedDistrictId) {
+        fetch(`/admin/wards_by_district?district_id=${selectedDistrictId}`)
+          .then((response) => response.json())
+          .then((data) => {
+            wardSelect.innerHTML = '<option value="">Chọn phường</option>';
 
-          data.forEach((ward) => {
-            this.wardSelectTarget.insertAdjacentHTML(
-              "beforeend",
-              `<option value="${ward.id}">${ward.name}</option>`
-            );
+            data.forEach((ward) => {
+              wardSelect.insertAdjacentHTML(
+                "beforeend",
+                `<option value="${ward.id}">${ward.name}</option>`
+              );
+            });
+
+            wardSelect.disabled = false;
+          })
+          .catch((error) => {
+            console.error(error);
           });
-        });
-    } else {
-      this.wardSelectTarget.innerHTML = '<option value="">Chọn phường</option>';
-    }
+      } 
+      else {
+        wardSelect.innerHTML = '<option value="">Chọn phường</option>';
+        wardSelect.disabled = true;
+      }
+    });
   }
 }

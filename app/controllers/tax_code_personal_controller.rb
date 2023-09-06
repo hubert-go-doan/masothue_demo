@@ -6,7 +6,7 @@ class TaxCodePersonalController < ApplicationController
   def search
     query = params[:q]
 
-    @result = Person.where("people.cmnd LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%").joins(:tax_code) if query.present?
+    @result = Person.where('people.cmnd LIKE ? OR tax_codes.code LIKE ?', "%#{query}%", "%#{query}%").joins(:tax_code) if query.present?
     if @result.blank?
       render 'no_result'
     else

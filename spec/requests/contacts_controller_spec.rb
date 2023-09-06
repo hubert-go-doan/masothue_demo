@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "ContactsControllers", type: :request do
+RSpec.describe 'ContactsControllers', type: :request do
   describe 'GET #new' do
     it 'returns a success response' do
       get contacts_path

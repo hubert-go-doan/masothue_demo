@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'main#home'
-  match '/404', to: "errors#not_found", via: :all, as: :not_found
-  match '/500', to: "errors#internal_server_error", via: :all, as: :internal_server_error
+  match '/404', to: 'errors#not_found', via: :all, as: :not_found
+  match '/500', to: 'errors#internal_server_error', via: :all, as: :internal_server_error
   get 'info_detail/:id/:type', to: 'main#info_detail', as: :info_detail
   get 'cities/district/:id', to: 'cities#show_district', as: 'district'
   get 'cities/ward/:id', to: 'cities#show_ward', as: 'ward'

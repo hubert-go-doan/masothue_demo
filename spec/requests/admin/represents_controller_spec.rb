@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Admin::RepresentsControllers", type: :request do
+RSpec.describe 'Admin::RepresentsControllers', type: :request do
   let(:admin_user) { create(:user) }
 
   before do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Admin::BaseControllers", type: :request do
+RSpec.describe 'Admin::BaseControllers', type: :request do
   let(:admin_user) { create(:user) }
 
   context 'when user is authenticated' do
