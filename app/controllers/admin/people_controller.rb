@@ -11,9 +11,9 @@ class Admin::PeopleController < ApplicationController
 
     if query.present?
       @persons = Person
-                 .left_joins(:tax_code)
-                 .includes(:tax_code, :city, :district, :ward)
-                 .where("LOWER(people.name) LIKE ? OR LOWER(people.cmnd) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+        .left_joins(:tax_code)
+        .includes(:tax_code, :city, :district, :ward)
+        .where("LOWER(people.name) LIKE ? OR LOWER(people.cmnd) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
     end
     @pagy, @persons = pagy_array(@persons, items: 10)
     if @persons.blank?

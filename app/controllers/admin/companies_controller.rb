@@ -11,9 +11,9 @@ class Admin::CompaniesController < ApplicationController
 
     if query.present?
       @companies = Company
-                   .left_joins(:tax_code, :represent)
-                   .includes(:tax_code, :represent, :city, :district, :ward)
-                   .where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+        .left_joins(:tax_code, :represent)
+        .includes(:tax_code, :represent, :city, :district, :ward)
+        .where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
     end
 
     @pagy, @companies = pagy_array(@companies, items: 10)
