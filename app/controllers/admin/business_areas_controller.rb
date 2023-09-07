@@ -16,7 +16,7 @@ class Admin::BusinessAreasController < Admin::BaseController
 
   def index
     authorize BusinessArea
-    @pagy, @business_areas = pagy(BusinessArea.all, items: 15)
+    @pagy, @business_areas = pagy(BusinessArea.order(created_at: :asc), items: 15)
   end
 
   def new

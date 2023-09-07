@@ -2,9 +2,15 @@
   = turbo_frame_tag 'new_business_area' do 
     h3.style-form
       | New Business Area
-    = render 'form', business_area: @business_area
+    .container-form.rounded-4.shadow.bg-body.rounded.border-1
+      .style-form-new
+        = simple_form_for @business_area, url: admin_business_areas_path(@business_area), method: :post do |f|
+          = render 'form', business_area: @business_area, f:f
 
   = turbo_frame_tag 'new_company' do 
     h3.style-form
       | New Business Area
-    = render 'form', business_area: @business_area
+    .container-form.rounded-4.shadow.bg-body.rounded.border-1
+      .style-form-new
+        = simple_form_for @business_area, url: admin_business_areas_path(@business_area), method: :post do |f|
+          = render 'form', business_area: @business_area, f:f

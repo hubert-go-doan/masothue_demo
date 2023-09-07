@@ -34,7 +34,8 @@ class Admin::PeopleController < Admin::BaseController
     persons = Person.includes(:tax_code, :ward, :district, :city).all
     persons = persons.where(city_id: params[:city_id]) if params[:city_id].present?
     persons = persons.where(status_id: params[:status_id]) if params[:status_id].present?
-    @pagy, @persons = pagy(persons, items: 10)
+    @persons = persons.order(created_at: :asc)
+    @pagy, @persons = pagy(@persons, items: 10)
   end
 
   def new

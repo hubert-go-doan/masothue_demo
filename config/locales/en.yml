@@ -30,6 +30,4 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  activerecord:
-    errors:
-      format: '%{attribute} %{message}'
+  hello: "Hello world"

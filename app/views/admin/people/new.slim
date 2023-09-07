@@ -1,6 +1,9 @@
 .body-content
   = turbo_frame_tag 'new_person' do 
     h3.style-form
-      | New Person 
-    = render partial: 'form', locals: { person: @person }
+      | New Person
+    .container-form.rounded-4.shadow.bg-body.rounded.border-1
+      .style-form-new
+        = simple_form_for @person, url: admin_people_path(@person), method: :post do |f|
+          = render 'form', person: @person, f:f
 

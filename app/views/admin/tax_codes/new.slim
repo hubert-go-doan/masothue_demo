@@ -1,4 +1,7 @@
 .body-content
   h3.taxcode-title
     | New Tax Code 
-  = render partial: 'form', locals: {tax_code: @tax_code}
+  .taxcode-form.rounded-4.shadow.bg-body.rounded.border-1
+    .style-form-new
+      = simple_form_for @tax_code, url: admin_tax_codes_path(@tax_code), method: :post, html: { id: 'tax-code-form' } do |f|
+        = render 'form',  tax_code: @tax_code, f:f

@@ -29,7 +29,8 @@ class Admin::CompaniesController < Admin::BaseController
     companies = Company.includes(:tax_code, :represent, :city, :district, :ward).all
     companies = companies.where(city_id: params[:city_id]) if params[:city_id].present?
     companies = companies.where(status_id: params[:status_id]) if params[:status_id].present?
-    @pagy, @companies = pagy(companies, items: 10)
+    @companies = companies.order(created_at: :asc)
+    @pagy, @companies = pagy(@companies, items: 10)
   end
 
   def show
