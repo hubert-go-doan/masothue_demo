@@ -1,5 +1,8 @@
-# TAX CODE INFO
+# Project Information
+## Name: TaxCodeInfo
 "Quickly look up personal and business information"
+
+Link project: https://taxcode.onrender.com/
 ## Introduction
 "This is a user-friendly, fast tax code lookup platform. Our user-friendly application is designed to provide you with quick and efficient access to both personal and business tax information. With taxcodeinfo, you can search for tax identification numbers quickly and conveniently, ensuring a smooth and seamless experience for all your tax-related needs."
 ## Description
@@ -27,11 +30,11 @@ To develop the TaxCodeInfo website, we utilize the following technologies:
 ## DB Diagram [Use tool Mermaid]
 ![image](https://github.com/hubert-go-doan/masothue_demo/assets/137854325/08b3ef90-df56-487e-879b-60d3af2251a6)
 
-## Setup environment
-- Installing Ruby (version: 3.2.2)
-- Installing Rails (version: 7.0.6)
-- Installing PostgreSQL
-## Usage
+# General Information
+- Ruby (version: 3.2.2)
+- Rails (version: 7.0.6)
+- PostgreSQL
+# Installation  
 Step 1. Clone the repo
 ```sh
 git clone git@github.com:hubert-go-doan/masothue_demo.git
@@ -57,9 +60,17 @@ Step 6: Run `rails db:seed`
 
 Step 7: Run `rails server`
 
-## Contact
+# Deploy  
+- Use [render.com](https://render.com/)
+- Deployment `main` branch
+- When pushing code to the main branch, render deploy that branch (manual or automatic setup)
+- Docs: https://render.com/docs/deploy-rails
+# Rspec  
+- To run unit tests, run `rspec` in the terminal
+- Install gem `simplecov` to check converage
+
+# Contact
 - Hubert Doan: hubert.doan.goldenowl@gmail.com
-- Project Link: https://taxcode.onrender.com/
 
 
 
