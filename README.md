@@ -28,6 +28,11 @@ For guest users: They can use the application without logging into the system. U
 ## DB Diagram [Use tool Mermaid]
 ![image](https://github.com/hubert-go-doan/masothue_demo/assets/137854325/08b3ef90-df56-487e-879b-60d3af2251a6)
 
+# General Information
+- Ruby (version: 3.2.2)
+- Rails (version: 7.0.6)
+- PostgreSQL
+
 # Installation  
 Step 1. Clone the repo
 ```sh
@@ -64,3 +69,4 @@ Step 7: Run `rails server`
 - After running your tests, open `coverage/index.html` in the browser of your choice.
 # Contact
 - Hubert Doan: hubert.doan.goldenowl@gmail.com
+

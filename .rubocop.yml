@@ -23,26 +23,39 @@ AllCops:
     - node_modules/**/*
     - app/queries/**/*
     - app/services/data_crawler_service.rb
+Bundler/OrderedGems:
+  Enabled: false
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/SpaceInsidePercentLiteralDelimiters:
+  Enabled: false
+
+Layout/SpaceAroundOperators:
+  EnforcedStyleForExponentOperator: space
+
+Layout/LineLength:
+  Enabled: false
+
+Lint/MissingSuper:
+  Exclude:
+    - "app/services/**/*"
 
 Style/Encoding:
   Enabled: false
 
 Style/Documentation:
-  Description: "Document classes and non-namespace modules."
   Enabled: false
 
 Style/InlineComment:
   Description: "Avoid inline comments."
   Enabled: false
 
-Layout/LineLength:
-  Description: "Limit lines to 100 characters. (Default is 80)"
-  Enabled: false
-
 Style/ClassAndModuleChildren:
-  Enabled: false
-
-Metrics/AbcSize:
   Enabled: false
 
 Security/Open:
@@ -50,27 +63,27 @@ Security/Open:
     - "app/services/data_crawler_service.rb"
 
 Style/FrozenStringLiteralComment:
-  Description: To help transition from Ruby 2.3.0 to Ruby 3.0.
   Enabled: false
 
 Style/WordArray:
-  Description: "Use %w or %W for arrays of words."
   Enabled: false
 
-# Defaults all strings to double quotes. Less performant, but
-# nicer for consistency, and for adding interpolation later.
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
+Style/SymbolArray:
   Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
 
 Style/RedundantPercentQ:
   Enabled: false
 
-Lint/MissingSuper:
-  Exclude:
-    - "app/services/**/*"
+Metrics/AbcSize:
+  Enabled: false
 
 Metrics/ClassLength:
+  Max: 300
+
+Metrics/ModuleLength:
   Max: 300
 
 Metrics/CyclomaticComplexity:
@@ -78,6 +91,14 @@ Metrics/CyclomaticComplexity:
 
 Metrics/MethodLength:
   Enabled: false
+
+Metrics/BlockNesting:
+  Max: 4
+
+Metrics/BlockLength:
+  Max: 65
+  Exclude:
+    - "spec/**/*"
 
 Metrics/PerceivedComplexity:
   Enabled: false
@@ -91,23 +112,52 @@ Style/Lambda:
 Style/FormatStringToken:
   Enabled: false
 
+Style/MutableConstant:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: false
+
+Style/NumericLiterals:
+  MinDigits: 7
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/Semicolon:
+  AllowAsExpressionSeparator: true
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
 Naming/AccessorMethodName:
   Enabled: false
 
 Naming/PredicateName:
   Enabled: false
-# Prettier hashes.
+
+Style/AndOr:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
 Layout/HashAlignment:
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
 
-# No auto-correct for unused block arguments,
-# but will still warn.
 Lint/UnusedBlockArgument:
   AutoCorrect: false
 
-# No auto-correct for unused method arguments,
-# but will still warn.
 Lint/UnusedMethodArgument:
   AutoCorrect: false
 

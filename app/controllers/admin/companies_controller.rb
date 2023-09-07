@@ -8,7 +8,14 @@ class Admin::CompaniesController < ApplicationController
   def search
     query = params[:q]&.strip&.downcase
     @companies = []
-    @companies = Company.where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%").joins(:represent, :tax_code).includes(:tax_code, :represent, :business_area, :status, :company_type, :city, :district, :ward) if query.present?
+
+    if query.present?
+      @companies = Company
+        .left_joins(:tax_code, :represent)
+        .includes(:tax_code, :represent, :city, :district, :ward)
+        .where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+    end
+
     @pagy, @companies = pagy_array(@companies, items: 10)
     if @companies.blank?
       render 'no_result'
@@ -36,7 +43,7 @@ class Admin::CompaniesController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.update(
-          dom_id(@company), partial: "form", locals: { company: @company }
+          dom_id(@company), partial: 'form', locals: { company: @company }
         )
       end
       format.html
@@ -49,7 +56,7 @@ class Admin::CompaniesController < ApplicationController
     if @company.save
       respond_to do |format|
         format.html { redirect_to admin_companies_path, notice: 'Company was successfully created!' }
-        format.turbo_stream { flash.now[:notice] = "Company was successfully created!" }
+        format.turbo_stream { flash.now[:notice] = 'Company was successfully created!' }
       end
     else
       respond_to do |format|
@@ -67,7 +74,7 @@ class Admin::CompaniesController < ApplicationController
     if @company.update(company_params)
       respond_to do |format|
         format.html { redirect_to admin_companies_path, notice: 'Company was successfully updated!' }
-        format.turbo_stream { flash.now[:notice] = "Company was successfully updated!" }
+        format.turbo_stream { flash.now[:notice] = 'Company was successfully updated!' }
       end
     else
       respond_to do |format|
@@ -81,7 +88,7 @@ class Admin::CompaniesController < ApplicationController
     @company.destroy
     respond_to do |format|
       format.html { redirect_to admin_companies_path, status: :see_other, notice: 'Company was successfully deleted!' }
-      format.turbo_stream { flash.now[:notice] = "Company was successfully deleted!" }
+      format.turbo_stream { flash.now[:notice] = 'Company was successfully deleted!' }
     end
   end
 

@@ -8,7 +8,13 @@ class Admin::PeopleController < ApplicationController
   def search
     query = params[:q]&.strip&.downcase
     @persons = []
-    @persons = Person.where("LOWER(people.cmnd) LIKE ? OR tax_codes.code LIKE ?", "%#{query}%", "%#{query}%").joins(:tax_code) if query.present?
+
+    if query.present?
+      @persons = Person
+        .left_joins(:tax_code)
+        .includes(:tax_code, :city, :district, :ward)
+        .where("LOWER(people.name) LIKE ? OR LOWER(people.cmnd) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+    end
     @pagy, @persons = pagy_array(@persons, items: 10)
     if @persons.blank?
       render 'no_result'
@@ -36,7 +42,7 @@ class Admin::PeopleController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.update(
-          dom_id(@person), partial: "form", locals: { person: @person }
+          dom_id(@person), partial: 'form', locals: { person: @person }
         )
       end
       format.html
@@ -49,7 +55,7 @@ class Admin::PeopleController < ApplicationController
     if @person.save
       respond_to do |format|
         format.html { redirect_to admin_people_path, notice: 'Person was successfully created!' }
-        format.turbo_stream { flash.now[:notice] = "Person was successfully created!" }
+        format.turbo_stream { flash.now[:notice] = 'Person was successfully created!' }
       end
     else
       respond_to do |format|
@@ -67,7 +73,7 @@ class Admin::PeopleController < ApplicationController
     if @person.update(person_params)
       respond_to do |format|
         format.html { redirect_to admin_people_path, notice: 'Person was successfully updated!' }
-        format.turbo_stream { flash.now[:notice] = "Person was successfully updated!" }
+        format.turbo_stream { flash.now[:notice] = 'Person was successfully updated!' }
       end
     else
       respond_to do |format|
@@ -81,7 +87,7 @@ class Admin::PeopleController < ApplicationController
     @person.destroy
     respond_to do |format|
       format.html { redirect_to admin_people_path, status: :see_other, notice: 'Person was successfully deleted!' }
-      format.turbo_stream { flash.now[:notice] = "Person was successfully deleted!" }
+      format.turbo_stream { flash.now[:notice] = 'Person was successfully deleted!' }
     end
   end
 

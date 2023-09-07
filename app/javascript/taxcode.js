@@ -1,3 +1,5 @@
+import * as Routes from './routes';
+
 $(document).on('turbo:load', () => {
   const taxableIdField = $('#tax-code-taxable-id');
   const originalOptions = taxableIdField.html();
@@ -7,9 +9,17 @@ $(document).on('turbo:load', () => {
     const selectedType = target.value;
     if (selectedType === '' || selectedType === 'Select Type') {
       taxableIdField.html(originalOptions).val('').prop('disabled', true);
-    } else {
+    } 
+    else {
+      let getTaxCodesUrl;
+      if (selectedType === 'Company') {
+        getTaxCodesUrl = Routes.company_options_admin_tax_codes_path();
+      } 
+      else if (selectedType === 'Person') {
+        getTaxCodesUrl = Routes.person_options_admin_tax_codes_path();
+      }
       $.ajax({
-        url: '/admin/tax_codes/' + selectedType.toLowerCase() + '_options',
+        url: getTaxCodesUrl,
         method: 'GET',
         dataType: 'json',
         success: (data) => {
@@ -17,7 +27,8 @@ $(document).on('turbo:load', () => {
 
           if (data.length === 0) {
             options = '<option value="">All have tax codes</option>';
-          } else {
+          } 
+          else {
             data.forEach((item) => {
               options += `<option value="${item.id}">#${item.id} - ${item.name}</option>`;
             });

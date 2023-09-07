@@ -12,7 +12,7 @@ class Admin::RepresentsController < ApplicationController
     if @represent.save
       respond_to do |format|
         format.html { redirect_to new_admin_company_path, notice: 'Create successfully represent' }
-        format.turbo_stream { flash.now[:notice] = "Create successfully represent" }
+        format.turbo_stream { flash.now[:notice] = 'Create successfully represent' }
       end
     else
       respond_to do |format|
