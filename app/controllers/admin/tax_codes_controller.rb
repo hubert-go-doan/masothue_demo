@@ -1,9 +1,7 @@
-class Admin::TaxCodesController < ApplicationController
-  layout 'admin_layout'
+class Admin::TaxCodesController < Admin::BaseController
+  before_action :fetch_taxable_types, only: %i[new create]
 
   OBJECT_TAXCODE = %w[Company Person].freeze
-
-  before_action :fetch_taxable_types, only: %i[new create]
 
   def search
     query = params[:q]&.strip&.downcase
@@ -64,6 +62,8 @@ class Admin::TaxCodesController < ApplicationController
     redirect_to admin_tax_codes_path, status: :see_other, notice: 'Tax Code was successfully deleted!'
   end
 
+  private
+
   def fetch_taxable_types
     @taxable_types = OBJECT_TAXCODE
   end
@@ -72,9 +72,11 @@ class Admin::TaxCodesController < ApplicationController
     render json: @taxable_objects
   end
 
-  private
-
   def taxcode_params
-    params.require(:tax_code).permit(:code, :taxable_type, :taxable_id)
+    params.require(:tax_code).permit(
+      :code,
+      :taxable_type,
+      :taxable_id
+    )
   end
 end

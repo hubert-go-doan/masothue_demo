@@ -1,6 +1,4 @@
-class Admin::ContactsController < ApplicationController
-  layout 'admin_layout'
-
+class Admin::ContactsController < Admin::BaseController
   def index
     authorize Contact
     @pagy, @contacts = pagy(Contact.all, items: 10)

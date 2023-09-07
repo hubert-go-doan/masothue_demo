@@ -17,18 +17,18 @@ class ContactsController < ApplicationController
 
   private
 
+  def prepare_breadcrumb_data
+    @breadcrumb_data = [
+      { name: 'Tra cứu mã số thuế', path: root_path },
+      { name: 'Liên hệ', path: contacts_path }
+    ]
+  end
+
   def contact_params
     params.require(:contact).permit(
       :name,
       :email,
       :content
     )
-  end
-
-  def prepare_breadcrumb_data
-    @breadcrumb_data = [
-      { name: 'Tra cứu mã số thuế', path: root_path },
-      { name: 'Liên hệ', path: contacts_path }
-    ]
   end
 end

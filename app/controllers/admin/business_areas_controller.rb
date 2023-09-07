@@ -1,6 +1,4 @@
-class Admin::BusinessAreasController < ApplicationController
-  layout 'admin_layout'
-
+class Admin::BusinessAreasController < Admin::BaseController
   before_action :prepare_business_area, only: %i[edit update destroy]
 
   def search
@@ -68,11 +66,11 @@ class Admin::BusinessAreasController < ApplicationController
     end
   end
 
+  private
+
   def prepare_business_area
     @business_area = BusinessArea.find(params[:id])
   end
-
-  private
 
   def business_area_params
     params.require(:business_area).permit(:name, :detail)

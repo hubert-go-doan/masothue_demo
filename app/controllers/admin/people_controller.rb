@@ -1,6 +1,4 @@
-class Admin::PeopleController < ApplicationController
-  layout 'admin_layout'
-
+class Admin::PeopleController < Admin::BaseController
   before_action :prepare_data, only: %i[new create edit update]
   before_action :prepare_person, only: %i[edit update destroy show]
   before_action :prepare_data_filter, only: %i[index search]
@@ -15,7 +13,9 @@ class Admin::PeopleController < ApplicationController
         .includes(:tax_code, :city, :district, :ward)
         .where("LOWER(people.name) LIKE ? OR LOWER(people.cmnd) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
     end
+
     @pagy, @persons = pagy_array(@persons, items: 10)
+
     if @persons.blank?
       render 'no_result'
     else
@@ -91,6 +91,8 @@ class Admin::PeopleController < ApplicationController
     end
   end
 
+  private
+
   def prepare_person
     @person = Person.find(params[:id])
   end
@@ -101,14 +103,24 @@ class Admin::PeopleController < ApplicationController
     @status_list = Status.pluck(:name, :id)
   end
 
-  private
-
-  def person_params
-    params.require(:person).permit(:name, :cmnd, :date_start, :phone_number, :managed_by, :address, :city_id, :district_id, :ward_id, :company_type_id, :status_id)
-  end
-
   def prepare_data_filter
     @cities = City.order(:id)
     @status_list = Status.pluck(:name, :id)
+  end
+
+  def person_params
+    params.require(:person).permit(
+      :name,
+      :cmnd,
+      :date_start,
+      :phone_number,
+      :managed_by,
+      :address,
+      :city_id,
+      :district_id,
+      :ward_id,
+      :company_type_id,
+      :status_id
+    )
   end
 end

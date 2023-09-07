@@ -1,6 +1,4 @@
-class Admin::CompaniesController < ApplicationController
-  layout 'admin_layout'
-
+class Admin::CompaniesController < Admin::BaseController
   before_action :prepare_data, only: %i[new create edit update]
   before_action :prepare_company, only: %i[edit update destroy show]
   before_action :prepare_data_filter, only: %i[index search]
@@ -17,6 +15,7 @@ class Admin::CompaniesController < ApplicationController
     end
 
     @pagy, @companies = pagy_array(@companies, items: 10)
+
     if @companies.blank?
       render 'no_result'
     else
@@ -92,6 +91,8 @@ class Admin::CompaniesController < ApplicationController
     end
   end
 
+  private
+
   def prepare_data
     @city_list = City.pluck(:name, :id)
     @represent_list = Represent.pluck(:name, :id)
@@ -108,8 +109,6 @@ class Admin::CompaniesController < ApplicationController
     @cities = City.order(:id)
     @status_list = Status.pluck(:name, :id)
   end
-
-  private
 
   def company_params
     params.require(:company).permit(
