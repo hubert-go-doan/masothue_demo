@@ -11,15 +11,15 @@ $(document).on('turbo:load', () => {
       taxableIdField.html(originalOptions).val('').prop('disabled', true);
     } 
     else {
-      let url;
+      let getTaxCodesUrl;
       if (selectedType === 'Company') {
-        url = Routes.company_options_admin_tax_codes_path();
+        getTaxCodesUrl = Routes.company_options_admin_tax_codes_path();
       } 
       else if (selectedType === 'Person') {
-        url = Routes.person_options_admin_tax_codes_path();
+        getTaxCodesUrl = Routes.person_options_admin_tax_codes_path();
       }
       $.ajax({
-        url: url,
+        url: getTaxCodesUrl,
         method: 'GET',
         dataType: 'json',
         success: (data) => {
