@@ -8,6 +8,5 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "taxcode"
 import "flash"
-import "dropdown_district_ward"
 
 // Turbo.session.drive = false

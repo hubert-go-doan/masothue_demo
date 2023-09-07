@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "BusinessAreasControllers", type: :request do
-  describe "GET #index" do
+RSpec.describe 'BusinessAreasControllers', type: :request do
+  describe 'GET #index' do
     it 'returns a success response' do
       get business_areas_path
       expect(response).to have_http_status(200)

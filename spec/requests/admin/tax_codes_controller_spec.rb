@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Admin::TaxCodesControllers", type: :request do
+RSpec.describe 'Admin::TaxCodesControllers', type: :request do
   let(:admin_user) { create(:user) }
   let(:tax_code) { create(:tax_code) }
 

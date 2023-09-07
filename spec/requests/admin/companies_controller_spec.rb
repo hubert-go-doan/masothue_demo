@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Admin::CompaniesControllers", type: :request do
+RSpec.describe 'Admin::CompaniesControllers', type: :request do
   let(:admin_user) { create(:user) }
 
   let(:city) { create(:city) }
@@ -52,11 +52,11 @@ RSpec.describe "Admin::CompaniesControllers", type: :request do
       let(:valid_params) do
         {
           company: {
-            name:             "ABC",
-            address:          "123 Hà Nội",
+            name:             'ABC',
+            address:          '123 Hà Nội',
             date_start:       Time.zone.today,
-            phone_number:     "0192726333",
-            managed_by:       "Chi cục thuế Quận 22",
+            phone_number:     '0192726333',
+            managed_by:       'Chi cục thuế Quận 22',
             city_id:          city,
             district_id:      district,
             ward_id:          ward,
@@ -77,11 +77,11 @@ RSpec.describe "Admin::CompaniesControllers", type: :request do
       let(:invalid_params) do
         {
           company: {
-            name:             "",
-            address:          "",
+            name:             '',
+            address:          '',
             date_start:       Time.zone.today,
-            phone_number:     "",
-            managed_by:       "Chi cục thuế Quận 22",
+            phone_number:     '',
+            managed_by:       'Chi cục thuế Quận 22',
             city_id:          city,
             district_id:      district,
             ward_id:          ward,

@@ -18,7 +18,7 @@ class Person < ApplicationRecord
     foreign_keys = %i[city_id district_id ward_id company_type_id status_id]
 
     foreign_keys.each do |foreign_key|
-      errors.add(foreign_key, "must be selected") if self[foreign_key].blank?
+      errors.add(foreign_key, 'must be selected') if self[foreign_key].blank?
     end
   end
 end

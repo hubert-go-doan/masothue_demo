@@ -9,7 +9,7 @@ class Admin::TaxCodesController < ApplicationController
     query = params[:q]&.strip&.downcase
     @pagy, @tax_codes = pagy_array([])
 
-    @tax_codes = TaxCode.where("tax_codes.code LIKE ? ", "%#{query}%").includes(taxable: %i[represent city district ward]) if query.present?
+    @tax_codes = TaxCode.where('tax_codes.code LIKE ? ', "%#{query}%").includes(taxable: %i[represent city district ward]) if query.present?
 
     if @tax_codes.blank?
       render 'no_result'

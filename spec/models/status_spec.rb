@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Status, type: :model do
-  describe "associations" do
+  describe 'associations' do
     it { should have_many(:companies).dependent(:nullify) }
     it { should have_many(:people).dependent(:nullify) }
   end

@@ -42,7 +42,7 @@ class Admin::PeopleController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.update(
-          dom_id(@person), partial: "form", locals: { person: @person }
+          dom_id(@person), partial: 'form', locals: { person: @person }
         )
       end
       format.html
@@ -55,7 +55,7 @@ class Admin::PeopleController < ApplicationController
     if @person.save
       respond_to do |format|
         format.html { redirect_to admin_people_path, notice: 'Person was successfully created!' }
-        format.turbo_stream { flash.now[:notice] = "Person was successfully created!" }
+        format.turbo_stream { flash.now[:notice] = 'Person was successfully created!' }
       end
     else
       respond_to do |format|
@@ -73,7 +73,7 @@ class Admin::PeopleController < ApplicationController
     if @person.update(person_params)
       respond_to do |format|
         format.html { redirect_to admin_people_path, notice: 'Person was successfully updated!' }
-        format.turbo_stream { flash.now[:notice] = "Person was successfully updated!" }
+        format.turbo_stream { flash.now[:notice] = 'Person was successfully updated!' }
       end
     else
       respond_to do |format|
@@ -87,7 +87,7 @@ class Admin::PeopleController < ApplicationController
     @person.destroy
     respond_to do |format|
       format.html { redirect_to admin_people_path, status: :see_other, notice: 'Person was successfully deleted!' }
-      format.turbo_stream { flash.now[:notice] = "Person was successfully deleted!" }
+      format.turbo_stream { flash.now[:notice] = 'Person was successfully deleted!' }
     end
   end
 
