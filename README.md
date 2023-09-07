@@ -20,20 +20,13 @@ System Administrator: This is the person who can log in to the system and perfor
 
 For guest users: They can use the application without logging into the system. Users can easily search for information about company and personal right on the interface, and they can perform actions such as list, searching, filtering..., and send feedback."
 
-## Technologies
-To develop the TaxCodeInfo website, we utilize the following technologies:
-
-- Programming language: Ruby, Javascript, SCSS.
-- Framework: Rails 7 (Have used Turbo and Stimulus), Bootstrap.
-- Database: PostgreSQL.
-- Gem: Devise, pundit, rspec, bullet, simple_form, pagy, rubocop...
-## DB Diagram [Use tool Mermaid]
-![image](https://github.com/hubert-go-doan/masothue_demo/assets/137854325/08b3ef90-df56-487e-879b-60d3af2251a6)
-
 # General Information
 - Ruby (version: 3.2.2)
 - Rails (version: 7.0.6)
 - PostgreSQL
+## DB Diagram [Use tool Mermaid]
+![image](https://github.com/hubert-go-doan/masothue_demo/assets/137854325/08b3ef90-df56-487e-879b-60d3af2251a6)
+
 # Installation  
 Step 1. Clone the repo
 ```sh
@@ -67,10 +60,7 @@ Step 7: Run `rails server`
 - Docs: https://render.com/docs/deploy-rails
 # Rspec  
 - To run unit tests, run `rspec` in the terminal
-- Install gem `simplecov` to check converage
-
+- After running your tests, open `coverage/index.html` in the browser of your choice.
 # Contact
 - Hubert Doan: hubert.doan.goldenowl@gmail.com
-
-
 
