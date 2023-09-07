@@ -41,6 +41,8 @@ gem 'rollbar'
 
 gem 'rubocop'
 
+gem 'js-routes'
+
 gem 'rubocop-rails'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]

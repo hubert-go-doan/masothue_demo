@@ -1,74 +1,69 @@
 import { Controller } from "@hotwired/stimulus"
+import * as Routes from '../routes';
 
 export default class extends Controller {
   connect() {
+    console.log('connect!');
     this.disableSelectFields();
   }
 
   disableSelectFields() {
-    const citySelect = document.getElementById("city-select");
-    const districtSelect = document.getElementById("district-select");
-    const wardSelect = document.getElementById("ward-select");
+    const citySelect = $('#city-select');
+    const districtSelect = $('#district-select');
+    const wardSelect = $('#ward-select');
+    districtSelect.prop('disabled', true);
+    wardSelect.prop('disabled', true);
 
-    districtSelect.disabled = true;
-    wardSelect.disabled = true;
-
-    citySelect.addEventListener("change", () => {
-      const selectedCityId = citySelect.value;
-
+    citySelect.on('change', () => {
+      const selectedCityId = citySelect.val();
+      
       if (selectedCityId) {
-        fetch(`/admin/districts_by_city?city_id=${selectedCityId}`)
-          .then((response) => response.json())
-          .then((data) => {
-            districtSelect.innerHTML = '<option value="">Chọn quận</option>';
-            wardSelect.innerHTML = '<option value="">Chọn phường</option>';
+        $.get(Routes.admin_districts_by_city_path({city_id: selectedCityId}))
+          .done((data) => {
+            console.log(data);
+            districtSelect.html('<option value="">Chọn quận</option>');
 
-            data.forEach((district) => {
-              districtSelect.insertAdjacentHTML(
-                "beforeend",
-                `<option value="${district.id}">${district.name}</option>`
-              );
+            wardSelect.html('<option value="">Chọn phường</option>');
+
+            $.each(data, (index, district) => {
+              districtSelect.append(`<option value="${district.id}">${district.name}</option>`);
             });
 
-            districtSelect.disabled = false;
+            districtSelect.prop('disabled', false);
           })
-          .catch((error) => {
+          .fail((error) => {
             console.error(error);
           });
       } 
       else {
-        districtSelect.innerHTML = '<option value="">Chọn quận</option>';
-        wardSelect.innerHTML = '<option value="">Chọn phường</option>';
-        districtSelect.disabled = true;
-        wardSelect.disabled = true;
+        districtSelect.html('<option value="">Chọn quận</option>');
+        wardSelect.html('<option value="">Chọn phường</option>');
+        districtSelect.prop('disabled', true);
+        wardSelect.prop('disabled', true);
       }
     });
 
-    districtSelect.addEventListener("change", () => {
-      const selectedDistrictId = districtSelect.value;
+    districtSelect.on('change', () => {
+      const selectedDistrictId = districtSelect.val();
 
       if (selectedDistrictId) {
-        fetch(`/admin/wards_by_district?district_id=${selectedDistrictId}`)
-          .then((response) => response.json())
-          .then((data) => {
-            wardSelect.innerHTML = '<option value="">Chọn phường</option>';
+        $.get(Routes.admin_wards_by_district_path({district_id: selectedDistrictId}))
+          .done((data) => {
+            wardSelect.html('<option value="">Chọn phường</option>');
 
-            data.forEach((ward) => {
-              wardSelect.insertAdjacentHTML(
-                "beforeend",
-                `<option value="${ward.id}">${ward.name}</option>`
-              );
+            $.each(data, (index, ward) => {
+              wardSelect.append(`<option value="${ward.id}">${ward.name}</option>`);
             });
 
-            wardSelect.disabled = false;
+            wardSelect.prop('disabled', false);
           })
-          .catch((error) => {
+          .fail((error) => {
             console.error(error);
           });
       } 
       else {
-        wardSelect.innerHTML = '<option value="">Chọn phường</option>';
-        wardSelect.disabled = true;
+        wardSelect.html('<option value="">Chọn phường</option>');
+        wardSelect.prop('disabled', true);
       }
     });
   }
