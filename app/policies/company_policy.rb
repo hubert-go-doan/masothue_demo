@@ -33,4 +33,8 @@ class CompanyPolicy < ApplicationPolicy
   def show?
     user.present?
   end
+
+  def search?
+    user.present?
+  end
 end

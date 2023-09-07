@@ -1,6 +1,4 @@
-class Admin::CompanyTypesController < ApplicationController
-  layout 'admin_layout'
-
+class Admin::CompanyTypesController < Admin::BaseController
   def index
     authorize CompanyType
 

@@ -1,12 +1,10 @@
-class Admin::BusinessAreasController < ApplicationController
-  layout 'admin_layout'
-
+class Admin::BusinessAreasController < Admin::BaseController
   before_action :prepare_business_area, only: %i[edit update destroy]
 
   def search
+    authorize BusinessArea
     query = params[:q]&.strip&.downcase
     @pagy, @business_areas = pagy_array([])
-
     @business_areas = BusinessArea.where('business_areas.name ILIKE ? ', "%#{query}%") if query.present?
 
     if @business_areas.blank?
@@ -18,7 +16,7 @@ class Admin::BusinessAreasController < ApplicationController
 
   def index
     authorize BusinessArea
-    @pagy, @business_areas = pagy(BusinessArea.all, items: 15)
+    @pagy, @business_areas = pagy(BusinessArea.order(created_at: :asc), items: 15)
   end
 
   def new
@@ -68,11 +66,11 @@ class Admin::BusinessAreasController < ApplicationController
     end
   end
 
+  private
+
   def prepare_business_area
     @business_area = BusinessArea.find(params[:id])
   end
-
-  private
 
   def business_area_params
     params.require(:business_area).permit(:name, :detail)

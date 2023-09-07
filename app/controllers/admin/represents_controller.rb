@@ -1,6 +1,4 @@
-class Admin::RepresentsController < ApplicationController
-  layout 'admin_layout'
-
+class Admin::RepresentsController < Admin::BaseController
   def new
     authorize Represent
     @represent = Represent.new

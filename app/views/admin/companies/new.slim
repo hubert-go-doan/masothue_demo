@@ -3,5 +3,8 @@
   = turbo_frame_tag 'new_company' do 
     h3.style-form
       | New Company 
-    = render partial: 'form', locals: {company: @company}
+    .container-form.rounded-4.shadow.bg-body.rounded.border-1
+      .style-form-new
+        = simple_form_for @company, url: admin_companies_path(@company), method: :post do |f|
+          = render 'form', company: @company, f:f
     

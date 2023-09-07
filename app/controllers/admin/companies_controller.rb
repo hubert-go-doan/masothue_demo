@@ -1,11 +1,10 @@
-class Admin::CompaniesController < ApplicationController
-  layout 'admin_layout'
-
+class Admin::CompaniesController < Admin::BaseController
   before_action :prepare_data, only: %i[new create edit update]
   before_action :prepare_company, only: %i[edit update destroy show]
   before_action :prepare_data_filter, only: %i[index search]
 
   def search
+    authorize Company
     query = params[:q]&.strip&.downcase
     @companies = []
 
@@ -17,6 +16,7 @@ class Admin::CompaniesController < ApplicationController
     end
 
     @pagy, @companies = pagy_array(@companies, items: 10)
+
     if @companies.blank?
       render 'no_result'
     else
@@ -29,7 +29,8 @@ class Admin::CompaniesController < ApplicationController
     companies = Company.includes(:tax_code, :represent, :city, :district, :ward).all
     companies = companies.where(city_id: params[:city_id]) if params[:city_id].present?
     companies = companies.where(status_id: params[:status_id]) if params[:status_id].present?
-    @pagy, @companies = pagy(companies, items: 10)
+    @companies = companies.order(created_at: :asc)
+    @pagy, @companies = pagy(@companies, items: 10)
   end
 
   def show
@@ -92,6 +93,8 @@ class Admin::CompaniesController < ApplicationController
     end
   end
 
+  private
+
   def prepare_data
     @city_list = City.pluck(:name, :id)
     @represent_list = Represent.pluck(:name, :id)
@@ -108,8 +111,6 @@ class Admin::CompaniesController < ApplicationController
     @cities = City.order(:id)
     @status_list = Status.pluck(:name, :id)
   end
-
-  private
 
   def company_params
     params.require(:company).permit(

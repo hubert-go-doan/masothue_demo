@@ -2,7 +2,9 @@ class MainController < ApplicationController
   before_action :prepare_cities, only: %i[home info_detail search]
 
   def home
-    @data = (Company.order('RANDOM()').includes(:represent, :tax_code, :city, :district, :ward).limit(10) + Person.order('RANDOM()').includes(:tax_code, :city, :district, :ward).limit(10)).shuffle
+    data_company = Company.order('RANDOM()').includes(:represent, :tax_code, :city, :district, :ward).limit(10)
+    data_person = Person.order('RANDOM()').includes(:tax_code, :city, :district, :ward).limit(10)
+    @data = (data_company + data_person).shuffle
   end
 
   def search
@@ -13,8 +15,8 @@ class MainController < ApplicationController
     if query.present?
       company_results = Company
         .left_joins(:represent, :tax_code)
-        .includes(:tax_code, :represent, :city, :district, :ward)
         .where("LOWER(companies.name) LIKE ? OR LOWER(represents.name) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+        .includes(:tax_code, :represent, :city, :district, :ward)
       person_results = Person
         .left_joins(:tax_code)
         .where("LOWER(people.name) LIKE ? OR LOWER(people.cmnd) LIKE ? OR COALESCE(tax_codes.code, '') LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
@@ -36,8 +38,15 @@ class MainController < ApplicationController
   end
 
   def info_detail
-    @new_companies = Company.where('date_start >= ?', 20.days.ago).order(date_start: :desc).includes(:represent, :tax_code, :city, :district, :ward)
-    @new_persons = Person.where('date_start >= ?', 20.days.ago).order(date_start: :desc).includes(:tax_code, :city, :district, :ward)
+    @new_companies = Company
+      .where('date_start >= ?', 20.days.ago)
+      .order(date_start: :desc)
+      .includes(:represent, :tax_code, :city, :district, :ward)
+    @new_persons = Person
+      .where('date_start >= ?', 20.days.ago)
+      .order(date_start: :desc)
+      .includes(:tax_code, :city, :district, :ward)
+
     @pagy, @new_entity = pagy_array(@new_companies + @new_persons)
 
     type = params[:type]
@@ -46,9 +55,24 @@ class MainController < ApplicationController
     case type
     when 'company'
       @entity = Company.find(id)
-      @related_companies_ward = Company.where(city_id: @entity.city_id, district_id: @entity.district_id, ward_id: @entity.ward_id).includes(:tax_code, :represent, :city, :district, :ward).order('RANDOM()').limit(5)
-      @related_companies_district = Company.where(city_id: @entity.city_id, district_id: @entity.district_id).includes(:tax_code, :represent, :city, :district, :ward).order('RANDOM()').limit(5)
-      @related_companies_city = Company.where(city_id: @entity.city_id).includes(:tax_code, :represent, :city, :district, :ward).order('RANDOM()').limit(5)
+
+      @related_companies_ward = Company
+        .where(ward_id: @entity.ward_id)
+        .includes(:tax_code, :represent, :city, :district, :ward)
+        .order('RANDOM()')
+        .limit(5)
+
+      @related_companies_district = Company
+        .where(district_id: @entity.district_id)
+        .includes(:tax_code, :represent, :city, :district, :ward)
+        .order('RANDOM()')
+        .limit(5)
+
+      @related_companies_city = Company
+        .where(city_id: @entity.city_id)
+        .includes(:tax_code, :represent, :city, :district, :ward)
+        .order('RANDOM()')
+        .limit(5)
 
       @related_wards = Ward.where(district_id: @entity.district_id)
 

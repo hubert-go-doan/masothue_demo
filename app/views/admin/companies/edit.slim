@@ -1,6 +1,9 @@
 .body-content
   h3.style-form
     | Edit Company 
-  = turbo_frame_tag dom_id(@company) do 
-    = render partial: 'form', locals: {company: @company}
+  = turbo_frame_tag dom_id(@company) do
+    .container-form.rounded-4.shadow.bg-body.rounded.border-1
+      .style-form-new
+        = simple_form_for @company, url: admin_company_path(@company), method: :put do |f|
+          = render 'form', company: @company, f:f
 

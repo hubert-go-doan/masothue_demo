@@ -1,14 +1,11 @@
-.taxcode-form.rounded-4.shadow.bg-body.rounded.border-1
-  .style-form-new
-    = simple_form_for [:admin, @tax_code], html: { id: 'tax-code-form' } do |f|
-      .row.mb-3 
-        .col 
-          = f.input :code, label: "Tax Code", input_html: { class: 'form-control'}, placeholder: "Tax Code"
-      .row.mb-3 
-        .col 
-          = f.input :taxable_type, require: true, label: "Type", prompt: "Select Type", collection: @taxable_types, input_html: { class: 'form-control', id: 'tax-code-taxable-type' }
-        .col
-          = f.input :taxable_id, collection: [], label_method: :name, value_method: :id, prompt: 'Please Choose Type', input_html: {id: 'tax-code-taxable-id'}
-      = link_to "Back", admin_tax_codes_path, class: "sub-back-button btn btn-secondary float-start"
-      = f.button :submit, value: "Submit", class: "sub-back-button btn btn-primary float-end", data: {turbo: false}
+.row.mb-3 
+  .col 
+    = f.input :code, label: "Tax Code", input_html: { class: 'form-control'}, placeholder: "Tax Code"
+.row.mb-3 
+  .col 
+    = f.input :taxable_type, require: true, label: "Type", prompt: "Select Type", collection: @taxable_types, input_html: { class: 'form-control', id: 'tax-code-taxable-type' }
+  .col
+    = f.input :taxable_id, collection: [], label_method: :name, value_method: :id, prompt: 'Please Choose Type', input_html: {id: 'tax-code-taxable-id'}
+= link_to "Back", admin_tax_codes_path, class: "sub-back-button btn btn-secondary float-start"
+= f.button :submit, value: "Submit", class: "sub-back-button btn btn-primary float-end", data: {turbo: false}
 

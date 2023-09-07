@@ -1,46 +1,42 @@
-.container-form.rounded-4.shadow.bg-body.rounded.border-1
-  .style-form-new
-    = simple_form_for [:admin, company] do |f|
-      .row.mb-3
-        .col 
-            = f.input :name, required: true, lable: "Name Company",  input_html: {class: 'form-control'}, placeholder: "Name"
-        .col 
-            = f.input :sub_name, lable: "Sub Name", input_html: {class: 'form-control'}, placeholder: "Sub-name"
-        .col 
-            = f.input :date_start,lable: "Date Start", start_year: Date.today.year - 50,
-                      end_year: Date.today.year,order: [:day, :month, :year], input_html: { class: 'form-control'}, label_html: { class: 'style-date' }
-      .row.mb-3 
-        .col 
-            = f.input :phone_number, required: true,  input_html: {class: 'form-control'}, placeholder: "Phone number"
-        .col 
-            = f.input :managed_by, input_html: {class: 'form-control'}, placeholder: "Managed by"
-        .col 
-            = f.input :address, label: "Address", input_html: {class: 'form-control'},placeholder: "Address Detail"
-      
-      .row.mb-3
-        .col 
-          = f.input :city_id, required: true, prompt: "City", label: "City", collection: @city_list, input_html: { id: "city-select", data: { controller: "dropdown"} }
-        .col 
-          = f.input :district_id, required: true, prompt: "District", label: "District", collection: [], input_html: { id: "district-select", data: { controller: "dropdown"} }
-        .col 
-          = f.input :ward_id, required: true, prompt: "Ward", label: "Ward", collection: [], input_html: {id: "ward-select" }
+.row.mb-3
+  .col 
+      = f.input :name, required: true, lable: "Name Company",  input_html: {class: 'form-control'}, placeholder: "Name"
+  .col 
+      = f.input :sub_name, lable: "Sub Name", input_html: {class: 'form-control'}, placeholder: "Sub-name"
+  .col 
+      = f.input :date_start,lable: "Date Start", start_year: Date.today.year - 50,
+                end_year: Date.today.year,order: [:day, :month, :year], input_html: { class: 'form-control'}, label_html: { class: 'style-date' }
+.row.mb-3 
+  .col 
+      = f.input :phone_number, required: true,  input_html: {class: 'form-control'}, placeholder: "Phone number"
+  .col 
+      = f.input :managed_by, input_html: {class: 'form-control'}, placeholder: "Managed by"
+  .col 
+      = f.input :address, label: "Address", input_html: {class: 'form-control'},placeholder: "Address Detail"
 
+.row.mb-3
+  .col 
+    = f.association :city, required: true, prompt: "City", label: "City", collection: @city_list, input_html: { id: "city-select", data: { controller: "dropdown"} }
+  .col 
+    = f.association :district, required: true, prompt: "District", label: "District", collection: [], input_html: { id: "district-select", data: { controller: "dropdown"} }
+  .col 
+    = f.association :ward, required: true, prompt: "Ward", label: "Ward", collection: [], input_html: {id: "ward-select" }
 
-      .row.mb-3
-        .col 
-            = f.input :status_id, required: true, prompt: "Status ", label: "Status", collection: @status_list
-        .col
-            = f.input :company_type_id, required: true, prompt: "Company Type", label: "Company Type", collection: @company_type_list
-      
-      .row.mb-3 
-        .col 
-            = f.input :represent_id, required: true, prompt: "Repersent ", label: "Repersent", collection: @represent_list
-        .col.style-link-new
-            = link_to "New Create Represent", new_admin_represent_path, data: { turbo_frame: dom_id(Company.new) }
-        .col 
-            = f.input :business_area_id, prompt: "Business Area ", label: "Business Area", collection: @business_area_list
-        .col.style-link-new
-            = link_to "New Create Business Areas", new_admin_business_area_path, data: { turbo_frame: dom_id(Company.new) }
-        
-      = link_to "Back", admin_companies_path, class: "sub-back-button btn btn-secondary float-start"
-      = f.button :submit, value:"Submit", class: "sub-back-button btn btn-primary float-end"
+.row.mb-3
+  .col 
+      = f.association :status, required: true, prompt: "Status ", label: "Status", collection: @status_list
+  .col
+      = f.association :company_type, required: true, prompt: "Company Type", label: "Company Type", collection: @company_type_list
+
+.row.mb-3 
+  .col 
+      = f.association :represent, required: true, prompt: "Repersent ", label: "Repersent", collection: @represent_list
+  .col.style-link-new
+      = link_to "New Create Represent", new_admin_represent_path, data: { turbo_frame: dom_id(Company.new) }
+  .col 
+      = f.association :business_area, prompt: "Business Area ", label: "Business Area", collection: @business_area_list
+  .col.style-link-new
+      = link_to "New Create Business Areas", new_admin_business_area_path, data: { turbo_frame: dom_id(Company.new) }
+  
+= link_to "Back", admin_companies_path, class: "sub-back-button btn btn-secondary float-start", target: "_top"
+= f.button :submit, value:"Submit", class: "sub-back-button btn btn-primary float-end"
