@@ -4,6 +4,7 @@ class Admin::PeopleController < Admin::BaseController
   before_action :prepare_data_filter, only: %i[index search]
 
   def search
+    authorize Person
     query = params[:q]&.strip&.downcase
     @persons = []
 

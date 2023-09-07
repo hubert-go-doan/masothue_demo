@@ -4,6 +4,7 @@ class Admin::TaxCodesController < Admin::BaseController
   OBJECT_TAXCODE = %w[Company Person].freeze
 
   def search
+    authorize TaxCode
     query = params[:q]&.strip&.downcase
     @pagy, @tax_codes = pagy_array([])
 

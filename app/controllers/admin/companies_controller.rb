@@ -4,6 +4,7 @@ class Admin::CompaniesController < Admin::BaseController
   before_action :prepare_data_filter, only: %i[index search]
 
   def search
+    authorize Company
     query = params[:q]&.strip&.downcase
     @companies = []
 
