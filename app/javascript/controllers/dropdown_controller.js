@@ -3,7 +3,6 @@ import * as Routes from '../routes';
 
 export default class extends Controller {
   connect() {
-    console.log('connect!');
     this.disableSelectFields();
   }
 
@@ -20,7 +19,6 @@ export default class extends Controller {
       if (selectedCityId) {
         $.get(Routes.admin_districts_by_city_path({city_id: selectedCityId}))
           .done((data) => {
-            console.log(data);
             districtSelect.html('<option value="">Chọn quận</option>');
 
             wardSelect.html('<option value="">Chọn phường</option>');
