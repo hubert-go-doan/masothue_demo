@@ -7,7 +7,7 @@
             = image_tag image_path("logo/logo.png"), alt: "logo-taxcode" 
         button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
           span.navbar-toggler-icon
-        #navbarNav.collapse.navbar-collapse.p-5.flex-nowrap
+        #navbarNav.collapse.navbar-collapse.flex-nowrap
           ul.navbar-nav.fw-bold
             li.nav-item.ps-5
               = link_to root_path, class: "nav-link" do
@@ -18,6 +18,9 @@
             li.nav-item.ps-5
               = link_to business_areas_path, class: "nav-link" do
                 | Ngành nghề
+            li.nav-item.ps-5
+              = link_to charts_path, class: "nav-link" do
+                | Charts
             li.nav-item.ps-5
               = link_to contacts_path, class: "nav-link" do
                 | Liên hệ

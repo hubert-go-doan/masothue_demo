@@ -1,0 +1,56 @@
+.chart-lists.container
+  .chart-item
+    .area-section.chart-business-area
+      h5.fw-bold.text-center
+        | Top 10 ngành nghề có số lượng DN nhiều nhất tính đến năm 2023
+      .text-center.fst-italic
+        | (Đơn vị: Doanh nghiệp)
+      = bar_chart @top_business_areas, colors: (1..10).map { "#" + "%06x" % (rand * 0xffffff) }, id: "business-area-chart", width: "1100px", height: "400px", loading: "Loading..."
+      .legend-chart
+        .text-center.fst-italic.pt-3
+          | Hình 1: Biểu đồ thể hiện sự chênh lệch các ngành nghề về số lượng doanh nghiệp tại Việt Nam
+
+  .chart-item
+    .chart-time.d-flex
+      .chart-content
+        = line_chart @new_companies_data, loading: "Loading...", curve: false, legend: 'top', label: "DN mới", width: "800px", height: "500px", title: 'Doanh nghiệp đăng kí thành lập mới giai đoạn 2013 - 2023'
+        .text-center.fst-italic.pt-3
+          | Hình 2: Biểu đồ lượng doanh nghiệp thành lập mới giai đoạn 2013-2023
+      .chart-statistical
+        h5.fw-bold 
+          | Thống kê
+        table.table.table-bordered
+          thead
+            tr
+              th Năm
+              th Doanh nghiệp mới
+          tbody
+            - @table_data.each do |data|
+              tr.text-center
+                td= data[:year]
+                td= data[:count]
+
+  .chart-item
+    .chart-company-type.d-flex
+      .chart-content
+        = pie_chart @company_types_data_current, loading: "Loading...", legend: 'right', width: "750px", height: "300px", title: 'Tình hình doanh nghiệp mới theo loại hình DN tháng 8-2023'
+        .text-center.fst-italic.pt-3
+          | Hình 3: Biểu đồ lượng doanh nghiệp thành lập mới theo từng loại hình
+      .chart-info.text-start
+        h5.fw-bold
+          | Đánh giá
+        div
+          | Trong tháng 8 năm 2023:
+        div
+          | - Số doanh nghiệp đăng kí thành lập mới là #{@total_companies_current} doanh nghiệp, tăng #{@percentage_change} % so với cùng kỳ năm 2022.
+  
+  .chart-item
+    .area-section.chart-business-area
+      h5.fw-bold.text-center
+        | 20 tỉnh, thành có số lượng doanh nghiệp đang hoạt động cao nhất cả nước đến tháng 8-2023
+      .text-center.fst-italic
+        | (Đơn vị: Doanh nghiệp)
+      = column_chart @top_cities, id: "city-chart", colors: (1..20).map { "#" + "%06x" % (rand * 0xffffff) }, loading: "Loading..."
+      .legend-chart
+        .text-center.fst-italic.pt-3
+          | Hình 4: Biểu đồ thể hiện số lượng doanh nghiệp đang hoạt động theo từng khu vực
