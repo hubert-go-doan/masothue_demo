@@ -8,5 +8,6 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "taxcode"
 import "flash"
-
+import "chartkick"
+import "Chart.bundle"
 // Turbo.session.drive = false

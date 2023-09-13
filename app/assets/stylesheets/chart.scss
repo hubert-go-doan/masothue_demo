@@ -1,0 +1,17 @@
+.chart-item {
+  display: flex;
+  margin: 50px 0;
+  border-bottom: 1px dotted #615e5e;
+  padding-bottom: 71px;
+
+  .chart-statistical {
+    text-align: center;
+    margin-left: 183px;
+    margin-top: 15px;
+  }
+
+  .chart-info {
+    margin-left: 112px;
+    margin-top: 10px;
+  }
+}

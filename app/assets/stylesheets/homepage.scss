@@ -111,6 +111,9 @@ $color_solid: #ed2f2f;
 
 //PC
 @media (min-width: 1024px) {
+  #navbarNav {
+    padding: 43px 11px;
+  }
   .form-search-home {
     padding-left: 117px;
     input {
