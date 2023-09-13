@@ -1,11 +1,13 @@
 class ChartsController < ApplicationController
   def index
+    @current_year = Time.zone.today.year
+    @start_year = @current_year - 10
     @top_business_areas = calculate_top_business_areas
     @top_cities = calculate_top_cities
     @new_companies_data = calculate_new_companies_data
     @table_data = calculate_table_data(@new_companies_data)
-    @company_types_data_current = calculate_company_types_data(2023, 8)
-    @company_types_data_prev = calculate_company_types_data(2022, 8)
+    @company_types_data_current = calculate_company_types_data(@current_year, 8)
+    @company_types_data_prev = calculate_company_types_data(@current_year - 1, 8)
     @total_companies_current = @company_types_data_current.values.sum
     @total_companies_prev = @company_types_data_prev.values.sum
     @percentage_change = calculate_percentage_change
@@ -31,9 +33,8 @@ class ChartsController < ApplicationController
   end
 
   def calculate_new_companies_data
-    current_year = Time.zone.today.year
-    start_date = Date.new(2013, 1, 1)
-    end_date = Date.new(current_year, 12, 31)
+    start_date = Date.new(@start_year).beginning_of_year
+    end_date = Time.zone.today.end_of_year
 
     companies = Company.where(date_start: start_date..end_date)
     new_companies_data = companies.group_by { |company| company.date_start.year }
