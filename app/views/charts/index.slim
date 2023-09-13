@@ -2,7 +2,7 @@
   .chart-item
     .area-section.chart-business-area
       h5.fw-bold.text-center
-        | Top 10 ngành nghề có số lượng DN nhiều nhất tính đến năm 2023
+        | Top 10 ngành nghề có số lượng DN nhiều nhất tính đến thời điểm hiện tại năm 2023
       .text-center.fst-italic
         | (Đơn vị: Doanh nghiệp)
       = bar_chart @top_business_areas, colors: (1..10).map { "#" + "%06x" % (rand * 0xffffff) }, id: "business-area-chart", width: "1100px", height: "400px", loading: "Loading..."
@@ -33,7 +33,7 @@
   .chart-item
     .chart-company-type.d-flex
       .chart-content
-        = pie_chart @company_types_data_current, loading: "Loading...", legend: 'right', width: "750px", height: "300px", title: 'Tình hình doanh nghiệp mới theo loại hình DN tháng 8-2023'
+        = pie_chart @company_types_data_current, loading: "Loading...", legend: 'right', width: "750px", height: "300px", title: 'Tình hình doanh nghiệp mới theo loại hình DN tính đến tháng 8 năm 2023'
         .text-center.fst-italic.pt-3
           | Hình 3: Biểu đồ lượng doanh nghiệp thành lập mới theo từng loại hình
       .chart-info.text-start
@@ -47,7 +47,7 @@
   .chart-item
     .area-section.chart-business-area
       h5.fw-bold.text-center
-        | 20 tỉnh, thành có số lượng doanh nghiệp đang hoạt động cao nhất cả nước đến tháng 8-2023
+        | 20 tỉnh, thành có số lượng doanh nghiệp đang hoạt động cao nhất cả nước ở thời điểm hiện tại năm 2023
       .text-center.fst-italic
         | (Đơn vị: Doanh nghiệp)
       = column_chart @top_cities, id: "city-chart", colors: (1..20).map { "#" + "%06x" % (rand * 0xffffff) }, loading: "Loading..."

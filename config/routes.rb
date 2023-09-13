@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     passwords:     'passwords'
   }
 
-  resources :charts
+  resources :charts, only: %i[index]
   resources :company_types
   resources :business_areas
   resources :newly_established
