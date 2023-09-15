@@ -5,7 +5,7 @@ default: &default
 
 development:
   <<: *default
-  database: taxcode_development
+  database: taxcode_development_v2
 
 test:
   <<: *default
