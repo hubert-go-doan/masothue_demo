@@ -65,7 +65,7 @@ class DataCrawlerService
     'http://154.6.97.103:3128',
     'http://38.62.223.70:3128',
     'http://38.62.222.170:3128',
-    'http://38.62.222.76:3128',
+    # 'http://38.62.222.76:3128',
     'http://38.62.220.245:3128',
     'http://154.6.99.136:3128',
     'http://154.6.96.247:3128',
@@ -109,37 +109,49 @@ class DataCrawlerService
   end
 
   def call
-    crawl_and_save_provinces
+    loop do
+      begin
+        crawl_and_save_provinces
+      rescue Exception => e
+        puts "An error occurred: #{e.message}"
+        puts "Retrying the same URL after changing IP..."
+        retry_url_with_new_ip(BASE_URL)
+      end
+      rotate_proxy_if_needed
+    end
   end
 
   private
 
   def fetch_url_with_proxy(url)
-    if @requests_count >= 20
+    if @requests_count >= 50
       rotate_proxy
       puts "Switching to proxy: #{PROXY_LIST[@proxy_index]}"
-      sleep(10)
-      puts "Resuming crawling..."
       @requests_count = 0
     end
 
     proxy = PROXY_LIST[@proxy_index]
     conn = Faraday.new(url:, proxy:)
-    response = conn.get
 
-    case response.status
-    when 200
-      @requests_count += 1
-      response.body
-    when 403
-      puts "403 Forbidden: #{url}"
-      sleep(10)
-      fetch_url_with_proxy(url)
-    when 404
-      puts "404 Not Found: #{url}"
-      nil
-    else
-      raise "Failed to fetch #{url}, HTTP status code: #{response.status}"
+    begin
+      response = conn.get
+      case response.status
+      when 200
+        @requests_count += 1
+        response.body
+      when 403
+        puts "403 Forbidden: #{url}"
+        retry_url_with_new_ip(url)
+      when 404
+        puts "404 Not Found: #{url}"
+        nil
+      else
+        raise "Failed to fetch #{url}, HTTP status code: #{response.status}"
+      end
+    rescue Exception => e
+      puts "An error occurred: #{e.message}"
+      puts "Retrying the same URL after changing IP..."
+      retry_url_with_new_ip(url)
     end
   end
 
@@ -181,24 +193,71 @@ class DataCrawlerService
   end
 
   def crawl_and_save_companies_in_ward(ward, ward_url, district)
-    page = Nokogiri::HTML(fetch_url_with_proxy(ward_url))
-    company_list = page.css('.tax-listing')
-    company_list.css('div[data-prefetch]').each do |div|
+    first_url_in_ward = nil
+    page_number = 1
+
+    loop do
+      page_url = "#{ward_url}?page=#{page_number}"
+
+      page = nil
+
       begin
+        page = Nokogiri::HTML(fetch_url_with_proxy(page_url))
+      rescue Exception => e
+        puts "An error occurred while fetching ward page #{page_number}: #{e.message}"
+        retry_url_with_new_ip(page_url)
+        return
+      end
+
+      puts "Switching to page #{page_number}"
+
+      company_list = page.css('.tax-listing')
+      break if company_list.empty?
+
+      first_url_on_page = "#{BASE_URL}#{company_list.css('div[data-prefetch] h3 a').first&.attr('href')}"
+
+      if page_number == 1
+        first_url_in_ward = first_url_on_page
+      end
+
+      if page_number > 1 && first_url_on_page == first_url_in_ward
+        puts "All pages have been crawled for ward #{ward.name}. Moving to the next ward..."
+        break
+      end
+
+      company_list.css('div[data-prefetch]').each do |div|
         h3 = div.css('h3 a')
         company_name = h3.text
         company_url = "#{BASE_URL}#{h3.attr('href').value}"
         represent_name = div.css('div em a').text
-        if company_name == represent_name
-          crawl_and_save_person(company_url, ward.district.city, ward.district, ward)
-        else
-          crawl_and_save_company(company_url, ward.district.city, ward.district, ward)
+        begin
+          if company_name == represent_name
+            crawl_and_save_person(company_url, ward.district.city, ward.district, ward)
+          else
+            crawl_and_save_company(company_url, ward.district.city, ward.district, ward)
+          end
+        rescue Exception => e
+          puts "An error occurred while crawling company: #{e.message}"
+          puts 'Retrying the same URL after changing IP...'
+          retry_url_with_new_ip(company_url)
         end
-      rescue StandardError => e
-        puts "An error occurred: #{e.message}"
-        puts 'Skipping this step and continuing with the next URL...'
-        next
       end
+      page_number += 1
+    end
+  end
+
+  def retry_url_with_new_ip(url)
+    rotate_proxy
+    puts "Switching to proxy: #{PROXY_LIST[@proxy_index]}"
+    fetch_url_with_proxy(url)
+  end
+
+  def rotate_proxy_if_needed
+    if @proxy_index == PROXY_LIST.length - 1
+      puts 'All proxies have been used. Going back to the beginning of the proxy list.'
+      @proxy_index = 0
+    else
+      @proxy_index += 1
     end
   end
 
@@ -206,7 +265,7 @@ class DataCrawlerService
     page = Nokogiri::HTML(fetch_url_with_proxy(company_url))
     puts company_url
 
-    representative_name = page.css('tr[itemprop="alumni"] span[itemprop="name"] a').text
+    representative_name = page.css('tr[itemprop="alumni"] span[itemprop="name"] a').text || 'Chưa update'
     represent = Represent.find_or_create_by(name: representative_name)
 
     business_area_name_element = page.css('td strong a').last
@@ -221,20 +280,25 @@ class DataCrawlerService
     company_type_name = company_type_name_element&.next_element&.text || 'Chưa update'
     company_type = CompanyType.find_or_create_by(type_name: company_type_name)
 
-    status_element = page.css('td:contains("Tình trạng")').first&.next_element
-    status_name = status_element&.text || 'Chưa update'
+    status_element = page.css('td:contains("Tình trạng")').first
+    status_name = status_element&.next_element&.text || 'Chưa update'
     status = Status.find_or_create_by(name: status_name)
 
     phone_number_element = page.css('.table-taxinfo td[itemprop="telephone"] span.copy')
-    phone_number = phone_number_element&.text || ''
+    phone_number_text = phone_number_element&.text
+    if phone_number_text.nil? || phone_number_text.empty?
+      phone_number = 0
+    else
+      phone_number = phone_number_text.to_i
+    end
 
     managed_by_element = page.css('td:contains("Quản lý bởi")').first
-    managed_by = managed_by_element&.next_element&.text || ''
+    managed_by = managed_by_element ? managed_by_element.next_element.text : 'Chưa update'
 
     date_start_element = page.css('td:contains("Ngày hoạt động")').first
-    date_start = date_start_element&.next_element&.text || ''
+    date_start = date_start_element ? date_start_element.next_element.text : 'Chưa update'
 
-    address = page.css('.table-taxinfo td[itemprop="address"] span.copy').text
+    address = page.css('.table-taxinfo td[itemprop="address"] span.copy').text.presence || 'Chưa update'
 
     tax_code_text_element = page.css('.table-taxinfo td[itemprop="taxID"] span.copy').first
     tax_code_text = tax_code_text_element&.text || ''
@@ -255,33 +319,37 @@ class DataCrawlerService
       status:,
       represent:
     )
+    puts company.errors.full_messages
     tax_code.update(taxable: company)
   end
 
   def crawl_and_save_person(company_url, city, district, ward)
     page = Nokogiri::HTML(fetch_url_with_proxy(company_url))
-    puts "#{company_url}"
+    puts "PERSON_URL: #{company_url}"
 
+    name = page.css('table.table-taxinfo th[itemprop="name"] .copy').text
     company_type_name_element = page.css('td:contains("Loại hình DN")').first
     company_type_name = company_type_name_element&.next_element&.text || 'Chưa update'
     company_type = CompanyType.find_or_create_by(type_name: company_type_name)
-
-    name = page.css('table.table-taxinfo th[itemprop="name"] .copy').text
-
     status_element = page.css('td:contains("Tình trạng")').first&.next_element
     status_name = status_element&.text || 'Chưa update'
     status = Status.find_or_create_by(name: status_name)
 
     phone_number_element = page.css('.table-taxinfo td[itemprop="telephone"] span.copy')
-    phone_number = phone_number_element&.text || ''
+    phone_number_text = phone_number_element&.text
+    if phone_number_text.nil? || phone_number_text.empty?
+      phone_number = 0
+    else
+      phone_number = phone_number_text.to_i
+    end
 
     managed_by_element = page.css('td:contains("Quản lý bởi")').first
-    managed_by = managed_by_element&.next_element&.text || ''
+    managed_by = managed_by_element ? managed_by_element.next_element.text : 'Chưa update'
 
     date_start_element = page.css('td:contains("Ngày hoạt động")').first
-    date_start = date_start_element&.next_element&.text || ''
+    date_start = date_start_element ? date_start_element.next_element.text : 'Chưa update'
 
-    address = page.css('.table-taxinfo td[itemprop="address"] span.copy').text
+    address = page.css('.table-taxinfo td[itemprop="address"] span.copy').text.presence || 'Chưa update'
 
     tax_code_text_element = page.css('.table-taxinfo td[itemprop="taxID"] span.copy').first
     tax_code_text = tax_code_text_element&.text || ''
@@ -299,6 +367,7 @@ class DataCrawlerService
       company_type:,
       status:
     )
+    puts person.errors.full_messages
     tax_code.update(taxable: person)
   end
 end
