@@ -1,10 +1,28 @@
 require 'nokogiri'
 require 'open-uri'
 require 'faraday'
+require 'pstore'
 
 class DataCrawlerService
   BASE_URL = 'https://masothue.com'.freeze
   PROXY_LIST = [
+    'http://154.6.96.156:3128',
+    'http://38.62.223.156:3128',
+    'http://38.62.221.167:3128',
+    'http://154.6.99.188:3128',
+    'http://154.6.97.224:3128',
+    'http://154.6.98.212:3128',
+    'http://154.6.97.2:3128',
+    'http://38.62.223.245:3128',
+    'http://38.62.221.42:3128',
+    'http://38.62.222.168:3128',
+    'http://154.6.98.128:3128',
+    'http://38.62.220.244:3128',
+    'http://38.62.223.189:3128',
+    'http://38.62.220.150:3128',
+    'http://38.62.223.222:3128',
+    'http://154.6.96.241:3128',
+    'http://154.6.96.142:3128',
     'http://38.62.223.75:3128',
     'http://154.6.97.110:3128',
     'http://38.62.223.31:3128',
@@ -23,23 +41,6 @@ class DataCrawlerService
     'http://38.62.221.87:3128',
     'http://38.62.221.192:3128',
     'http://154.6.97.249:3128',
-    'http://154.6.96.156:3128',
-    'http://38.62.223.156:3128',
-    'http://38.62.221.167:3128',
-    'http://154.6.99.188:3128',
-    'http://154.6.97.224:3128',
-    'http://154.6.98.212:3128',
-    'http://154.6.97.2:3128',
-    'http://38.62.223.245:3128',
-    'http://38.62.221.42:3128',
-    'http://38.62.222.168:3128',
-    'http://154.6.98.128:3128',
-    'http://38.62.220.244:3128',
-    'http://38.62.223.189:3128',
-    'http://38.62.220.150:3128',
-    'http://38.62.223.222:3128',
-    'http://154.6.96.241:3128',
-    'http://154.6.96.142:3128',
     'http://38.62.222.41:3128',
     'http://154.6.96.15:3128',
     'http://154.6.97.250:3128',
@@ -65,7 +66,7 @@ class DataCrawlerService
     'http://154.6.97.103:3128',
     'http://38.62.223.70:3128',
     'http://38.62.222.170:3128',
-    # 'http://38.62.222.76:3128',
+    'http://38.62.222.76:3128',
     'http://38.62.220.245:3128',
     'http://154.6.99.136:3128',
     'http://154.6.96.247:3128',
@@ -73,13 +74,6 @@ class DataCrawlerService
     'http://38.62.222.109:3128',
     'http://154.6.98.127:3128',
     'http://38.62.221.22:3128',
-    'http://38.62.222.119:3128',
-    'http://38.62.222.62:3128',
-    'http://38.62.221.114:3128',
-    'http://38.62.223.65:3128',
-    'http://38.62.220.18:3128',
-    'http://38.62.223.131:3128',
-    'http://154.6.97.207:3128',
     'http://38.62.220.3:3128',
     'http://38.62.220.176:3128',
     'http://38.62.220.117:3128',
@@ -100,44 +94,39 @@ class DataCrawlerService
     'http://38.62.223.60:3128',
     'http://38.62.223.36:3128',
     'http://154.6.97.158:3128',
-    'http://38.62.223.179:3128'
+    'http://38.62.223.179:3128',
+    'http://38.62.222.62:3128',
+    'http://38.62.221.114:3128',
+    'http://38.62.223.65:3128',
+    'http://38.62.220.18:3128',
+    'http://38.62.223.131:3128',
+    'http://154.6.97.207:3128',
   ]
 
   def initialize
+    @province_data = PStore.new('province_data.pstore')
     @proxy_index = 0
-    @requests_count = 0
   end
 
   def call
-    loop do
-      begin
-        crawl_and_save_provinces
-      rescue Exception => e
-        puts "An error occurred: #{e.message}"
-        puts "Retrying the same URL after changing IP..."
-        retry_url_with_new_ip(BASE_URL)
-      end
-      rotate_proxy_if_needed
-    end
+    crawl_and_save_provinces
+  end
+
+  def crawl_province_data(province_id)
+    puts province_id
+    province_data = @province_data.transaction { @province_data[province_id] }
+    crawl_and_save_districts(province_data[:id], province_data[:url])
   end
 
   private
 
   def fetch_url_with_proxy(url)
-    if @requests_count >= 50
-      rotate_proxy
-      puts "Switching to proxy: #{PROXY_LIST[@proxy_index]}"
-      @requests_count = 0
-    end
-
     proxy = PROXY_LIST[@proxy_index]
     conn = Faraday.new(url:, proxy:)
-
     begin
       response = conn.get
       case response.status
       when 200
-        @requests_count += 1
         response.body
       when 403
         puts "403 Forbidden: #{url}"
@@ -150,7 +139,6 @@ class DataCrawlerService
       end
     rescue Exception => e
       puts "An error occurred: #{e.message}"
-      puts "Retrying the same URL after changing IP..."
       retry_url_with_new_ip(url)
     end
   end
@@ -166,17 +154,21 @@ class DataCrawlerService
       province_name = li.css('a').text
       province_url = "#{BASE_URL}#{li.css('a').attr('href').value}"
       province = City.find_or_create_by(name: province_name)
-      crawl_and_save_districts(province, province_url)
+      province_data = { name: province_name, url: province_url, id: province.id }
+
+      @province_data.transaction { @province_data[province.id] = province_data }
+      p @province_data
     end
   end
 
-  def crawl_and_save_districts(province, province_url)
+  def crawl_and_save_districts(province_id, province_url)
     page = Nokogiri::HTML(fetch_url_with_proxy(province_url))
     district_list = page.css('ul.row')
     district_list.css('li.cat-item').each do |li|
       district_name = li.css('a').text
+      puts district_name
       district_url = "#{BASE_URL}#{li.css('a').attr('href').value}"
-      district = District.find_or_create_by(name: district_name, city_id: province.id)
+      district = District.find_or_create_by(name: district_name, city_id: province_id)
       crawl_and_save_wards(district, district_url)
     end
   end
@@ -186,6 +178,7 @@ class DataCrawlerService
     ward_list = page.css('ul.row')
     ward_list.css('li.cat-item').each do |li|
       ward_name = li.css('a').text
+      puts ward_name
       ward_url = "#{BASE_URL}#{li.css('a').attr('href').value}"
       ward = Ward.find_or_create_by(name: ward_name, district_id: district.id)
       crawl_and_save_companies_in_ward(ward, ward_url, district)
@@ -198,21 +191,12 @@ class DataCrawlerService
 
     loop do
       page_url = "#{ward_url}?page=#{page_number}"
-
-      page = nil
-
-      begin
-        page = Nokogiri::HTML(fetch_url_with_proxy(page_url))
-      rescue Exception => e
-        puts "An error occurred while fetching ward page #{page_number}: #{e.message}"
-        retry_url_with_new_ip(page_url)
-        return
-      end
-
+      page = Nokogiri::HTML(fetch_url_with_proxy(page_url))
       puts "Switching to page #{page_number}"
-
       company_list = page.css('.tax-listing')
-      break if company_list.empty?
+      url_exist = company_list.css('div[data-prefetch]')
+
+      break if url_exist.empty?
 
       first_url_on_page = "#{BASE_URL}#{company_list.css('div[data-prefetch] h3 a').first&.attr('href')}"
 
@@ -237,8 +221,7 @@ class DataCrawlerService
             crawl_and_save_company(company_url, ward.district.city, ward.district, ward)
           end
         rescue Exception => e
-          puts "An error occurred while crawling company: #{e.message}"
-          puts 'Retrying the same URL after changing IP...'
+          puts "An error occurred while crawling company or Person: #{e.message}"
           retry_url_with_new_ip(company_url)
         end
       end
@@ -262,6 +245,7 @@ class DataCrawlerService
   end
 
   def crawl_and_save_company(company_url, city, district, ward)
+    default_date_start = Date.new(2000, 1, 1)
     page = Nokogiri::HTML(fetch_url_with_proxy(company_url))
     puts company_url
 
@@ -296,7 +280,7 @@ class DataCrawlerService
     managed_by = managed_by_element ? managed_by_element.next_element.text : 'Chưa update'
 
     date_start_element = page.css('td:contains("Ngày hoạt động")').first
-    date_start = date_start_element ? date_start_element.next_element.text : 'Chưa update'
+    date_start = date_start_element ? date_start_element.next_element.text : default_date_start
 
     address = page.css('.table-taxinfo td[itemprop="address"] span.copy').text.presence || 'Chưa update'
 
@@ -324,6 +308,8 @@ class DataCrawlerService
   end
 
   def crawl_and_save_person(company_url, city, district, ward)
+    default_date_start = Date.new(2000, 1, 1)
+
     page = Nokogiri::HTML(fetch_url_with_proxy(company_url))
     puts "PERSON_URL: #{company_url}"
 
@@ -347,7 +333,7 @@ class DataCrawlerService
     managed_by = managed_by_element ? managed_by_element.next_element.text : 'Chưa update'
 
     date_start_element = page.css('td:contains("Ngày hoạt động")').first
-    date_start = date_start_element ? date_start_element.next_element.text : 'Chưa update'
+    date_start = date_start_element ? date_start_element.next_element.text : default_date_start
 
     address = page.css('.table-taxinfo td[itemprop="address"] span.copy').text.presence || 'Chưa update'
 

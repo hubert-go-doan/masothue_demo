@@ -49,6 +49,8 @@ gem 'groupdate'
 
 gem 'faraday'
 
+gem 'pstore'
+
 gem 'rubocop-rails'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]

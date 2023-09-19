@@ -187,6 +187,7 @@ GEM
       racc
     pg (1.5.4)
     popper_js (2.11.8)
+    pstore (0.1.2)
     psych (5.1.0)
       stringio
     public_suffix (5.0.3)
@@ -371,6 +372,7 @@ DEPENDENCIES
   js-routes
   pagy
   pg (~> 1.1)
+  pstore
   puma (~> 5.0)
   pundit
   rails (~> 7.0.6)
