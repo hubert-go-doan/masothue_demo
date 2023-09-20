@@ -9,5 +9,4 @@ class Company < ApplicationRecord
   has_one :tax_code, as: :taxable, dependent: :destroy
 
   validates :name, :address, :managed_by, :date_start, presence: true
-  validates :phone_number, numericality: { only_integer: true }
 end
