@@ -6,106 +6,113 @@ require 'pstore'
 class DataCrawlerService
   BASE_URL = 'https://masothue.com'.freeze
   PROXY_LIST = [
-    'http://154.6.96.156:3128',
-    'http://38.62.223.156:3128',
-    'http://38.62.221.167:3128',
-    'http://154.6.99.188:3128',
-    'http://154.6.97.224:3128',
-    'http://154.6.98.212:3128',
-    'http://154.6.97.2:3128',
-    'http://38.62.223.245:3128',
-    'http://38.62.221.42:3128',
-    'http://38.62.222.168:3128',
-    'http://154.6.98.128:3128',
-    'http://38.62.220.244:3128',
-    'http://38.62.223.189:3128',
-    'http://38.62.220.150:3128',
+    'http://38.62.222.142:3128',
+    'http://154.6.96.143:3128',
+    'http://154.6.99.36:3128',
+    'http://154.6.96.19:3128',
+    'http://154.6.98.219:3128',
+    'http://38.62.223.86:3128',
+    'http://154.6.98.178:3128',
+    'http://38.62.221.185:3128',
+    'http://154.6.96.133:3128',
+    'http://38.62.221.164:3128',
+    'http://154.6.96.159:3128',
+    'http://38.62.220.45:3128',
+    'http://154.6.97.74:3128',
+    'http://38.62.222.115:3128',
+    'http://154.6.96.244:3128',
     'http://38.62.223.222:3128',
-    'http://154.6.96.241:3128',
-    'http://154.6.96.142:3128',
-    'http://38.62.223.75:3128',
-    'http://154.6.97.110:3128',
-    'http://38.62.223.31:3128',
-    'http://154.6.99.182:3128',
-    'http://154.6.96.217:3128',
-    'http://38.62.221.107:3128',
-    'http://38.62.222.54:3128',
-    'http://154.6.99.222:3128',
-    'http://38.62.221.218:3128',
-    'http://154.6.97.228:3128',
-    'http://154.6.97.21:3128',
-    'http://154.6.96.191:3128',
-    'http://38.62.221.80:3128',
-    'http://38.62.222.246:3128',
-    'http://154.6.98.46:3128',
-    'http://38.62.221.87:3128',
-    'http://38.62.221.192:3128',
-    'http://154.6.97.249:3128',
-    'http://38.62.222.41:3128',
-    'http://154.6.96.15:3128',
-    'http://154.6.97.250:3128',
-    'http://38.62.221.109:3128',
-    'http://154.6.99.138:3128',
-    'http://154.6.99.122:3128',
-    'http://38.62.223.174:3128',
-    'http://38.62.221.191:3128',
-    'http://154.6.99.233:3128',
-    'http://154.6.99.164:3128',
-    'http://154.6.96.56:3128',
-    'http://38.62.223.125:3128',
-    'http://38.62.221.204:3128',
-    'http://38.62.221.95:3128',
-    'http://38.62.220.143:3128',
-    'http://154.6.99.83:3128',
+    'http://38.62.222.55:3128',
+    'http://154.6.97.29:3128',
+    'http://38.62.221.9:3128',
+    'http://38.62.222.183:3128',
+    'http://38.62.222.82:3128',
+    'http://38.62.223.88:3128',
+    'http://38.62.222.191:3128',
+    'http://38.62.222.144:3128',
+    'http://154.6.99.174:3128',
+    'http://154.6.97.89:3128',
+    'http://154.6.98.247:3128',
+    'http://38.62.220.164:3128',
+    'http://38.62.221.35:3128',
+    'http://154.6.96.8:3128',
+    'http://154.6.96.80:3128',
+    'http://154.6.96.41:3128',
+    'http://38.62.220.170:3128',
+    'http://38.62.223.195:3128',
+    'http://154.6.98.243:3128',
+    'http://154.6.98.203:3128',
     'http://154.6.99.110:3128',
-    'http://154.6.97.214:3128',
-    'http://38.62.220.229:3128',
-    'http://154.6.96.186:3128',
-    'http://154.6.97.147:3128',
-    'http://38.62.223.197:3128',
-    'http://154.6.97.103:3128',
-    'http://38.62.223.70:3128',
-    'http://38.62.222.170:3128',
-    'http://38.62.222.76:3128',
-    'http://38.62.220.245:3128',
-    'http://154.6.99.136:3128',
+    'http://38.62.220.190:3128',
+    'http://38.62.223.24:3128',
+    'http://154.6.98.138:3128',
+    'http://38.62.222.123:3128',
+    'http://38.62.222.193:3128',
+    'http://154.6.99.64:3128',
+    'http://38.62.223.193:3128',
+    'http://154.6.97.69:3128',
+    'http://38.62.222.125:3128',
+    'http://154.6.97.22:3128',
+    'http://154.6.96.253:3128',
+    'http://38.62.223.128:3128',
+    'http://154.6.99.95:3128',
+    'http://38.62.222.163:3128',
+    'http://38.62.223.235:3128',
+    'http://38.62.222.173:3128',
+    'http://38.62.221.33:3128',
+    'http://154.6.96.112:3128',
+    'http://154.6.99.2:3128',
+    'http://38.62.220.149:3128',
+    'http://154.6.97.123:3128',
+    'http://38.62.221.158:3128',
+    'http://154.6.99.62:3128',
+    'http://154.6.99.159:3128',
+    'http://38.62.223.204:3128',
+    'http://154.6.98.150:3128',
+    'http://38.62.222.236:3128',
+    'http://154.6.98.121:3128',
+    'http://154.6.97.168:3128',
+    'http://38.62.220.84:3128',
+    'http://38.62.220.103:3128',
+    'http://38.62.221.84:3128',
+    'http://154.6.98.70:3128',
+    'http://154.6.97.126:3128',
+    'http://38.62.223.48:3128',
+    'http://154.6.96.5:3128',
+    'http://154.6.96.199:3128',
+    'http://154.6.99.22:3128',
+    'http://38.62.223.251:3128',
+    'http://38.62.223.170:3128',
+    'http://38.62.223.248:3128',
+    'http://38.62.221.191:3128',
+    'http://38.62.222.212:3128',
+    'http://38.62.223.33:3128',
     'http://154.6.96.247:3128',
-    'http://38.62.222.11:3128',
-    'http://38.62.222.109:3128',
-    'http://154.6.98.127:3128',
-    'http://38.62.221.22:3128',
-    'http://38.62.220.3:3128',
-    'http://38.62.220.176:3128',
-    'http://38.62.220.117:3128',
-    'http://154.6.97.11:3128',
-    'http://154.6.98.14:3128',
-    'http://154.6.98.167:3128',
-    'http://154.6.98.8:3128',
-    'http://154.6.97.253:3128',
-    'http://38.62.220.179:3128',
-    'http://38.62.223.72:3128',
-    'http://154.6.96.57:3128',
-    'http://38.62.222.172:3128',
-    'http://154.6.99.124:3128',
-    'http://154.6.99.30:3128',
-    'http://154.6.96.119:3128',
-    'http://154.6.97.41:3128',
-    'http://38.62.220.197:3128',
-    'http://38.62.223.60:3128',
-    'http://38.62.223.36:3128',
-    'http://154.6.97.158:3128',
-    'http://38.62.223.179:3128',
-    'http://38.62.222.62:3128',
-    'http://38.62.221.114:3128',
-    'http://38.62.223.65:3128',
-    'http://38.62.220.18:3128',
-    'http://38.62.223.131:3128',
-    'http://154.6.97.207:3128',
+    'http://38.62.221.43:3128',
+    'http://38.62.222.1:3128',
+    'http://154.6.98.114:3128',
+    'http://154.6.97.188:3128',
+    'http://38.62.220.83:3128',
+    'http://38.62.220.208:3128',
+    'http://38.62.223.136:3128',
+    'http://154.6.96.135:3128',
+    'http://154.6.98.101:3128',
+    'http://38.62.223.120:3128',
+    'http://154.6.96.242:3128',
+    'http://38.62.221.59:3128',
+    'http://154.6.97.220:3128',
+    'http://38.62.221.175:3128',
+    'http://38.62.220.107:3128',
+    'http://38.62.223.58:3128',
+    'http://38.62.220.248:3128',
+    'http://154.6.96.24:3128'
   ]
 
   def initialize
     @province_data = PStore.new('province_data.pstore')
     @proxy_index = 0
+    @requests_count = 0
+    @proxy_retry_count = 0
   end
 
   def call
@@ -113,20 +120,40 @@ class DataCrawlerService
   end
 
   def crawl_province_data(province_id)
-    puts province_id
     province_data = @province_data.transaction { @province_data[province_id] }
+    return unless province_data
+
     crawl_and_save_districts(province_data[:id], province_data[:url])
   end
 
   private
 
+  def url_accessible?(url)
+    proxy = PROXY_LIST[@proxy_index]
+    conn = Faraday.new(url:, proxy:)
+
+    begin
+      response = conn.head
+      response.status == 200
+    rescue Faraday::ConnectionFailed
+      false
+    end
+  end
+
   def fetch_url_with_proxy(url)
+    if @requests_count >= 30
+      rotate_proxy
+      @requests_count = 0
+    end
+
     proxy = PROXY_LIST[@proxy_index]
     conn = Faraday.new(url:, proxy:)
     begin
       response = conn.get
       case response.status
       when 200
+        @requests_count += 1
+        @proxy_retry_count = 0
         response.body
       when 403
         puts "403 Forbidden: #{url}"
@@ -214,15 +241,25 @@ class DataCrawlerService
         company_name = h3.text
         company_url = "#{BASE_URL}#{h3.attr('href').value}"
         represent_name = div.css('div em a').text
-        begin
-          if company_name == represent_name
-            crawl_and_save_person(company_url, ward.district.city, ward.district, ward)
+
+        retry_count = 0
+        while retry_count < 5
+          if url_accessible?(company_url)
+            if company_name == represent_name
+              crawl_and_save_person(company_url, ward.district.city, ward.district, ward)
+            else
+              crawl_and_save_company(company_url, ward.district.city, ward.district, ward)
+            end
+            break
           else
-            crawl_and_save_company(company_url, ward.district.city, ward.district, ward)
+            retry_count += 1
+            if retry_count == 5
+              puts "Skipping: #{company_url}"
+            else
+              puts "Retry #{retry_count} for #{company_url}"
+              rotate_proxy
+            end
           end
-        rescue Exception => e
-          puts "An error occurred while crawling company or Person: #{e.message}"
-          retry_url_with_new_ip(company_url)
         end
       end
       page_number += 1
@@ -230,17 +267,14 @@ class DataCrawlerService
   end
 
   def retry_url_with_new_ip(url)
-    rotate_proxy
-    puts "Switching to proxy: #{PROXY_LIST[@proxy_index]}"
-    fetch_url_with_proxy(url)
-  end
-
-  def rotate_proxy_if_needed
-    if @proxy_index == PROXY_LIST.length - 1
-      puts 'All proxies have been used. Going back to the beginning of the proxy list.'
-      @proxy_index = 0
+    if @proxy_retry_count < 20
+      @proxy_retry_count += 1
+      rotate_proxy
+      puts "Switching to proxy: #{PROXY_LIST[@proxy_index]} (Retry #{@proxy_retry_count})"
+      fetch_url_with_proxy(url)
     else
-      @proxy_index += 1
+      @proxy_retry_count = 0
+      nil
     end
   end
 
