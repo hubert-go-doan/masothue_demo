@@ -1,0 +1,317 @@
+[
+  {
+    "name": "An Giang",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/an-giang-93",
+    "id": 1
+  },
+  {
+    "name": "Bà Rịa - Vũng Tàu",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/ba-ria-vung-tau-32",
+    "id": 2
+  },
+  {
+    "name": "Bắc Giang",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/bac-giang-72",
+    "id": 3
+  },
+  {
+    "name": "Bắc Kạn",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/bac-kan-1127",
+    "id": 4
+  },
+  {
+    "name": "Bạc Liêu",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/bac-lieu-197",
+    "id": 5
+  },
+  {
+    "name": "Bắc Ninh",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/bac-ninh-170",
+    "id": 6
+  },
+  {
+    "name": "Bến Tre",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/ben-tre-185",
+    "id": 7
+  },
+  {
+    "name": "Bình Định",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/binh-dinh-152",
+    "id": 8
+  },
+  {
+    "name": "Bình Dương",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/binh-duong-17",
+    "id": 9
+  },
+  {
+    "name": "Bình Phước",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/binh-phuoc-1",
+    "id": 10
+  },
+  {
+    "name": "Bình Thuận",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/binh-thuan-20",
+    "id": 11
+  },
+  {
+    "name": "Cà Mau",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/ca-mau-108",
+    "id": 12
+  },
+  {
+    "name": "Cần Thơ",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/can-tho-96",
+    "id": 13
+  },
+  {
+    "name": "Cao Bằng",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/cao-bang-1612",
+    "id": 14
+  },
+  {
+    "name": "Đà Nẵng",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/da-nang-35",
+    "id": 15
+  },
+  {
+    "name": "Đắk Lắk",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/dak-lak-214",
+    "id": 16
+  },
+  {
+    "name": "Đắk Nông",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/dak-nong-245",
+    "id": 17
+  },
+  {
+    "name": "Điện Biên",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/dien-bien-1007",
+    "id": 18
+  },
+  {
+    "name": "Đồng Nai",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/dong-nai-57",
+    "id": 19
+  },
+  {
+    "name": "Đồng Tháp",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/dong-thap-63",
+    "id": 20
+  },
+  {
+    "name": "Gia Lai",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/gia-lai-563",
+    "id": 21
+  },
+  {
+    "name": "Hà Giang",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/ha-giang-529",
+    "id": 22
+  },
+  {
+    "name": "Hà Nam",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/ha-nam-162",
+    "id": 23
+  },
+  {
+    "name": "Hà Nội",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/ha-noi-7",
+    "id": 24
+  },
+  {
+    "name": "Hà Tĩnh",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/ha-tinh-342",
+    "id": 25
+  },
+  {
+    "name": "Hải Dương",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/hai-duong-147",
+    "id": 26
+  },
+  {
+    "name": "Hải Phòng",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/hai-phong-99",
+    "id": 27
+  },
+  {
+    "name": "Hậu Giang",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/hau-giang-190",
+    "id": 28
+  },
+  {
+    "name": "Hồ Chí Minh",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/ho-chi-minh-23",
+    "id": 29
+  },
+  {
+    "name": "Hòa Bình",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/hoa-binh-786",
+    "id": 30
+  },
+  {
+    "name": "Hưng Yên",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/hung-yen-123",
+    "id": 31
+  },
+  {
+    "name": "Khánh Hòa",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/khanh-hoa-26",
+    "id": 32
+  },
+  {
+    "name": "Kiên Giang",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/kien-giang-80",
+    "id": 33
+  },
+  {
+    "name": "Kon Tum",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/kon-tum-956",
+    "id": 34
+  },
+  {
+    "name": "Lai Châu",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/lai-chau-2501",
+    "id": 35
+  },
+  {
+    "name": "Lâm Đồng",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/lam-dong-10",
+    "id": 36
+  },
+  {
+    "name": "Lạng Sơn",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/lang-son-984",
+    "id": 37
+  },
+  {
+    "name": "Lào Cai",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/lao-cai-320",
+    "id": 38
+  },
+  {
+    "name": "Long An",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/long-an-29",
+    "id": 39
+  },
+  {
+    "name": "Nam Định",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/nam-dinh-137",
+    "id": 40
+  },
+  {
+    "name": "Nghệ An",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/nghe-an-144",
+    "id": 41
+  },
+  {
+    "name": "Ninh Bình",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/ninh-binh-75",
+    "id": 42
+  },
+  {
+    "name": "Ninh Thuận",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/ninh-thuan-11",
+    "id": 43
+  },
+  {
+    "name": "Phú Thọ",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/phu-tho-134",
+    "id": 44
+  },
+  {
+    "name": "Phú Yên",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/phu-yen-14",
+    "id": 45
+  },
+  {
+    "name": "Quảng Bình",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/quang-binh-60",
+    "id": 46
+  },
+  {
+    "name": "Quảng Nam",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/quang-nam-49",
+    "id": 47
+  },
+  {
+    "name": "Quảng Ngãi",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/quang-ngai-301",
+    "id": 48
+  },
+  {
+    "name": "Quảng Ninh",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/quang-ninh-142",
+    "id": 49
+  },
+  {
+    "name": "Quảng Trị",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/quang-tri-69",
+    "id": 50
+  },
+  {
+    "name": "Sóc Trăng",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/soc-trang-949",
+    "id": 51
+  },
+  {
+    "name": "Sơn La",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/son-la-316",
+    "id": 52
+  },
+  {
+    "name": "Tây Ninh",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/tay-ninh-90",
+    "id": 53
+  },
+  {
+    "name": "Thái Bình",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/thai-binh-128",
+    "id": 54
+  },
+  {
+    "name": "Thái Nguyên",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/thai-nguyen-131",
+    "id": 55
+  },
+  {
+    "name": "Thanh Hoá",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/thanh-hoa-4",
+    "id": 56
+  },
+  {
+    "name": "Thừa Thiên Huế",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/thua-thien-hue-66",
+    "id": 57
+  },
+  {
+    "name": "Tiền Giang",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/tien-giang-177",
+    "id": 58
+  },
+  {
+    "name": "Trà Vinh",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/tra-vinh-41",
+    "id": 59
+  },
+  {
+    "name": "Tuyên Quang",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/tuyen-quang-1284",
+    "id": 60
+  },
+  {
+    "name": "Vĩnh Long",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/vinh-long-193",
+    "id": 61
+  },
+  {
+    "name": "Vĩnh Phúc",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/vinh-phuc-420",
+    "id": 62
+  },
+  {
+    "name": "Yên Bái",
+    "url": "https://masothue.com/tra-cuu-ma-so-thue-theo-tinh/yen-bai-724",
+    "id": 63
+  }
+]

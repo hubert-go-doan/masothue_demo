@@ -1,9 +1,9 @@
 require 'nokogiri'
 require 'open-uri'
 require 'faraday'
-require 'pstore'
+require 'json'
 
-class DataCrawlerService
+class CrawlerCityService
   BASE_URL = ENV['BASE_URL'].freeze
   PROXY_LIST = ENV['PROXY_LIST'].split(',')
 
@@ -13,25 +13,29 @@ class DataCrawlerService
   DEFAULT_MAX_PROXY_RETRYS = 30
   DEFAULT_MAX_PROXY_REQUESTS = 50
 
-  def initialize
-    @province_data = PStore.new('province_data.pstore')
+  def initialize(city_data_file)
+    @city_data_file = city_data_file
+    @city_data = load_city_data
     @proxy_index = 0
     @requests_count = 0
     @proxy_retry_count = 0
   end
 
-  def call
-    crawl_and_save_provinces
-  end
-
   def crawl_province_data(province_id)
-    province_data = @province_data.transaction { @province_data[province_id] }
+    province_data = @city_data.find { |province| province['id'] == province_id }
     return unless province_data
 
-    crawl_and_save_districts(province_data[:id], province_data[:url])
+    province_id = province_data['id']
+    province_url = province_data['url']
+
+    crawl_and_save_districts(province_id, province_url)
   end
 
   private
+
+  def load_city_data
+    JSON.parse(File.read(@city_data_file))
+  end
 
   def url_accessible?(url)
     proxy = PROXY_LIST[@proxy_index]
@@ -78,20 +82,6 @@ class DataCrawlerService
 
   def rotate_proxy
     @proxy_index = (@proxy_index + 1) % PROXY_LIST.length
-  end
-
-  def crawl_and_save_provinces
-    page = Nokogiri::HTML(fetch_url_with_proxy(BASE_URL))
-    cities_list = page.css('aside ul.row')
-    cities_list.css('li.cat-item').each do |li|
-      province_name = li.css('a').text
-      province_url = "#{BASE_URL}#{li.css('a').attr('href').value}"
-      province = City.find_or_create_by(name: province_name)
-      province_data = { name: province_name, url: province_url, id: province.id }
-
-      @province_data.transaction { @province_data[province.id] = province_data }
-      p @province_data
-    end
   end
 
   def crawl_and_save_districts(province_id, province_url)
