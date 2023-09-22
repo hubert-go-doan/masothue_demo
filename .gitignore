@@ -7,6 +7,7 @@
 # Ignore bundler config.
 /.bundle
 /.env
+cities_data.json
 
 # Ignore all logfiles and tempfiles.
 /log/*

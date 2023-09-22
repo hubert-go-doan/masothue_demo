@@ -47,6 +47,8 @@ gem 'chartkick'
 
 gem 'groupdate'
 
+gem 'faraday'
+
 gem 'rubocop-rails'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
