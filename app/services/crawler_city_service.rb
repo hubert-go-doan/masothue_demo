@@ -7,8 +7,8 @@ class CrawlerCityService
   BASE_URL = ENV['BASE_URL'].freeze
   PROXY_LIST = ENV['PROXY_LIST'].split(',')
 
-  DEFAULT_NOT_UPDATED = 'Chưa update'
-  DEFAULT_EMPTY_STRING = ''
+  DEFAULT_NOT_UPDATED = 'Chưa update'.freeze
+  DEFAULT_EMPTY_STRING = ''.freeze
   DEFAULT_DATE_START = Date.new(2000, 1, 1)
   DEFAULT_MAX_PROXY_RETRYS = 30
   DEFAULT_MAX_PROXY_REQUESTS = 50

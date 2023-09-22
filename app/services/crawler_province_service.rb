@@ -67,8 +67,6 @@ class CrawlerProvinceService
       province_url = "#{BASE_URL}#{li.css('a').attr('href').value}"
       province = City.find_or_create_by(name: province_name)
       @city_data << { name: province_name, url: province_url, id: province.id }
-
-      p @city_data
     end
     save_to_json(@city_data)
   end
