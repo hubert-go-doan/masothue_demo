@@ -15,7 +15,8 @@
           strong
             i.fa-solid.fa-person 
           |  Người đại diện: 
-          = company.represent.name 
+          - if company.represent.present?
+            = company.represent.name 
           br
           strong
             i.fa-solid.fa-location-dot 

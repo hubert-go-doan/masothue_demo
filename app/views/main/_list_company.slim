@@ -9,7 +9,7 @@
     strong
       i.fa-solid.fa-person 
     |  Người đại diện: 
-    = category.instance_of?(Company) ? category.represent.name : category.name
+    = category.instance_of?(Company) && category.represent.present? ? category.represent.name : category.name
     br
     strong
       i.fa-solid.fa-location-dot 

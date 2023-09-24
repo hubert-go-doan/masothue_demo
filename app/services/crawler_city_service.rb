@@ -10,8 +10,8 @@ class CrawlerCityService
   DEFAULT_NOT_UPDATED = 'Chưa update'.freeze
   DEFAULT_EMPTY_STRING = ''.freeze
   DEFAULT_DATE_START = Date.new(2000, 1, 1)
-  DEFAULT_MAX_PROXY_RETRYS = 30
-  DEFAULT_MAX_PROXY_REQUESTS = 50
+  DEFAULT_MAX_PROXY_RETRYS = 10
+  DEFAULT_MAX_PROXY_REQUESTS = 3
 
   def initialize(city_data_file)
     @city_data_file = city_data_file
@@ -125,7 +125,6 @@ class CrawlerCityService
       first_url_in_ward = first_url_on_page if page_number == 1
 
       if page_number > 1 && first_url_on_page == first_url_in_ward
-        puts "All pages have been crawled for ward #{ward.name}. Moving to the next ward..."
         break
       end
 
