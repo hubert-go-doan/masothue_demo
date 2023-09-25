@@ -221,45 +221,75 @@ class CrawlerCityService
 
     tax_code_text_element = page.css('.table-taxinfo td[itemprop="taxID"] span.copy').first
     tax_code_text = tax_code_text_element&.text || DEFAULT_EMPTY_STRING
-    tax_code = TaxCode.find_or_create_by(code: tax_code_text)
+    existing_tax_code = TaxCode.find_by(code: tax_code_text)
 
-    company = Company.create(
-      common_data.merge(
-        {
-          sub_name:,
-          city:,
-          district:,
-          ward:,
-          represent:,
-          business_area:
-        }
+    if existing_tax_code
+      company = existing_tax_code.taxable
+      company.update(
+        common_data.merge(
+          {
+            sub_name:,
+            city:,
+            district:,
+            ward:,
+            represent:,
+            business_area:,
+            updated_at: Time.current
+          }
+        )
       )
-    )
-
-    puts company.errors.full_messages
-    tax_code.update(taxable: company)
+    else
+      company = Company.create(
+        common_data.merge(
+          {
+            sub_name:,
+            city:,
+            district:,
+            ward:,
+            represent:,
+            business_area:
+          }
+        )
+      )
+      TaxCode.create(code: tax_code_text, taxable: company)
+      puts company.errors.full_messages
+    end
   end
 
   def crawl_and_save_person(company_url, city, district, ward)
     page = Nokogiri::HTML(fetch_url_with_proxy(company_url))
     puts "PERSON_URL: #{company_url}"
 
-    tax_code_text_element = page.css('.table-taxinfo td[itemprop="taxID"] span.copy').first
-    tax_code_text = tax_code_text_element&.text || DEFAULT_EMPTY_STRING
-    tax_code = TaxCode.find_or_create_by(code: tax_code_text)
-
     common_data = crawl_and_save_common_data(page)
 
-    person = Person.create(
-      common_data.merge(
-        {
-          city:,
-          district:,
-          ward:
-        }
+    tax_code_text_element = page.css('.table-taxinfo td[itemprop="taxID"] span.copy').first
+    tax_code_text = tax_code_text_element&.text || DEFAULT_EMPTY_STRING
+    existing_tax_code = TaxCode.find_by(code: tax_code_text)
+
+    if existing_tax_code
+      person = existing_tax_code.taxable
+      person.update(
+        common_data.merge(
+          {
+            city:,
+            district:,
+            ward:,
+            updated_at: Time.current
+          }
+        )
       )
-    )
-    puts person.errors.full_messages
-    tax_code.update(taxable: person)
+    else
+      person = Person.create(
+        common_data.merge(
+          {
+            city:,
+            district:,
+            ward:
+          }
+        )
+      )
+      TaxCode.create(code: tax_code_text, taxable: person)
+      puts person.errors.full_messages
+    end
   end
 end

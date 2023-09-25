@@ -53,8 +53,6 @@ gem 'sidekiq'
 
 gem 'sidekiq-scheduler'
 
-gem 'whenever', require: false
-
 gem 'rubocop-rails'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]

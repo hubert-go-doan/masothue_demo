@@ -1,22 +1,10 @@
-require 'sidekiq-scheduler'
-
-class CrawlProvinceWorker
-  include Sidekiq::Worker
-
-  def perform
-    province_crawler = ProvinceCrawler.new
-    current_province_id = province_crawler.next_province_id
-    CrawlerCityService.new('cities_data.json').crawl_province_data(current_province_id)
-  end
-end
-
 class ProvinceCrawler
   attr_reader :current_province_id
 
   def initialize
-    @current_province_id = 0
     @special_province_ids = [29, 24, 15]
     @days_since_last_special_province = 0
+    @current_province_id = fetch_current_province_id # Lấy giá trị từ cache hoặc database
   end
 
   def next_province_id
@@ -27,8 +15,12 @@ class ProvinceCrawler
       selected_special_province
     else
       @days_since_last_special_province += 1
+      @current_province_id ||= 1
       @current_province_id += 1
-      @current_province_id = 1 if @current_province_id > 63
+      if @current_province_id > 63
+        @current_province_id = 1
+      end
+      store_current_province_id(@current_province_id) # Lưu giá trị vào cache hoặc database
       @current_province_id
     end
   end

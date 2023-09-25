@@ -1,6 +1,7 @@
 :queues:
   - default
-:schedule:
-  crawl_province_daily:
-    cron: "0 0 * * *"
-    class: "CrawlProvinceWorker"
+:scheduler:
+  :schedule:
+    crawl_province_daily:
+      cron: "0 * * * * *"
+      class: CrawlProvinceWorker
