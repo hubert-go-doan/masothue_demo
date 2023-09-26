@@ -10,8 +10,8 @@ class CrawlerCityService
   DEFAULT_NOT_UPDATED = 'Chưa update'.freeze
   DEFAULT_EMPTY_STRING = ''.freeze
   DEFAULT_DATE_START = Date.new(2000, 1, 1)
-  DEFAULT_MAX_PROXY_RETRYS = 10
-  DEFAULT_MAX_PROXY_REQUESTS = 3
+  DEFAULT_MAX_PROXY_RETRYS = 30
+  DEFAULT_MAX_PROXY_REQUESTS = 50
 
   def initialize(city_data_file)
     @city_data_file = city_data_file
@@ -252,7 +252,6 @@ class CrawlerCityService
         )
       )
       TaxCode.create(code: tax_code_text, taxable: company)
-      puts company.errors.full_messages
     end
   end
 
@@ -289,7 +288,6 @@ class CrawlerCityService
         )
       )
       TaxCode.create(code: tax_code_text, taxable: person)
-      puts person.errors.full_messages
     end
   end
 end

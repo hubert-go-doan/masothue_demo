@@ -39,7 +39,7 @@
             i.fa.fa-user.fa-xs.pe-2
             | Người đại diện
           td
-            = @entity.instance_of?(Company) && @entity.represent.present? ? @entity.represent.name : @entity.name
+            = @entity.instance_of?(Company) && @entity.represent&.name || @entity.name
 
         tr
           td

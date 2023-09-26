@@ -1,40 +1,31 @@
 require 'sidekiq-scheduler'
 require 'json'
-require 'redis'
 
 class CrawlProvinceWorker
   include Sidekiq::Worker
 
-  def initialize
-    @city_data_file = 'cities_data.json'
-    @special_province_ids = [29, 24, 15]
-    @redis = Redis.new
-  end
+  HCM_ID = 29
+  HANOI_ID = 24
+  DANANG_ID = 15
+  BINHDUONG_ID = 9
+
+  SPECIAL_PROVINCE_IDS = [HCM_ID, HANOI_ID, DANANG_ID, BINHDUONG_ID].freeze
 
   def perform
-    province_id = next_province_id
-    CrawlerCityService.new(@city_data_file).crawl_province_data(province_id)
+    province_id = next_province_id_to_crawl
+    CrawlerCityService.new('cities_data.json').crawl_province_data(province_id)
+    City.find(province_id).update(updated_at: Time.current)
   end
 
   private
 
-  def next_province_id
-    current_province_id = @redis.get('current_province_id').to_i || 0
-    days_since_last_special_province = @redis.get('days_since_last_special_province').to_i || 0
+  def next_province_id_to_crawl
+    current_day = Time.zone.today.day
 
-    if days_since_last_special_province >= 3
-      days_since_last_special_province = 0
-      selected_special_province = @special_province_ids.shift
-      @special_province_ids.push(selected_special_province)
-      @redis.set('days_since_last_special_province', days_since_last_special_province)
-      selected_special_province
+    if (current_day % 3).zero?
+      SPECIAL_PROVINCE_IDS.min_by { |province_id| City.find(province_id).updated_at }
     else
-      days_since_last_special_province += 1
-      current_province_id += 1
-      current_province_id = 1 if current_province_id > 63
-      @redis.set('current_province_id', current_province_id)
-      @redis.set('days_since_last_special_province', days_since_last_special_province)
-      current_province_id
+      City.order(updated_at: :asc).first.id
     end
   end
 end
