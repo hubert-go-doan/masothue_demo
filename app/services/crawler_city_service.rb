@@ -21,6 +21,12 @@ class CrawlerCityService
     @proxy_retry_count = 0
   end
 
+  def call(province_id)
+    crawl_province_data(province_id)
+  end
+
+  private
+
   def crawl_province_data(province_id)
     province_data = @city_data.find { |province| province['id'] == province_id }
     return unless province_data
@@ -30,8 +36,6 @@ class CrawlerCityService
 
     crawl_and_save_districts(province_id, province_url)
   end
-
-  private
 
   def load_city_data
     JSON.parse(File.read(@city_data_file))
