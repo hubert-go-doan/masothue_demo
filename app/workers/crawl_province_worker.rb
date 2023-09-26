@@ -13,7 +13,7 @@ class CrawlProvinceWorker
 
   def perform
     province_id = next_province_id_to_crawl
-    CrawlerCityService.new('cities_data.json').call(province_id)
+    CrawlerCityService.new('cities_data.json', province_id).call
     City.find(province_id).touch
   end
 

@@ -13,16 +13,17 @@ class CrawlerCityService
   DEFAULT_MAX_PROXY_RETRYS = 30
   DEFAULT_MAX_PROXY_REQUESTS = 50
 
-  def initialize(city_data_file)
+  def initialize(city_data_file, province_id)
     @city_data_file = city_data_file
     @city_data = load_city_data
     @proxy_index = 0
     @requests_count = 0
     @proxy_retry_count = 0
+    @province_id = province_id
   end
 
-  def call(province_id)
-    crawl_province_data(province_id)
+  def call
+    crawl_province_data(@province_id)
   end
 
   private
