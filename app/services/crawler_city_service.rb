@@ -13,13 +13,20 @@ class CrawlerCityService
   DEFAULT_MAX_PROXY_RETRYS = 30
   DEFAULT_MAX_PROXY_REQUESTS = 50
 
-  def initialize(city_data_file)
+  def initialize(city_data_file, province_id)
     @city_data_file = city_data_file
     @city_data = load_city_data
     @proxy_index = 0
     @requests_count = 0
     @proxy_retry_count = 0
+    @province_id = province_id
   end
+
+  def call
+    crawl_province_data(@province_id)
+  end
+
+  private
 
   def crawl_province_data(province_id)
     province_data = @city_data.find { |province| province['id'] == province_id }
@@ -30,8 +37,6 @@ class CrawlerCityService
 
     crawl_and_save_districts(province_id, province_url)
   end
-
-  private
 
   def load_city_data
     JSON.parse(File.read(@city_data_file))
@@ -125,7 +130,6 @@ class CrawlerCityService
       first_url_in_ward = first_url_on_page if page_number == 1
 
       if page_number > 1 && first_url_on_page == first_url_in_ward
-        puts "All pages have been crawled for ward #{ward.name}. Moving to the next ward..."
         break
       end
 
@@ -222,45 +226,73 @@ class CrawlerCityService
 
     tax_code_text_element = page.css('.table-taxinfo td[itemprop="taxID"] span.copy').first
     tax_code_text = tax_code_text_element&.text || DEFAULT_EMPTY_STRING
-    tax_code = TaxCode.find_or_create_by(code: tax_code_text)
+    existing_tax_code = TaxCode.find_by(code: tax_code_text)
 
-    company = Company.create(
-      common_data.merge(
-        {
-          sub_name:,
-          city:,
-          district:,
-          ward:,
-          represent:,
-          business_area:
-        }
+    if existing_tax_code
+      company = existing_tax_code.taxable
+      company.update(
+        common_data.merge(
+          {
+            sub_name:,
+            city:,
+            district:,
+            ward:,
+            represent:,
+            business_area:,
+            updated_at: Time.current
+          }
+        )
       )
-    )
-
-    puts company.errors.full_messages
-    tax_code.update(taxable: company)
+    else
+      company = Company.create(
+        common_data.merge(
+          {
+            sub_name:,
+            city:,
+            district:,
+            ward:,
+            represent:,
+            business_area:
+          }
+        )
+      )
+      TaxCode.create(code: tax_code_text, taxable: company)
+    end
   end
 
   def crawl_and_save_person(company_url, city, district, ward)
     page = Nokogiri::HTML(fetch_url_with_proxy(company_url))
     puts "PERSON_URL: #{company_url}"
 
-    tax_code_text_element = page.css('.table-taxinfo td[itemprop="taxID"] span.copy').first
-    tax_code_text = tax_code_text_element&.text || DEFAULT_EMPTY_STRING
-    tax_code = TaxCode.find_or_create_by(code: tax_code_text)
-
     common_data = crawl_and_save_common_data(page)
 
-    person = Person.create(
-      common_data.merge(
-        {
-          city:,
-          district:,
-          ward:
-        }
+    tax_code_text_element = page.css('.table-taxinfo td[itemprop="taxID"] span.copy').first
+    tax_code_text = tax_code_text_element&.text || DEFAULT_EMPTY_STRING
+    existing_tax_code = TaxCode.find_by(code: tax_code_text)
+
+    if existing_tax_code
+      person = existing_tax_code.taxable
+      person.update(
+        common_data.merge(
+          {
+            city:,
+            district:,
+            ward:,
+            updated_at: Time.current
+          }
+        )
       )
-    )
-    puts person.errors.full_messages
-    tax_code.update(taxable: person)
+    else
+      person = Person.create(
+        common_data.merge(
+          {
+            city:,
+            district:,
+            ward:
+          }
+        )
+      )
+      TaxCode.create(code: tax_code_text, taxable: person)
+    end
   end
 end

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web =>'/sidekiq'
+
   root 'main#home'
   match '/404', to: 'errors#not_found', via: :all, as: :not_found
   match '/500', to: 'errors#internal_server_error', via: :all, as: :internal_server_error

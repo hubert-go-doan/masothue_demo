@@ -39,7 +39,8 @@
             i.fa.fa-user.fa-xs.pe-2
             | Người đại diện
           td
-            = @entity.instance_of?(Company) ? @entity.represent.name.upcase : @entity.name.upcase
+            = @entity.instance_of?(Company) && @entity.represent&.name || @entity.name
+
         tr
           td
             i.fa.fa-phone.fa-xs.pe-2
@@ -71,6 +72,7 @@
               | Tình trạng
             td
               = @entity.status.name
+    i Thông tin mã số thuế  #{@entity.tax_code&.code} được cập nhật lần cuối #{@entity.updated_at}.
     - if @entity.instance_of?(Company)
       = render partial: 'list_business_area'
       = render partial: 'list_ward'

@@ -49,6 +49,10 @@ gem 'groupdate'
 
 gem 'faraday'
 
+gem 'sidekiq'
+
+gem 'sidekiq-scheduler'
+
 gem 'rubocop-rails'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
