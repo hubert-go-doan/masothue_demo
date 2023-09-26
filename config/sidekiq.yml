@@ -3,5 +3,8 @@
 :scheduler:
   :schedule:
     crawl_province_daily:
-      cron: "0 * * * * *"
+      cron: "0 0 * * *"
       class: CrawlProvinceWorker
+    crawl_province_monthly:
+      cron: "0 0 1 * *"
+      class: CrawlProvinceMonthlyWorker
