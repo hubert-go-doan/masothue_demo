@@ -1,5 +1,6 @@
+require 'sidekiq/web'
+require 'sidekiq-scheduler/web'
 Rails.application.routes.draw do
-  require 'sidekiq/web'
   mount Sidekiq::Web =>'/sidekiq'
 
   root 'main#home'
