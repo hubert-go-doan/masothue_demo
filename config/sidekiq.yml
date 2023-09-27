@@ -6,5 +6,5 @@
       cron: "0 0 * * *"
       class: CrawlProvinceWorker
     crawl_province_monthly:
-      cron: "0 0 1 * *"
+      cron: "0 0 21 * *"
       class: CrawlProvinceMonthlyWorker
