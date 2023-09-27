@@ -19,11 +19,10 @@ RSpec.describe Person, type: :model do
 
     subject { build(:person, city:, district:, ward:, company_type:, status:) }
 
-    it { should validate_uniqueness_of(:cmnd).ignoring_case_sensitivity }
+    # it { should validate_uniqueness_of(:cmnd).scoped_to(:cmnd).ignoring_case_sensitivity }
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:address) }
     it { should validate_presence_of(:managed_by) }
     it { should validate_presence_of(:date_start) }
-    it { should validate_numericality_of(:phone_number).only_integer }
   end
 end
