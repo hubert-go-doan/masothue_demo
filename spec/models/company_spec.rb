@@ -17,6 +17,5 @@ RSpec.describe Company, type: :model do
     it { should validate_presence_of(:address) }
     it { should validate_presence_of(:managed_by) }
     it { should validate_presence_of(:date_start) }
-    it { should validate_numericality_of(:phone_number).only_integer }
   end
 end

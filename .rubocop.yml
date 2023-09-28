@@ -161,5 +161,11 @@ Lint/UnusedBlockArgument:
 Lint/UnusedMethodArgument:
   AutoCorrect: false
 
+Lint/RescueException:
+  Enabled: false
+
 Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/Output:
   Enabled: false

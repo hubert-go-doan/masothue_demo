@@ -23,6 +23,7 @@ class CrawlerCityService
   end
 
   def call
+    puts @city_data
     crawl_province_data(@province_id)
   end
 
@@ -239,7 +240,7 @@ class CrawlerCityService
             ward:,
             represent:,
             business_area:,
-            updated_at: Time.current
+            updated_at:    Time.current
           }
         )
       )
