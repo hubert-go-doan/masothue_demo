@@ -25,7 +25,7 @@ For guest users: They can use the application without logging into the system. U
 - Rails (version: 7.0.6)
 - PostgreSQL
 ## Architecture Diagram
-![image](https://github.com/hubert-go-doan/masothue_demo/assets/137854325/2efca5d9-e953-4a5c-886b-cbfbb6122894)
+![image](https://github.com/hubert-go-doan/masothue_demo/assets/137854325/b9ba94f0-68eb-43a4-bdfc-03c3581f337a)
 
 ## DB Diagram [Use tool Mermaid]
 ![image](https://github.com/hubert-go-doan/masothue_demo/assets/137854325/08b3ef90-df56-487e-879b-60d3af2251a6)
