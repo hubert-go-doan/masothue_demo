@@ -23,6 +23,12 @@ $color_solid: #ed2f2f;
   .sidebar-blog {
     display: none;
   }
+  .search-bar {
+    flex-direction: column;
+  }
+  .search-person {
+    width: 300px;
+  }
 }
 
 // Tablet
@@ -107,6 +113,9 @@ $color_solid: #ed2f2f;
       cursor: pointer;
     }
   }
+  .search-person {
+    width: 350px;
+  }
 }
 
 //PC
@@ -115,9 +124,9 @@ $color_solid: #ed2f2f;
     padding: 43px 11px;
   }
   .form-search-home {
-    padding-left: 117px;
+    padding-left: 50px;
     input {
-      width: 500px;
+      width: 600px;
     }
     button {
       padding: 7px;
@@ -195,6 +204,9 @@ $color_solid: #ed2f2f;
       scale: 0.6;
       cursor: pointer;
     }
+  }
+  .search-person {
+    width: 500px;
   }
 }
 

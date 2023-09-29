@@ -6,11 +6,7 @@ class ChartsController < ApplicationController
     @top_cities = calculate_top_cities
     @new_companies_data = calculate_new_companies_data
     @table_data = calculate_table_data(@new_companies_data)
-    @company_types_data_current = calculate_company_types_data(@current_year, 8)
-    @company_types_data_prev = calculate_company_types_data(@current_year - 1, 8)
-    @total_companies_current = @company_types_data_current.values.sum
-    @total_companies_prev = @company_types_data_prev.values.sum
-    @percentage_change = calculate_percentage_change
+    @company_types_data_current = calculate_company_types_data
   end
 
   private
@@ -45,14 +41,10 @@ class ChartsController < ApplicationController
     new_companies_data.map { |year, count| { year:, count: } }
   end
 
-  def calculate_company_types_data(year, month)
-    Company.joins(:company_type)
-      .where('extract(year from date_start) = ? AND extract(month from date_start) <= ?', year, month)
+  def calculate_company_types_data
+    Company.left_joins(:company_type)
+      .where('company_types.type_name != ?', 'Chưa update')
       .group('company_types.type_name')
       .count
-  end
-
-  def calculate_percentage_change
-    (((@total_companies_current - @total_companies_prev).to_f / @total_companies_prev) * 100).round(2)
   end
 end
