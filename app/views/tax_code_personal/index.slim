@@ -5,6 +5,6 @@
       |Tra cứu mã số thuế cá nhân
     .search-personal
       = form_tag search_person_tax_code_personal_index_path, method: :get, class: 'd-flex', role: 'search' do
-        = text_field_tag :q, params[:q], class: 'form-control me-2', style: 'width: 500px;', type: 'search', placeholder: 'Nhập mã số thuế, CMND, Thẻ căn cước', aria_label: 'Search'
+        = text_field_tag :q, params[:q], class: 'form-control me-2 search-person', type: 'search', placeholder: 'Nhập mã số thuế, CMND, Thẻ căn cước', aria_label: 'Search'
         button.btn.btn-dark(type="submit")
           | Tra cứu
