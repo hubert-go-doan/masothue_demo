@@ -10,4 +10,5 @@ import "taxcode"
 import "flash"
 import "chartkick"
 import "Chart.bundle"
-// Turbo.session.drive = false
+import "chart"
+// Turbo.session.drive = false  

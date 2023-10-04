@@ -1,14 +1,38 @@
+#year-select.d-flex.justify-content-center.p-3
+  #time-interval-select.ps-2
+    = select_tag 'time_interval', options_for_select(['Year', 'Month', 'Quarter'], @selected_time), id: 'selected-time-interval', class: "form-select", style: 'width: 120px'
+ 
+  #year-select.me-2.ms-2
+    = select_tag 'year', options_for_select((@start_year..@current_year).to_a.reverse, @selected_year), id: 'selected-year', class: "form-select", style: 'width: 120px'
+
+  #month-select.me-2
+    = select_tag 'month', options_for_select((1..12).to_a, @selected_month), id: 'selected-month', class: "form-select", style: 'width: 120px'
+
+  #quarter-select.me-2
+    = select_tag 'quarter', options_for_select(['Quý 1', 'Quý 2', 'Quý 3', 'Quý 4'], @selected_quarter), id: 'selected-quarter', class: "form-select", style: 'width: 120px'
+  
+  button#update-button.btn.btn-primary
+    | Filter
+
 .chart-lists.container
   .chart-item
     .area-section.chart-business-area
-      h5.fw-bold.text-center
-        | Top 10 ngành nghề có số lượng DN nhiều nhất tính đến thời điểm hiện tại năm #{@current_year}
+      - if @selected_month.present?
+        h5.fw-bold.text-center
+          | Top 10 ngành nghề có số lượng DN nhiều nhất tính đến thời điểm tháng #{@selected_month} năm #{@selected_year}
+      - elsif @selected_quarter.present?
+        h5.fw-bold.text-center
+          | Top 10 ngành nghề có số lượng DN nhiều nhất tính đến thời điểm #{@selected_quarter} năm #{@selected_year}
+      - else 
+        h5.fw-bold.text-center
+          | Top 10 ngành nghề có số lượng DN nhiều nhất tính đến thời điểm năm #{@selected_year}
       .text-center.fst-italic
         | (Đơn vị: Doanh nghiệp)
       = bar_chart @top_business_areas, colors: (1..10).map { "#" + "%06x" % (rand * 0xffffff) }, id: "business-area-chart", width: "1100px", height: "400px", loading: "Loading..."
       .legend-chart
         .text-center.fst-italic.pt-3
           | Hình 1: Biểu đồ thể hiện sự chênh lệch các ngành nghề về số lượng doanh nghiệp tại Việt Nam
+
 
   .chart-item
     .chart-time.d-flex
@@ -32,19 +56,33 @@
 
   .chart-item
     .area-section.chart-business-area
-      h5.fw-bold.text-center.pb-4
-        | Tình hình các doanh nghiệp theo từng loại hình DN tính đến thời điểm hiện tại #{@current_year}
+      - if @selected_month.present?
+        h5.fw-bold.text-center.pb-4
+          | Tình hình các doanh nghiệp theo từng loại hình DN tính đến thời điểm tháng  #{@selected_month} năm #{@selected_year}
+      - elsif @selected_quarter.present?
+        h5.fw-bold.text-center.pb-4
+          | Tình hình các doanh nghiệp theo từng loại hình DN tính đến thời điểm  #{@selected_quarter} năm #{@selected_year}
+      - else 
+        h5.fw-bold.text-center.pb-4
+          | Tình hình các doanh nghiệp theo từng loại hình DN tính đến thời điểm năm #{@selected_year}
       .text-center.fst-italic
         | (Đơn vị: Doanh nghiệp)
       = pie_chart @company_types_data_current, loading: "Loading...", legend: 'right', width: "1100px", height: "400px"
       .legend-chart
         .text-center.fst-italic.pt-3
-          | Hình 3: Biểu đồ thể hiện số lượng doanh nghiệp thành lập mới theo từng loại hình
+          | Hình 3: Biểu đồ thể hiện số lượng doanh nghiệp theo từng loại hình
 
   .chart-item
     .area-section.chart-business-area
-      h5.fw-bold.text-center
-        | 20 tỉnh, thành có số lượng doanh nghiệp đang hoạt động cao nhất cả nước ở thời điểm hiện tại năm #{@current_year}
+      - if @selected_month.present?
+        h5.fw-bold.text-center
+          | 20 tỉnh, thành có số lượng doanh nghiệp đang hoạt động cao nhất cả nước ở thời điểm tháng #{@selected_month} năm #{@selected_year}
+      - elsif @selected_quarter.present?
+        h5.fw-bold.text-center
+          | 20 tỉnh, thành có số lượng doanh nghiệp đang hoạt động cao nhất cả nước ở thời điểm #{@selected_quarter} năm #{@selected_year}
+      - else 
+        h5.fw-bold.text-center
+          | 20 tỉnh, thành có số lượng doanh nghiệp đang hoạt động cao nhất cả nước ở thời điểm năm #{@selected_year}
       .text-center.fst-italic
         | (Đơn vị: Doanh nghiệp)
       = column_chart @top_cities, id: "city-chart", colors: (1..20).map { "#" + "%06x" % (rand * 0xffffff) }, loading: "Loading..."
