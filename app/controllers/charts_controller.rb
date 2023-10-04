@@ -48,7 +48,7 @@ class ChartsController < ApplicationController
     BusinessArea.left_joins(:companies)
       .where(query)
       .group('business_areas.name')
-      .order('count(companies.id) DESC')
+      .order('COUNT(companies.id) DESC')
       .limit(10)
       .count('companies.id')
   end
@@ -58,7 +58,7 @@ class ChartsController < ApplicationController
       .where('LOWER(statuses.name) LIKE ?', '%đang hoạt động%')
       .where(query)
       .group('cities.name')
-      .order('count(companies.id) DESC')
+      .order('COUNT(companies.id) DESC')
       .limit(20)
       .count('companies.id')
   end
