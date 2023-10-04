@@ -19,9 +19,7 @@ Rails.application.routes.draw do
     passwords:     'passwords'
   }
 
-  constraints(year: /\d{4}/) do
-    resources :charts, only: %i[index]
-  end
+  resources :charts, only: %i[index], constraints: { year: /\d{4}/, month: /\d{1,2}/, quarter: /\d{1}/ }
 
   resources :company_types
   resources :business_areas
