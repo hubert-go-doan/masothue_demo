@@ -2,30 +2,41 @@ class ChartsController < ApplicationController
   def index
     @current_year = Time.zone.today.year
     @start_year = @current_year - 10
-    @top_business_areas = calculate_top_business_areas
-    @top_cities = calculate_top_cities
+    @selected_year = params[:year] || @current_year
+    @top_business_areas = calculate_top_business_areas(@selected_year)
+    @top_cities = calculate_top_cities(@selected_year)
     @new_companies_data = calculate_new_companies_data
     @table_data = calculate_table_data(@new_companies_data)
-    @company_types_data_current = calculate_company_types_data
+    @company_types_data_current = calculate_company_types_data(@selected_year)
   end
 
   private
 
-  def calculate_top_business_areas
+  def calculate_top_business_areas(year)
     BusinessArea.left_joins(:companies)
+      .where('EXTRACT(YEAR FROM companies.date_start) = ?', year)
       .group('business_areas.name')
       .order('count(companies.id) DESC')
       .limit(10)
       .count('companies.id')
   end
 
-  def calculate_top_cities
+  def calculate_top_cities(year)
     City.left_joins(companies: :status)
       .where('LOWER(statuses.name) LIKE ?', '%đang hoạt động%')
+      .where('EXTRACT(YEAR FROM companies.date_start) = ?', year)
       .group('cities.name')
-      .order('COUNT(companies.id) DESC')
+      .order('count(companies.id) DESC')
       .limit(20)
       .count('companies.id')
+  end
+
+  def calculate_company_types_data(year)
+    Company.left_joins(:company_type)
+      .where('company_types.type_name != ?', 'Chưa update')
+      .where('EXTRACT(YEAR FROM companies.date_start) = ?', year)
+      .group('company_types.type_name')
+      .count
   end
 
   def calculate_new_companies_data
@@ -39,12 +50,5 @@ class ChartsController < ApplicationController
 
   def calculate_table_data(new_companies_data)
     new_companies_data.map { |year, count| { year:, count: } }
-  end
-
-  def calculate_company_types_data
-    Company.left_joins(:company_type)
-      .where('company_types.type_name != ?', 'Chưa update')
-      .group('company_types.type_name')
-      .count
   end
 end

@@ -13,5 +13,6 @@ pin '@popperjs/core', to: 'popper.js', preload: true
 pin 'chartkick', to: 'chartkick.js'
 pin 'Chart.bundle', to: 'Chart.bundle.js'
 pin 'taxcode', to: 'taxcode.js', preload: true
+pin 'chart', to: 'chart.js', preload: true
 pin 'flash', to: 'flash.js', preload: true
 pin 'dropdown_district_ward', to: 'dropdown_district_ward.js', preload: true

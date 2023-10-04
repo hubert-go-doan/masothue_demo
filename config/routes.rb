@@ -19,7 +19,10 @@ Rails.application.routes.draw do
     passwords:     'passwords'
   }
 
-  resources :charts, only: %i[index]
+  constraints(year: /\d{4}/) do
+    resources :charts, only: %i[index]
+  end
+
   resources :company_types
   resources :business_areas
   resources :newly_established
